@@ -22,4 +22,7 @@
     <string name="lbl_payment_mode">Payment Mode</string>
     <string name="lbl_cash_on_delivery">cash on delivery</string>
     <string name="btn_lbl_place_order">Checkout</string>
+    <string name="content_description">content</string>
+    <string name="title_favourite">Favourites</string>
+    <string name="no_favourite_yet">No Favourite Items yet</string>
 </resources>

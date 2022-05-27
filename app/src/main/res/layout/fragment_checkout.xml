@@ -56,7 +56,9 @@
                 android:id="@+id/rv_cart_list_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_product_items" />
+                android:layout_below="@id/tv_product_items"
+                tools:itemCount="2"
+                tools:listitem="@layout/checkout_item" />
 
             <TextView
                 android:id="@+id/tv_selected_address"
