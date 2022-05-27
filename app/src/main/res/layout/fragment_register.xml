@@ -124,7 +124,6 @@
                     android:id="@+id/cb_terms_and_condition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/tv_background"
                     android:gravity="center"
                     tools:checked="false"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -134,7 +133,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/txt_terms_condition_marginStart"
-                    android:paddingStart="10dp"
                     android:text="@string/i_agree_to_the_terms_and_condition"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/txt_terms_and_condition_textSize" />
@@ -161,6 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:gravity="center"
+                android:padding="10dp"
                 android:orientation="horizontal">
 
                 <TextView
