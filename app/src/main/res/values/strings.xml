@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">E-commerce App</string>
+    <string name="app_name">El Mercado</string>
+    <string name="login">Login</string>
+    <string name="already_hane_an_account">already had an account</string>
+    <string name="register">Register</string>
+    <string name="i_agree_to_the_terms_and_condition">I agree to the terms and condition</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="e_mail">E-mail</string>
+    <string name="last_name">Last name</string>
+    <string name="first_name">First name</string>
+    <string name="create_an_account">Create An Account</string>
+    <string name="don_t_have_account_already">Don\'t have account already</string>
+    <string name="login_image">login_image</string>
+    <string name="title_checkout">Checkout</string>
+    <string name="checkout_lbl_product_items">Product Items</string>
+    <string name="checkout_lbl_selected_address">Selected address</string>
+    <string name="checkout_lbl_items_receipt">Item reciept</string>
+    <string name="lbl_subtotal">SubTotal</string>
+    <string name="lbl_shipping_charge">Shipping charge</string>
+    <string name="lbl_total_amount">Total</string>
+    <string name="lbl_payment_mode">Payment Mode</string>
+    <string name="lbl_cash_on_delivery">cash on delivery</string>
+    <string name="btn_lbl_place_order">Checkout</string>
 </resources>
