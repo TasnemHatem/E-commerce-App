@@ -13,5 +13,33 @@
     <dimen name="btn_padding">8dp</dimen>
     <dimen name="lbl_text_view_textSize">16sp</dimen>
     <dimen name="frame_header_height">60dp</dimen>
+    <dimen name="txt_terms_and_condition_textSize">14sp</dimen>
+    <dimen name="txt_terms_condition_marginStart">10dp</dimen>
+    <dimen name="toolbar_title_paddingStart">8dp</dimen>
+    <dimen name="toolbar_title_text_size">20sp</dimen>
+    <dimen name="button_background_radius">30dp</dimen>
+
+    <dimen name="checkout_content_marginStartEnd">16dp</dimen>
+    <dimen name="checkout_content_marginTopBottom">10dp</dimen>
+    <dimen name="checkout_content_lbl_padding">2dp</dimen>
+    <dimen name="checkout_lbl_textSize">14sp</dimen>
+    <dimen name="checkout_content_paddingStartEnd">16dp</dimen>
+    <dimen name="checkout_content_paddingTopBottom">10dp</dimen>
+    <dimen name="ll_checkout_place_order_padding">16dp</dimen>
+    <dimen name="ll_checkout_items_receipt">16dp</dimen>
+
+    <dimen name="back_btn_dimen">37dp</dimen>
+
+
+
+    <dimen name="item_address_marginTop">16dp</dimen>
+    <dimen name="item_address_paddingStartEnd">16dp</dimen>
+    <dimen name="item_address_paddingTopBottom">10dp</dimen>
+    <dimen name="item_address_name_textSize">18sp</dimen>
+    <dimen name="item_address_type_paddingStartEnd">10dp</dimen>
+    <dimen name="item_address_type_paddingTopBottom">2dp</dimen>
+    <dimen name="address_details_textSize">14sp</dimen>
+    <dimen name="address_details_marginTop">2dp</dimen>
+    <dimen name="checkout_label_value_textSize">18sp</dimen>
 
 </resources>
