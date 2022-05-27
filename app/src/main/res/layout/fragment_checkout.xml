@@ -303,5 +303,5 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
-        app:srcCompat="@drawable/ic_black_color_back_24dp" />
+        android:src="@drawable/ic_black_color_back_24dp" />
 </RelativeLayout>
