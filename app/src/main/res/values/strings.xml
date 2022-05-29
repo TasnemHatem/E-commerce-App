@@ -25,4 +25,23 @@
     <string name="content_description">content</string>
     <string name="title_favourite">Favourites</string>
     <string name="no_favourite_yet">No Favourite Items yet</string>
+
+    <string name="myOrders">My Orders</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="viewall">View All</string>
+    <string name="nickname">Nickname</string>
+    <string name="currency">Currency</string>
+    <string name="signout">SIGN OUT</string>
+    <string name="addressbook">Address book</string>
+    <string name="ok">OK</string>
+    <string name="addAddress">Add Address</string>
+    <string name="city">City</string>
+    <string name="postCode">Post/Zip Code</string>
+
+    <string-array name="currencyArr">
+        <item>EGP</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>AUD</item>
+    </string-array>
 </resources>
