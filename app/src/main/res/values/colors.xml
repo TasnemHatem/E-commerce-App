@@ -21,4 +21,8 @@
 
     <color name="colorOrderStatusInProcess">#FF9800</color>
     <color name="colorOrderStatusDelivered">#8BC34A</color>
+
+    <color name="lightGray">#f6f6f6</color>
+    <color name="gray">#bababa</color>
+    <color name="red">#EC0000</color>
 </resources>
