@@ -42,4 +42,9 @@
     <dimen name="address_details_marginTop">2dp</dimen>
     <dimen name="checkout_label_value_textSize">18sp</dimen>
 
+    <dimen name="input_label_vertical_spacing">8dp</dimen>
+    <dimen name="input_label_horizontal_spacing">4dp</dimen>
+
+
+
 </resources>
