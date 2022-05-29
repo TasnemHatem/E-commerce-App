@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGray"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/design_default_color_primary">
+
+        <include
+            layout="@layout/layout_settings_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:padding="10dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nicknameId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nickname"
+                    android:inputType="textPersonName"
+                    android:textSize="15sp"
+                    android:text="Deleted name"
+                    android:textColor="@color/gray"
+                    android:background="@color/white"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                style="@style/InputLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/currency"
+                android:textColor="@color/black"
+                android:background="@color/white"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/currencySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:entries="@array/currencyArr">
+
+            </Spinner>
+
+            <Button
+                android:id="@+id/addresBtnId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:drawableEnd="@drawable/ic_chevron_right"
+                android:text="@string/addressbook"
+                android:textColor="@color/black"
+                android:gravity="left"/>
+
+
+            <Button
+                android:id="@+id/login_outBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="@string/signout"
+                android:textColor="@color/red"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
