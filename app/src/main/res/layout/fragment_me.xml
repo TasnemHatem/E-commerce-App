@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGray">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/userNameId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                tools:text="Hello, Emy" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/ordersHeaderId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/myOrders"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/viewallOrdersBtnId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewall"
+                    android:textColor="@color/gray"
+                    android:drawableEnd="@drawable/ic_chevron_right"
+                    android:background="@android:color/transparent"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/orderRecycleViewId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/wishlistHeaderId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/wishlist"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/viewallWishlistBtnId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewall"
+                    android:textColor="@color/gray"
+                    android:drawableEnd="@drawable/ic_chevron_right"
+                    android:background="@android:color/transparent"/>
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/wishlistRecycleViewId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"/>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
