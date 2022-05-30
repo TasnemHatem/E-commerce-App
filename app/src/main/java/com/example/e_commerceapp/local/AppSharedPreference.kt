@@ -3,7 +3,7 @@ package com.example.e_commerceapp.local
 import android.content.SharedPreferences
 import javax.inject.Inject
 
-class AppSharedPreference @Inject constructor(private val mSharedPreferences: SharedPreferences, private val mSharedPreferencesEditor: SharedPreferences.Editor) {
+class AppSharedPreference constructor(private val mSharedPreferences: SharedPreferences, private val mSharedPreferencesEditor: SharedPreferences.Editor) {
     init {
         mSharedPreferencesEditor.apply()
     }
