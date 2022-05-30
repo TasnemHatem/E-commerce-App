@@ -7,5 +7,81 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.e_commerceapp.ui.main.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_homeFragment3"
+            app:destination="@id/homeFragment3" />
+        <action
+            android:id="@+id/action_mainFragment_to_meFragment2"
+            app:destination="@id/meFragment2" />
+        <action
+            android:id="@+id/action_mainFragment_to_categoryFragment2"
+            app:destination="@id/categoryFragment2" />
+        <action
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment3"
+        android:name="com.example.e_commerceapp.ui.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment3_to_productFragment2"
+            app:destination="@id/productFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/productFragment2"
+        android:name="com.example.e_commerceapp.ui.product.ProductFragment"
+        android:label="ProductFragment" />
+    <fragment
+        android:id="@+id/meFragment2"
+        android:name="com.example.e_commerceapp.ui.me.MeFragment"
+        android:label="MeFragment" >
+        <action
+            android:id="@+id/action_meFragment2_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_meFragment2_to_orderFragment"
+            app:destination="@id/orderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.e_commerceapp.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderFragment"
+        android:name="com.example.e_commerceapp.ui.order.OrderFragment"
+        android:label="OrderFragment" />
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.example.e_commerceapp.ui.address.AddressFragment"
+        android:label="AddressFragment" >
+        <action
+            android:id="@+id/action_addressFragment_to_newAddressFragment"
+            app:destination="@id/newAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newAddressFragment"
+        android:name="com.example.e_commerceapp.ui.newaddress.NewAddressFragment"
+        android:label="NewAddressFragment" />
+    <fragment
+        android:id="@+id/categoryFragment2"
+        android:name="com.example.e_commerceapp.ui.category.CategoryFragment"
+        android:label="CategoryFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.e_commerceapp.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.e_commerceapp.ui.register.RegisterFragment"
+        android:label="RegisterFragment" />
 </navigation>
