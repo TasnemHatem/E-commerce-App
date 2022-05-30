@@ -40,6 +40,7 @@
     <string name="home">Home</string>
     <string name="category">Category</string>
     <string name="profile">Profile</string>
+    <string name="cart">Cart</string>
 
     <string-array name="currencyArr">
         <item>EGP</item>
