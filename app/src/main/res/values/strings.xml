@@ -48,6 +48,7 @@
     <string name="addressLine2">Address Line 2</string>
     <string name="phoneNumber">Phone Number</string>
     <string name="save">Save</string>
+    <string name="favorites">Favorites</string>
 
     <string-array name="currencyArr">
         <item>EGP</item>
