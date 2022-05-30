@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    <item android:id="@+id/homeFragment"-->
-<!--        android:title="@string/shop"-->
-<!--        android:icon="@drawable/ic_home" />-->
-<!--    <item android:id="@+id/favoritesFragment"-->
-<!--        android:title="@string/favorites"-->
-<!--        android:enabled="true"-->
-<!--        android:icon="@drawable/ic_favorite" />-->
-<!--    <item android:id="@+id/alarmsFragment"-->
-<!--        android:title="@string/alarms"-->
-<!--        android:enabled="true"-->
-<!--        android:icon="@drawable/ic_alert" />-->
-<!--    <item android:id="@+id/settingsFragment"-->
-<!--        android:title="@string/settings"-->
-<!--        android:enabled="true"-->
-<!--        android:icon="@drawable/ic_settings" />-->
+    <item android:id="@+id/homeFragment"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home" />
+    <item android:id="@+id/categoryFragment"
+        android:title="@string/category"
+        android:enabled="true"
+        android:icon="@drawable/ic_cart" />
+    <item android:id="@+id/meFragment"
+        android:title="@string/profile"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile_2" />
+
 </menu>
