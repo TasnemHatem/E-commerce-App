@@ -13,10 +13,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageView_brand"
                 android:layout_width="0dp"
                 android:layout_height="210dp"
-                android:scaleType="center"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                app:layout_constraintStart_toStartOf="@id/imageView"
-                app:layout_constraintTop_toBottomOf="@id/imageView"
+                app:layout_constraintStart_toStartOf="@id/imageView_brand"
+                app:layout_constraintTop_toBottomOf="@id/imageView_brand"
                 android:text="brand 1"
                 android:textSize="15sp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

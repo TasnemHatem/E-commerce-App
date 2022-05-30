@@ -6,35 +6,36 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.e_commerceapp.R
-import com.example.e_commerceapp.ui.home.model.SmartCollection
+import com.example.e_commerceapp.ui.home.model.VendorsResponse
 
-class VendorResponseAdapter (var brands: List<SmartCollection>) : RecyclerView.Adapter<VendorResponseAdapter.ViewHolder>(){
+class VendorResponseAdapter (var brands:  VendorsResponse) : RecyclerView.Adapter<VendorResponseAdapter.ViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VendorResponseAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.category_row,parent,false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.brands_row,parent,false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: VendorResponseAdapter.ViewHolder, position: Int) {
-        var current = brands[position]
-        holder.txtSportName.text = current.title
-        holder.image.setImageResource(current.image)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var current = brands.smartCollections[position]
+       holder.txtBrandName.text = current.title
+       holder.image.load(current.image.src)
 
     }
 
-    fun setListTOAdaptr(brand: List<SmartCollection>?){
+    fun setListTOAdaptr(brand: VendorsResponse){
         if (brand != null) {
             brands = brand
             notifyDataSetChanged()
         }
     }
 
-    override fun getItemCount(): Int = brands.size
+    override fun getItemCount(): Int = brands.smartCollections.size
 
     class ViewHolder (val itemView: View): RecyclerView.ViewHolder(itemView){
-        val txtSportName : TextView = itemView.findViewById(R.id.category_name)
-        val image :ImageView = itemView.findViewById(R.id.category_imageView)
+        val txtBrandName : TextView = itemView.findViewById(R.id.brand_name_text)
+       val image : ImageView = itemView.findViewById(R.id.imageView_brand)
 
 
     }
