@@ -19,7 +19,7 @@ class VendorResponseAdapter (var brands: List<SmartCollection>) : RecyclerView.A
     override fun onBindViewHolder(holder: VendorResponseAdapter.ViewHolder, position: Int) {
         var current = brands[position]
         holder.txtSportName.text = current.title
-        holder.image.setImageResource(current.image)
+        //holder.image.setImageResource(current.image)
 
     }
 

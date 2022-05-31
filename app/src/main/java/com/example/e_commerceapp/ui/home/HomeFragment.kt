@@ -39,5 +39,6 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
             }
         }
         mViewModel.requestVendors()
+
     }
 }
