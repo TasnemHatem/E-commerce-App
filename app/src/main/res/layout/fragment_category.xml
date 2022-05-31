@@ -48,7 +48,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="#EFEEED"
-            android:layout_weight="1.5"/>
+            android:layout_weight="1.5"
+            tools:listitem="@layout/filter_row"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
