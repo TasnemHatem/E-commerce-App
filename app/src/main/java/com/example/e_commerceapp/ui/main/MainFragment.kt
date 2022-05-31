@@ -21,7 +21,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         }
 
         binding.btnCart.setOnClickListener{
-
+            navController.navigate(R.id.action_mainFragment_to_cartFragment)
         }
 
         binding.settingsBtnId.setOnClickListener{

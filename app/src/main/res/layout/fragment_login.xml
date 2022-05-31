@@ -82,15 +82,12 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@drawable/button_gradient_background"
+        android:backgroundTint="@color/appTheme"
         android:text="@string/login"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="@dimen/btn_textSize"
-        android:layout_marginTop="15dp"
-        android:paddingEnd="120dp"
-        android:padding="10dp"
-        android:paddingStart="120dp"/>
+        android:layout_marginTop="15dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

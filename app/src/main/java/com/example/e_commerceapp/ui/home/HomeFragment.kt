@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,7 @@ import kotlin.collections.ArrayList
 
 private const val TAG = "HomeFragment"
 @AndroidEntryPoint
-class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate), OnBrandClickListener {
     private lateinit var   recyclerViewBrand :RecyclerView
     private lateinit var vendorsResponse:VendorsResponse
     private lateinit var   vendorResponseAdapter: VendorResponseAdapter
@@ -73,7 +74,7 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
         recyclerViewBrand.setLayoutManager(grid)
 
         vendorsResponse = VendorsResponse(ArrayList())
-        vendorResponseAdapter = VendorResponseAdapter( vendorsResponse)
+        vendorResponseAdapter = VendorResponseAdapter( vendorsResponse, {clickBrandBtn()})
         recyclerViewBrand.setAdapter(vendorResponseAdapter)
     }
 
@@ -90,5 +91,9 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
            R.drawable.banner3,)
         banerAdapter = BanerAdapter(banerList)
         recyclerViewBaner.setAdapter(banerAdapter)
+    }
+
+    override fun clickBrandBtn() {
+        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_mainFragment_to_productFragment2)
     }
 }

@@ -9,9 +9,6 @@
         android:name="com.example.e_commerceapp.ui.main.MainFragment"
         android:label="MainFragment" >
         <action
-            android:id="@+id/action_mainFragment_to_homeFragment3"
-            app:destination="@id/homeFragment3" />
-        <action
             android:id="@+id/action_mainFragment_to_categoryFragment2"
             app:destination="@id/categoryFragment2" />
         <action
@@ -26,14 +23,12 @@
         <action
             android:id="@+id/action_mainFragment_to_wishlistFragment"
             app:destination="@id/wishlistFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/homeFragment3"
-        android:name="com.example.e_commerceapp.ui.home.HomeFragment"
-        android:label="HomeFragment" >
         <action
-            android:id="@+id/action_homeFragment3_to_productFragment2"
+            android:id="@+id/action_mainFragment_to_productFragment2"
             app:destination="@id/productFragment2" />
+        <action
+            android:id="@+id/action_mainFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/productFragment2"
@@ -83,4 +78,16 @@
         android:id="@+id/wishlistFragment"
         android:name="com.example.e_commerceapp.ui.wishlist.WishlistFragment"
         android:label="WishlistFragment" />
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.example.e_commerceapp.ui.checkout.CheckoutFragment"
+        android:label="CheckoutFragment" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.e_commerceapp.ui.cart.CartFragment"
+        android:label="CartFragment" >
+        <action
+            android:id="@+id/action_cartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
 </navigation>
