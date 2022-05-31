@@ -10,9 +10,12 @@
         <entry key="..\:/E-commerce-App/app/src/main/res/layout/fragment_main.xml" value="0.1" />
         <entry key="..\:/ITI/GraduationProject/E-commerce-App/app/src/main/res/drawable/button_bckground.xml" value="0.1735" />
         <entry key="..\:/ITI/GraduationProject/E-commerce-App/app/src/main/res/drawable/et_background.xml" value="0.1735" />
+        <entry key="..\:/ITI/GraduationProject/E-commerce-App/app/src/main/res/drawable/ic_add.xml" value="0.1735" />
+        <entry key="..\:/ITI/GraduationProject/E-commerce-App/app/src/main/res/drawable/ic_min.xml" value="0.1735" />
+        <entry key="..\:/ITI/GraduationProject/E-commerce-App/app/src/main/res/drawable/ic_minus.xml" value="0.1735" />
         <entry key="..\:/ITI/GraduationProject/E-commerce-App/app/src/main/res/drawable/item_cart.xml" value="0.1735" />
         <entry key="..\:/ITI/GraduationProject/E-commerce-App/app/src/main/res/layout/fragment_cart.xml" value="0.2" />
-        <entry key="..\:/ITI/GraduationProject/E-commerce-App/app/src/main/res/layout/item_cart.xml" value="0.20863616930312098" />
+        <entry key="..\:/ITI/GraduationProject/E-commerce-App/app/src/main/res/layout/item_cart.xml" value="0.4" />
         <entry key="..\:/Users/ElHandaSia/OneDrive/Desktop/E-commerce-App/app/src/main/res/drawable/button_gradient_background.xml" value="0.2203125" />
         <entry key="..\:/Users/ElHandaSia/OneDrive/Desktop/E-commerce-App/app/src/main/res/drawable/item_dashboard_background.xml" value="0.2203125" />
         <entry key="..\:/Users/ElHandaSia/OneDrive/Desktop/E-commerce-App/app/src/main/res/layout/checkout_item.xml" value="0.5" />
