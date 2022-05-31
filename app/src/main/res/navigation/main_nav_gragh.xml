@@ -12,14 +12,20 @@
             android:id="@+id/action_mainFragment_to_homeFragment3"
             app:destination="@id/homeFragment3" />
         <action
-            android:id="@+id/action_mainFragment_to_meFragment2"
-            app:destination="@id/meFragment2" />
-        <action
             android:id="@+id/action_mainFragment_to_categoryFragment2"
             app:destination="@id/categoryFragment2" />
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_orderFragment"
+            app:destination="@id/orderFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_wishlistFragment"
+            app:destination="@id/wishlistFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment3"
@@ -33,17 +39,6 @@
         android:id="@+id/productFragment2"
         android:name="com.example.e_commerceapp.ui.product.ProductFragment"
         android:label="ProductFragment" />
-    <fragment
-        android:id="@+id/meFragment2"
-        android:name="com.example.e_commerceapp.ui.me.MeFragment"
-        android:label="MeFragment" >
-        <action
-            android:id="@+id/action_meFragment2_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_meFragment2_to_orderFragment"
-            app:destination="@id/orderFragment" />
-    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.e_commerceapp.ui.settings.SettingsFragment"
@@ -84,4 +79,8 @@
         android:id="@+id/registerFragment"
         android:name="com.example.e_commerceapp.ui.register.RegisterFragment"
         android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.example.e_commerceapp.ui.wishlist.WishlistFragment"
+        android:label="WishlistFragment" />
 </navigation>

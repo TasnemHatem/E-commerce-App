@@ -49,6 +49,7 @@
     <string name="phoneNumber">Phone Number</string>
     <string name="save">Save</string>
     <string name="favorites">Favorites</string>
+    <string name="settings">Settings</string>
 
     <string-array name="currencyArr">
         <item>EGP</item>

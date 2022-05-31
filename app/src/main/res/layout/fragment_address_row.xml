@@ -65,7 +65,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="2"
+        android:weightSum="6"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -73,15 +73,16 @@
             android:id="@+id/defaultRadioBtnId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="5"
             android:text="RadioButton" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/deleteAddressId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_delete" />
+            app:srcCompat="@drawable/ic_delete"
+            />
     </LinearLayout>
 
 </LinearLayout>
