@@ -1,6 +1,7 @@
 package com.example.e_commerceapp.ui.main
 
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.e_commerceapp.R
@@ -14,6 +15,18 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         super.afterOnViewCreated()
         setUpBottomNavigation()
         setOnDestinationChangedListener()
+
+        binding.btnFavorite.setOnClickListener{
+            navController.navigate(R.id.action_mainFragment_to_wishlistFragment)
+        }
+
+        binding.btnCart.setOnClickListener{
+
+        }
+
+        binding.settingsBtnId.setOnClickListener{
+            navController.navigate(R.id.action_mainFragment_to_settingsFragment)
+        }
     }
 
     private fun setUpBottomNavigation() {
@@ -24,7 +37,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
 
     open fun setOnDestinationChangedListener(){
-
     }
 
 }
