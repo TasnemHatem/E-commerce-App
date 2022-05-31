@@ -51,7 +51,6 @@
     <string name="favorites">Favorites</string>
     <string name="checkout">Checkout</string>
     <string name="item_image">Item image</string>
-    <string name="settings">Settings</string>
 
     <string-array name="currencyArr">
         <item>EGP</item>
