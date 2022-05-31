@@ -55,6 +55,10 @@
     <string name="zero_num">0</string>
     <string name="minus">Minus</string>
     <string name="plus">plus</string>
+    <string name="settingsTitle">Settings</string>
+    <string name="orderTitle">Orders</string>
+    <string name="wishlistTitle">Wishllist</string>
+    <string name="newAddressTitle">New Address</string>
 
     <string-array name="currencyArr">
         <item>EGP</item>
