@@ -18,9 +18,9 @@ class MeFragment : BaseFragment<FragmentMeBinding>(FragmentMeBinding::inflate){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        if(!appSharedPreference.getBooleanValue("login")){
-//            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_mainFragment_to_loginFragment)
-//        }
+        if(!appSharedPreference.getBooleanValue("login")){
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_mainFragment_to_loginFragment)
+        }
 
         binding.viewallOrdersBtnId.setOnClickListener {
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_mainFragment_to_orderFragment)

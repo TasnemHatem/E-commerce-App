@@ -6,25 +6,6 @@
     android:orientation="vertical">
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_checkout_activity"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="@color/white">
-
-        <TextView
-            android:id="@+id/newAddressTitleId"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/newAddressTitle"
-            android:textColor="@color/black"
-            android:textSize="@dimen/toolbar_title_text_size"
-            android:textStyle="bold" />
-
-    </androidx.appcompat.widget.Toolbar>
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

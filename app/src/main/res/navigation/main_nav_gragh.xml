@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/wishlistFragment"
-        android:name="com.example.e_commerceapp.ui.wishlist.view.WishlistFragment"
+        android:name="com.example.e_commerceapp.ui.wishlist.WishlistFragment"
         android:label="WishlistFragment" />
     <fragment
         android:id="@+id/checkoutFragment"

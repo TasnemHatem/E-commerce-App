@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -31,7 +30,6 @@
         android:contentDescription="@string/addAddress"
         android:src="@drawable/ic_plus"
         app:elevation="6dp"
-        app:fabSize="normal"
-        android:backgroundTint="@color/gray"/>
+        app:fabSize="normal" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
