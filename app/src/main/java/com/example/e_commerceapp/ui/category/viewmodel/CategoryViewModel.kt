@@ -40,4 +40,12 @@ class CategoryViewModel  @Inject constructor(val categoryRepo: CategoryRepo) : V
             }.launchIn(viewModelScope)
         }
     }
+
+    fun requestAllCategory(){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            categoryRepo.getAllProducts().onEach{
+                _category.postValue(it)
+            }.launchIn(viewModelScope)
+        }
+    }
 }
