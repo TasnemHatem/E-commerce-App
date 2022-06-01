@@ -50,6 +50,7 @@
             android:layout_marginTop="35dp"
             android:orientation="vertical">
 
+
             <EditText
                 android:id="@+id/et_firstNAme_registry"
                 android:layout_width="match_parent"
@@ -91,6 +92,8 @@
                 android:textColor="@color/colorPrimaryText"
                 android:textColorHint="@color/colorSecondaryText"
                 android:textSize="@dimen/btn_textSize" />
+
+
 
             <EditText
                 android:id="@+id/et_password_registry"
@@ -147,6 +150,14 @@
                     android:textSize="@dimen/txt_terms_and_condition_textSize" />
             </LinearLayout>
 
+            <ProgressBar
+                android:id="@+id/progress_bar_register"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="50dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
 
             <Button
                 android:id="@+id/btnRegister"
@@ -154,14 +165,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-                android:backgroundTint="@drawable/button_gradient_background"
+                android:backgroundTint="@color/black"
                 android:padding="10dp"
                 android:paddingStart="100dp"
                 android:paddingEnd="100dp"
                 android:text="@string/register"
                 android:textColor="@color/white"
                 android:textSize="@dimen/btn_textSize"
-                android:textStyle="bold" />
+                android:textStyle="bold" >
+
+            </Button>
 
             <LinearLayout
                 android:layout_width="match_parent"
