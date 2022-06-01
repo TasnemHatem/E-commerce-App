@@ -2,6 +2,7 @@ package com.example.e_commerceapp.di
 
 import com.example.e_commerceapp.BuildConfig.SERVER_URL
 import com.example.e_commerceapp.ui.home.network.VendorService
+import com.example.e_commerceapp.ui.wishlist.network.WishlistService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +20,12 @@ object ServicesModule {
     @Provides
     fun providesVendorService(client: OkHttpClient):VendorService{
         return getDynamicRetrofitClient(client).create(VendorService::class.java)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun providesWishlistService(client: OkHttpClient):WishlistService{
+        return getDynamicRetrofitClient(client).create(WishlistService::class.java)
     }
 
     private fun getDynamicRetrofitClient(
