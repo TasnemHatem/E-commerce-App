@@ -10,4 +10,7 @@ interface CategoryService {
 
     @GET("products.json")
     suspend fun getProducts(@Query("product_type") productType:String): Response<ProductsResponse>
+
+    @GET("products.json")
+    suspend fun getAllProducts(): Response<ProductsResponse>
 }
