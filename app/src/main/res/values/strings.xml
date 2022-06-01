@@ -63,6 +63,10 @@
     <string name="no_internet_connection">No Internet connection</string>
     <string name="email_already_exist">Email already exist</string>
     <string name="registered_failed">registered failed</string>
+    <string name="settingsTitle">Settings</string>
+    <string name="orderTitle">Orders</string>
+    <string name="wishlistTitle">Wishllist</string>
+    <string name="newAddressTitle">New Address</string>
 
     <string-array name="currencyArr">
         <item>EGP</item>
