@@ -21,18 +21,14 @@ import kotlin.collections.ArrayList
 private const val TAG = "HomeFragment"
 @AndroidEntryPoint
 class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate), OnBrandClickListener {
-    private lateinit var   recyclerViewBrand :RecyclerView
-    private lateinit var vendorsResponse:VendorsResponse
-    private lateinit var   vendorResponseAdapter: VendorResponseAdapter
 
-    private lateinit var   recyclerViewBaner :RecyclerView
-    private lateinit var   banerAdapter: BanerAdapter
+    private lateinit var   vendorResponseAdapter: VendorResponseAdapter
     val mViewModel:VendorsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
          initBrandRecyclerView(view)
-        initBanerRecyclerView(view)
+         initBanerRecyclerView(view)
 
     }
     override fun afterOnCreateView() {
@@ -66,31 +62,26 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
     }
 
     private fun initBrandRecyclerView(view:View){
-        recyclerViewBrand =view.findViewById(R.id.brands_recyclerview)
 
         val grid =GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-//        val layoutManager = LinearLayoutManager(context)
-//        layoutManager.orientation = RecyclerView.HORIZONTAL
-        recyclerViewBrand.setLayoutManager(grid)
-
-        vendorsResponse = VendorsResponse(ArrayList())
+      var  vendorsResponse = VendorsResponse(ArrayList())
         vendorResponseAdapter = VendorResponseAdapter( vendorsResponse, {clickBrandBtn()})
-        recyclerViewBrand.setAdapter(vendorResponseAdapter)
+         binding.brandsRecyclerview.apply {
+             layoutManager = grid
+             adapter=vendorResponseAdapter
+         }
     }
 
     private fun initBanerRecyclerView(view:View){
 
-        recyclerViewBaner =view.findViewById(R.id.advertise_recyclerview)
 
-        val layoutManager = LinearLayoutManager(context)
-        layoutManager.orientation = RecyclerView.HORIZONTAL
-        recyclerViewBaner.setLayoutManager(layoutManager)
-       var banerList = listOf(
-             R.drawable.banner1,
-          R.drawable.banner2,
-           R.drawable.banner3,)
-        banerAdapter = BanerAdapter(banerList)
-        recyclerViewBaner.setAdapter(banerAdapter)
+        val _layoutManager = LinearLayoutManager(context)
+        _layoutManager.orientation = RecyclerView.HORIZONTAL
+        var banerAdapter = BanerAdapter(listOf(R.drawable.banner1, R.drawable.banner2, R.drawable.banner3))
+        binding.advertiseRecyclerview.apply {
+            layoutManager = _layoutManager
+            adapter= banerAdapter
+        }
     }
 
     override fun clickBrandBtn() {
