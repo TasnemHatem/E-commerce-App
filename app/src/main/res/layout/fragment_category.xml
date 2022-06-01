@@ -5,32 +5,23 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLaout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/topFilter_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+
+        android:background="#EFEEED"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Woman"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Man"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kids"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sale"/>
-    </com.google.android.material.tabs.TabLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/topfilter_row"/>
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topFilter_recycler"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,7 +29,7 @@
         android:orientation="horizontal"
         android:weightSum="6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLaout"
+        app:layout_constraintTop_toBottomOf="@id/view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -48,7 +39,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="#EFEEED"
-            android:layout_weight="1.5"/>
+            android:layout_weight="1.5"
+            tools:listitem="@layout/filter_row"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -57,6 +49,26 @@
             android:layout_height="match_parent"
             android:layout_weight="4.5"
             tools:listitem="@layout/brands_row" />
+
+        <LinearLayout
+            android:id="@+id/imageVisable"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4.5"
+            android:visibility="gone">
+
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4.5"
+                android:src="@drawable/noitem"
+                 />
+
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

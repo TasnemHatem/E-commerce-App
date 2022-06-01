@@ -42,5 +42,3 @@ class VendorResponseAdapter (var brands:  VendorsResponse, private val clickBran
 
     }
 }
-
-//data class brand(var name:String,var image:Int)
