@@ -69,8 +69,8 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
         recyclerViewBrand =view.findViewById(R.id.brands_recyclerview)
 
         val grid =GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-        val layoutManager = LinearLayoutManager(context)
-        layoutManager.orientation = RecyclerView.HORIZONTAL
+//        val layoutManager = LinearLayoutManager(context)
+//        layoutManager.orientation = RecyclerView.HORIZONTAL
         recyclerViewBrand.setLayoutManager(grid)
 
         vendorsResponse = VendorsResponse(ArrayList())

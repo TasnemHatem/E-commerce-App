@@ -7,4 +7,5 @@ import retrofit2.Response
 
 interface CategoryRepo {
     suspend fun getProducts(productType: String): Flow<Response<ProductsResponse>>
+
 }
