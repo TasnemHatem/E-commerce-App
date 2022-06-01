@@ -4,14 +4,12 @@ package com.example.e_commerceapp.ui.wishlist.model
 import com.google.gson.annotations.SerializedName
 
 data class LineItem(
-//    @SerializedName("id")
-//    val id: Int,
-    @SerializedName("product_id")
-    val productId: Int,
+    @SerializedName("id")
+    val id: Long,
     @SerializedName("price")
-    val price: String,
+    val productPrice: String,
     @SerializedName("title")
-    val title: String,
+    val productImg: String,
     @SerializedName("quantity")
     val quantity: Int,
 )
