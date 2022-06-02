@@ -16,7 +16,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-val  NETWORK_TIMEOUT =1000L
+val NETWORK_TIMEOUT = 1000L
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -56,7 +57,7 @@ object NetworkModule {
     }
 
     private fun authInterceptor(chain: Interceptor.Chain): Response {
-        val credentials = Credentials.basic(API_KEY,API_PASS);
+        val credentials = Credentials.basic(API_KEY, API_PASS);
         return chain.proceed(
             chain.request().newBuilder().header("Authorization", credentials)
                 .build()

@@ -1,5 +1,8 @@
 package com.example.e_commerceapp.di
 
+import com.example.e_commerceapp.ui.cart.network.CartService
+import com.example.e_commerceapp.ui.cart.repo.CartRepo
+import com.example.e_commerceapp.ui.cart.repo.CartRepoImpl
 import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.auth.network.AuthService
 import com.example.e_commerceapp.ui.auth.repo.AuthRepo
@@ -39,10 +42,17 @@ object RepoModule {
     fun getCategoryRepo(categoryService: CategoryService): CategoryRepo {
         return CategoryRepoImpl(categoryService)
     }
-
+    
+    @ViewModelScoped
+    @Provides
+    fun getCartRepo(cartService: CartService):CartRepo{
+        return CartRepoImpl(cartService)
+    }
+    
     @ViewModelScoped
     @Provides
     fun getWishlistRepo(wishlistService: WishlistService): WishlistRepo {
         return WishlistRepo(wishlistService)
     }
+    
 }
