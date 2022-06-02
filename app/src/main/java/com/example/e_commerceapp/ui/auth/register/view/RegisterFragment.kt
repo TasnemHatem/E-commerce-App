@@ -1,10 +1,9 @@
 package com.example.e_commerceapp.ui.auth.register.view
 
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
@@ -14,6 +13,7 @@ import com.example.e_commerceapp.ui.auth.model.Customer
 import com.example.e_commerceapp.ui.auth.model.CustomerModel
 import com.example.e_commerceapp.ui.auth.model.Either
 import com.example.e_commerceapp.ui.auth.register.viewModel.RegisterViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "RegisterFragment"
@@ -36,6 +36,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     override fun afterOnCreateView() {
         super.afterOnCreateView()
 
+        binding.checkoutRegister.setOnClickListener{
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_registerFragment_to_loginFragment)
+        }
+
         binding.btnRegister.setOnClickListener {
 
             if (validate()) {
@@ -49,15 +53,16 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 )
                 vm.postData(customer)
 
-                vm.signupSuccess.observe(viewLifecycleOwner) {
+                vm.signupState.observe(viewLifecycleOwner) {
                     when(it) {
                         is Either.Success -> {
-                            Toast.makeText(requireContext(), getString(R.string.registered_successfully), Toast.LENGTH_SHORT).show()
                             endProgress()
-                            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_registerFragment_to_loginFragment)
+                            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_registerFragment_to_mainFragment)
                         }
                         else -> {
-                            Toast.makeText(requireContext(), getString(R.string.registered_failed), Toast.LENGTH_SHORT).show()
+                            val snackBar = Snackbar.make(binding.root, getString(R.string.registered_failed), Snackbar.LENGTH_LONG)
+                            snackBar.view.setBackgroundColor(Color.RED)
+                            snackBar.show()
                             endProgress()
                         }
                     }

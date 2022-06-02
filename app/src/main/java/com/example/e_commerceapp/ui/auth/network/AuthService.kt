@@ -7,6 +7,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface AuthService {
     @POST("customers.json")
@@ -14,6 +15,6 @@ interface AuthService {
             Response<CustomerModel>
 
     @GET("customers.json")
-    suspend fun login(): Response<CustomerLoginModel>
+    suspend fun login(@Query("email") email: String): Response<CustomerLoginModel>
 }
 
