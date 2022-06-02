@@ -1,6 +1,7 @@
 package com.example.e_commerceapp.di
 
 import com.example.e_commerceapp.BuildConfig.SERVER_URL
+import com.example.e_commerceapp.ui.cart.network.CartService
 import com.example.e_commerceapp.ui.category.network.CategoryService
 import com.example.e_commerceapp.ui.home.network.VendorService
 import dagger.Module
@@ -26,6 +27,12 @@ object ServicesModule {
     @Provides
     fun providesCategoryService(client: OkHttpClient):CategoryService{
         return getDynamicRetrofitClient(client).create(CategoryService::class.java)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun providesCartService(client: OkHttpClient):CartService{
+        return getDynamicRetrofitClient(client).create(CartService::class.java)
     }
 
     private fun getDynamicRetrofitClient(
