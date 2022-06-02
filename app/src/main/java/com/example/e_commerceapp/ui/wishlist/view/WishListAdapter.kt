@@ -5,8 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.e_commerceapp.R
+import com.example.e_commerceapp.databinding.FragmentMeWhishlistRowBinding
 import com.example.e_commerceapp.ui.wishlist.model.DraftOrder
 import com.example.e_commerceapp.ui.wishlist.model.WishlistResponse
 import kotlin.reflect.KFunction2
@@ -15,6 +19,7 @@ import kotlin.reflect.KFunction2
 class WishListAdapter(var context: Context, var data: List<DraftOrder>, var listener: OnWishlistClickListenert) : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        val binding = FragmentMeWhishlistRowBinding.bind(itemView)
 
     }
 

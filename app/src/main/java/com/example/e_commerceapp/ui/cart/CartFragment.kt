@@ -16,32 +16,41 @@ import com.example.e_commerceapp.ui.cart.viewmodel.CartViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "CartFragment"
+
 @AndroidEntryPoint
 class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::inflate) {
     val mViewModel: CartViewModel by viewModels()
 
     override fun afterOnCreateView() {
         super.afterOnCreateView()
+        mViewModel.error.observeInFragment(viewLifecycleOwner) {
+            Log.e(TAG, "afterOnCreateView: ", it)
+        }
         mViewModel.cart.observeInFragment(viewLifecycleOwner) {
             when (it) {
                 is DataState.Success -> {
-                    Log.e(TAG, "afterOnCreateView: "+it)
-                    it.data.draftOrder?.lineItems?.filterNotNull()?.let{
+                    Log.e(TAG, "afterOnCreateView: " + it)
+                    it.data.draftOrder?.lineItems?.filterNotNull()?.let {
                         Log.e(TAG, "afterOnCreateView: $it")
                     }
                 }
                 is DataState.Error -> {
                     Log.e(TAG, "afterOnCreateView: ")
                 }
+                DataState.Idle -> {
+
+                }
+                DataState.Loading -> {
+                    
+                }
             }
         }
 
-        mViewModel.requestCart(1091436249323L)
+        mViewModel.requestCart(1091293511915L)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.btnCheckout.setOnClickListener {
             navController.navigate(R.id.action_cartFragment_to_checkoutFragment)
         }

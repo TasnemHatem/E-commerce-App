@@ -18,14 +18,14 @@ interface CartService {
     ): Response<CreateCartResponse>
 
     @GET("draft_orders/{id}.json")
-    fun getCart(@Path(value = "id", encoded = true) id: Long): Response<CartResponse>
+    suspend fun getCart(@Path(value = "id") id: Long): Response<CartResponse>
 
     @DELETE("draft_orders/{id}.json")
     fun deleteCart(@Path(value = "id", encoded = true) id: Long)
 
     @GET("draft_orders.json")
-    fun getAllCarts(): Response<AllCartsResponse>
+    suspend fun getAllCarts(): Response<AllCartsResponse>
 
-    @PUT("draft_orders/{ic}/complete.json")
+    @PUT("draft_orders/{id}/complete.json")
     fun completeCart(@Path(value = "id", encoded = true) id: Long): Response<AllCartsResponse>
 }

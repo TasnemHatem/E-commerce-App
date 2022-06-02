@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class CartResponse(
 	@field:SerializedName("draft_order")
-	val draftOrder: DraftOrder? = null
+	var draftOrder: DraftOrder? = null
 )
