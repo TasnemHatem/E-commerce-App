@@ -7,9 +7,11 @@ data class LineItem(
     @SerializedName("id")
     val id: Long,
     @SerializedName("price")
-    val productPrice: String,
-    @SerializedName("title")
-    val productImg: String,
+    val price: String,
+    @SerializedName("properties")
+    val properties: List<Property>,
     @SerializedName("quantity")
     val quantity: Int,
+    @SerializedName("title")
+    val title: String
 )

@@ -13,8 +13,9 @@ interface WishlistService {
     @PUT("draft_orders/{wishlistId}.json")
     suspend fun addFavouriteProduct(@Path("wishlistId") wishlistId: Int, @Body modifiedWishlist: DraftOrderResponse)
 
-    @GET("draft_orders.json")
-    suspend fun getWishlist(): Response<WishlistResponse>
+    //change it to bring only the order draft of the user
+    @GET("draft_orders/{id}.json")
+    suspend fun getWishlist(@Path("id") id: Long = 1091599171819): Response<DraftOrderResponse>
 
     @PUT("draft_orders/{wishlistId}.json")
     suspend fun deleteFavouriteProduct(@Path("wishlistId") wishlistId: Long)
