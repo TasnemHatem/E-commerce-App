@@ -52,14 +52,18 @@ class AuthRepoImpl(
         password: String
     ): Either<CustomerLoginModel, LoginErrors> {
         return try {
-            val res = authService.login()
+            val res = authService.login(email)
             if (res.isSuccessful) {
                 val customer = res.body()?.customer?.first() {
                     it?.email.equals(email)
                 } ?: return Either.Error(LoginErrors.CustomerNotFound, "CustomerNotFound")
-                return if (customer.lastName.equals(password)) {
-                    Either.Success(res.body()!!)
-
+                return if (customer.password.equals(password)) {
+                    if (res.body() != null) {
+                        Either.Success(res.body()!!)
+                    }
+                    else {
+                        Either.Error(LoginErrors.NullValue, res.message())
+                    }
                 } else Either.Error(
                     LoginErrors.IncorrectEmailOrPassword,
                     "Please enter correct email or password"

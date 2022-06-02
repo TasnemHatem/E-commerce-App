@@ -67,6 +67,8 @@
     <string name="orderTitle">Orders</string>
     <string name="wishlistTitle">Wishllist</string>
     <string name="newAddressTitle">New Address</string>
+    <string name="incorrect_email_or_password">Incorrect Email or Password</string>
+    <string name="login_successfully">login successfully</string>
 
     <string-array name="currencyArr">
         <item>EGP</item>
