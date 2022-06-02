@@ -3,13 +3,13 @@ package com.example.e_commerceapp.ui.category
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.R
-import com.example.e_commerceapp.ui.home.BanerAdapter
+import com.example.e_commerceapp.local.AppSharedPreference
+import com.example.e_commerceapp.ui.category.view.OnClickFilterListener
 
-class TypeProductAdapter (var typeList: List<String>) : RecyclerView.Adapter<TypeProductAdapter.ViewHolder>(){
+class TypeProductAdapter (var typeList: List<String>,val onClickFilterListener: OnClickFilterListener,val sharedPreference: AppSharedPreference) : RecyclerView.Adapter<TypeProductAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TypeProductAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.filter_row,parent,false)
@@ -19,6 +19,10 @@ class TypeProductAdapter (var typeList: List<String>) : RecyclerView.Adapter<Typ
     override fun onBindViewHolder(holder: TypeProductAdapter.ViewHolder, position: Int) {
         var current = typeList[position]
         holder.typeText.text = current
+
+        holder.typeText.setOnClickListener{
+            onClickFilterListener.filter(current, sharedPreference.getStringValue("index","Men"))
+        }
 
     }
 

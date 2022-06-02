@@ -64,7 +64,7 @@
         android:label="CategoryFragment" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.e_commerceapp.ui.login.LoginFragment"
+        android:name="com.example.e_commerceapp.ui.auth.login.view.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
@@ -72,11 +72,15 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.e_commerceapp.ui.register.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:name="com.example.e_commerceapp.ui.auth.register.view.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/wishlistFragment"
-        android:name="com.example.e_commerceapp.ui.wishlist.WishlistFragment"
+        android:name="com.example.e_commerceapp.ui.wishlist.view.WishlistFragment"
         android:label="WishlistFragment" />
     <fragment
         android:id="@+id/checkoutFragment"

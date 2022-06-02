@@ -2,8 +2,10 @@ package com.example.e_commerceapp.di
 
 import com.example.e_commerceapp.BuildConfig.SERVER_URL
 import com.example.e_commerceapp.ui.cart.network.CartService
+import com.example.e_commerceapp.ui.auth.network.AuthService
 import com.example.e_commerceapp.ui.category.network.CategoryService
 import com.example.e_commerceapp.ui.home.network.VendorService
+import com.example.e_commerceapp.ui.wishlist.network.WishlistService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +27,13 @@ object ServicesModule {
 
     @ViewModelScoped
     @Provides
-    fun providesCategoryService(client: OkHttpClient):CategoryService{
+    fun providesAuthService(client: OkHttpClient):AuthService{
+        return getDynamicRetrofitClient(client).create(AuthService::class.java)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun providesCategoryService(client: OkHttpClient): CategoryService {
         return getDynamicRetrofitClient(client).create(CategoryService::class.java)
     }
 
@@ -33,6 +41,12 @@ object ServicesModule {
     @Provides
     fun providesCartService(client: OkHttpClient):CartService{
         return getDynamicRetrofitClient(client).create(CartService::class.java)
+    }
+    
+    @ViewModelScoped
+    @Provides
+    fun providesWishlistService(client: OkHttpClient): WishlistService {
+        return getDynamicRetrofitClient(client).create(WishlistService::class.java)
     }
 
     private fun getDynamicRetrofitClient(
