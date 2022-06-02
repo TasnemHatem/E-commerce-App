@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.ui.wishlist.model.DraftOrder
 import com.example.e_commerceapp.ui.wishlist.model.WishlistResponse
+import kotlin.reflect.KFunction2
 
 
-class WishListAdapter (var context: Context, var data: List<DraftOrder>) : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
+class WishListAdapter(var context: Context, var data: List<DraftOrder>, var listener: OnWishlistClickListenert) : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
@@ -27,6 +28,10 @@ class WishListAdapter (var context: Context, var data: List<DraftOrder>) : Recyc
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.wishlistPriceId.text = data[0].lineItems[position].productPrice
         holder.binding.wishlistImgId.load(data[0].lineItems[position].productImg)
+        holder.binding.deleteIconId.setOnClickListener {
+            //listener.clickDeleteListener(data[0].)
+            //data
+        }
     }
 
     override fun getItemCount(): Int {

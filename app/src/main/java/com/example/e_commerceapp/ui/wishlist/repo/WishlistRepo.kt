@@ -18,8 +18,8 @@ class WishlistRepo(var wishlistService: WishlistService) : WishlistRepoI {
         emit(wishlistService.getWishlist())
     }
 
-    override suspend fun deleteFavouriteProduct(wishlistId: Int, modifiedWishlist: DraftOrderResponse) {
-        wishlistService.deleteFavouriteProduct(wishlistId, modifiedWishlist)
+    override suspend fun deleteFavouriteProduct(wishlistId: Long) {
+        wishlistService.deleteFavouriteProduct(wishlistId)
     }
 
 }

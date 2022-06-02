@@ -28,12 +28,21 @@ class WishlistVM @Inject constructor(val wishlistRepo: WishlistRepo) : ViewModel
         _error.postValue(throwable)
         Log.e("TAG", ": "+throwable.message)
     }
+
     fun requestWishlist(){
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             wishlistRepo.getWishlist().onEach {
                 //it.body()?.draftOrders?.filter { it.isWishlist }
+
                 _wishlist.postValue(it.body()?.draftOrders?.filter { it.isWishlist })
+
             }.launchIn(viewModelScope)
+        }
+    }
+
+    fun deleteWish(id: Long){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            wishlistRepo.deleteFavouriteProduct(id)
         }
     }
 }
