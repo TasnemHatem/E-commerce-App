@@ -1,8 +1,9 @@
 package com.example.e_commerceapp.ui.auth.repo
 
 import com.example.e_commerceapp.ui.auth.model.*
-import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
+import com.example.e_commerceapp.utils.Either
+import com.example.e_commerceapp.utils.LoginErrors
+import com.example.e_commerceapp.utils.SignUpErrors
 
 interface AuthRepo {
 

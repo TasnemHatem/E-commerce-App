@@ -28,7 +28,7 @@ data class Customer(
     @SerializedName("verified_email")
     val verified_email: Boolean? = true,
 
-    @SerializedName("phone")
+    @SerializedName("multipass_identifier")
     val cartId: String? = "",
 
     @SerializedName("note")

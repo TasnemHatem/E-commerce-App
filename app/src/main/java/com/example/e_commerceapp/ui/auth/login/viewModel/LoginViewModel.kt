@@ -1,15 +1,14 @@
 package com.example.e_commerceapp.ui.auth.login.viewModel
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.e_commerceapp.R
 import com.example.e_commerceapp.ui.auth.model.*
 import com.example.e_commerceapp.ui.auth.repo.AuthRepo
-import dagger.hilt.android.internal.Contexts.getApplication
+import com.example.e_commerceapp.utils.Either
+import com.example.e_commerceapp.utils.LoginErrors
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
