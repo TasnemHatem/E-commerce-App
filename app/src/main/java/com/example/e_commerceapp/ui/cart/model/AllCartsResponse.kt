@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class AllCartsResponse(
 
 	@field:SerializedName("draft_orders")
-	val draftOrders: List<DraftOrdersItem?>? = null
+	val draftOrders: List<DraftOrder?>? = null
 )
 
 data class LineItemsItem(
@@ -38,7 +38,7 @@ data class LineItemsItem(
 	val title: String? = null,
 
 	@field:SerializedName("variant_id")
-	val variantId: Int? = null,
+	val variantId: Long? = null,
 
 	@field:SerializedName("tax_lines")
 	val taxLines: List<Any?>? = null,
@@ -50,7 +50,7 @@ data class LineItemsItem(
 	val price: String? = null,
 
 	@field:SerializedName("product_id")
-	val productId: Int? = null,
+	val productId: Long? = null,
 
 	@field:SerializedName("admin_graphql_api_id")
 	val adminGraphqlApiId: String? = null,
@@ -59,7 +59,7 @@ data class LineItemsItem(
 	val name: String? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Long? = null,
 
 	@field:SerializedName("sku")
 	val sku: String? = null,
@@ -167,7 +167,7 @@ data class DraftOrdersItem(
 	val currency: String? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Long? = null,
 
 	@field:SerializedName("shipping_address")
 	val shippingAddress: ShippingAddress? = null,
@@ -209,7 +209,7 @@ data class DraftOrdersItem(
 	val shippingLine: Any? = null,
 
 	@field:SerializedName("order_id")
-	val orderId: Int? = null,
+	val orderId: Long? = null,
 
 	@field:SerializedName("invoice_url")
 	val invoiceUrl: String? = null,
@@ -233,7 +233,7 @@ data class Customer(
 	val lastOrderName: String? = null,
 
 	@field:SerializedName("last_order_id")
-	val lastOrderId: Int? = null,
+	val lastOrderId: Long? = null,
 
 	@field:SerializedName("tax_exempt")
 	val taxExempt: Boolean? = null,
@@ -281,7 +281,7 @@ data class Customer(
 	val currency: String? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Long? = null,
 
 	@field:SerializedName("state")
 	val state: String? = null,
@@ -341,7 +341,7 @@ data class DefaultAddress(
 	val company: Any? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Long? = null,
 
 	@field:SerializedName("customer_id")
 	val customerId: Int? = null,
