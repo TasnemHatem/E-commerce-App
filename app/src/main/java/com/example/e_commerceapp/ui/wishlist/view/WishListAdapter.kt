@@ -12,11 +12,12 @@ import coil.load
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.FragmentMeWhishlistRowBinding
 import com.example.e_commerceapp.ui.wishlist.model.DraftOrder
+import com.example.e_commerceapp.ui.wishlist.model.LineItem
 import com.example.e_commerceapp.ui.wishlist.model.WishlistResponse
 import kotlin.reflect.KFunction2
 
 
-class WishListAdapter(var context: Context, var data: List<DraftOrder>, var listener: OnWishlistClickListenert) : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
+class WishListAdapter(var context: Context, var data: List<LineItem>, var listener: OnWishlistClickListenert) : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val binding = FragmentMeWhishlistRowBinding.bind(itemView)
@@ -31,17 +32,15 @@ class WishListAdapter(var context: Context, var data: List<DraftOrder>, var list
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.wishlistPriceId.text = data[0].lineItems[position].productPrice
-        holder.binding.wishlistImgId.load(data[0].lineItems[position].productImg)
+        holder.binding.wishlistPriceId.text = data[position].properties[2].value
+        holder.binding.wishlistImgId.load(data[position].properties[1].value)
         holder.binding.deleteIconId.setOnClickListener {
-            //listener.clickDeleteListener(data[0].)
-            //data
         }
     }
 
     override fun getItemCount(): Int {
-        if(!data.isEmpty())
-            return data[0].lineItems.size
+        if(data != null)
+            return data.size
         else return 0
     }
 }

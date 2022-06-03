@@ -27,6 +27,7 @@ enum class DiscountError{
 }
 
 enum class LoginErrors {
+    NullValue,
     NoInternetConnection,
     ServerError,
     CustomerNotFound,

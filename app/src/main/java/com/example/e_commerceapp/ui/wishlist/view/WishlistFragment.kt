@@ -9,14 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentWishlistBinding
+import com.example.e_commerceapp.ui.wishlist.model.Customer
 import com.example.e_commerceapp.ui.wishlist.model.DraftOrder
+import com.example.e_commerceapp.ui.wishlist.model.LineItem
 import com.example.e_commerceapp.ui.wishlist.viewmodel.WishlistVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistBinding::inflate), OnWishlistClickListenert{
 
-    private lateinit var wishlistResponse: List<DraftOrder>
+    private lateinit var wishlistResponse: List<LineItem>
     lateinit var wishlistAdapter: WishListAdapter
 
     val viewmodel: WishlistVM by viewModels()
@@ -24,7 +26,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        wishlistResponse = listOf()
+        wishlistResponse = listOf<LineItem>()
         wishlistAdapter = WishListAdapter(requireContext(), wishlistResponse, this)
         binding.wishlistRecycleViewId.adapter = wishlistAdapter
 
@@ -38,7 +40,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
             //TODO Add logic depending on Exception Type
         }
         viewmodel.wishlist.observeInFragment(viewLifecycleOwner){
-            Log.i("EMYTAG", "afterOnCreateView: Data + ${it}")
+            Log.i("EMYTAG", "afterOnCreateView: Ya Data + ${it}")
             wishlistResponse = it
             wishlistAdapter.data = wishlistResponse
             wishlistAdapter.notifyDataSetChanged()

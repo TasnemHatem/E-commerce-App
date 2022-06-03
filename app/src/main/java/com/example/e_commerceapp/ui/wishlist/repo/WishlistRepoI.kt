@@ -11,7 +11,7 @@ interface WishlistRepoI {
 
     suspend fun addWishlist(wishlist: DraftOrderResponse)
     suspend fun addFavouriteProduct(wishlistId: Int, modifiedWishlist: DraftOrderResponse)
-    suspend fun getWishlist() : Flow<Response<WishlistResponse>>
+    suspend fun getWishlist(id: Long = 1091599171819): Flow<Response<DraftOrderResponse>>
     suspend fun deleteFavouriteProduct(wishlistId: Long)
 
 }
