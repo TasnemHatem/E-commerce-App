@@ -34,7 +34,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             navController.navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
-        binding.backLogin.setOnClickListener {
+        binding.backSearch.setOnClickListener {
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_loginFragment_to_mainFragment)
 
         }
