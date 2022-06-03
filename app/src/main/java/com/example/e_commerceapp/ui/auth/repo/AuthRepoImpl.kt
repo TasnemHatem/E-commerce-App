@@ -3,13 +3,14 @@ package com.example.e_commerceapp.ui.auth.repo
 import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.auth.model.*
 import com.example.e_commerceapp.ui.auth.network.AuthService
-import com.example.e_commerceapp.ui.home.network.VendorService
-import com.example.e_commerceapp.ui.home.repo.VendorsRepo
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import retrofit2.Response
-import java.lang.NullPointerException
-import javax.inject.Inject
+import com.example.e_commerceapp.utils.Constants.SHARED_CART_ID
+import com.example.e_commerceapp.utils.Constants.SHARED_FAV_ID
+import com.example.e_commerceapp.utils.Constants.SHARED_ID
+import com.example.e_commerceapp.utils.Constants.SHARED_MAIL
+import com.example.e_commerceapp.utils.Either
+import com.example.e_commerceapp.utils.LoginErrors
+import com.example.e_commerceapp.utils.SignUpErrors
+
 
 class AuthRepoImpl(
     private val authService: AuthService,
@@ -22,6 +23,7 @@ class AuthRepoImpl(
             if (res.isSuccessful) {
                 val body = res.body()
                 if (body != null) {
+                    cacheData(body.customer!!)
                     Either.Success(body)
                 } else {
                     Either.Error(SignUpErrors.NullValue, res.message())
@@ -41,10 +43,10 @@ class AuthRepoImpl(
 
 
     private fun cacheData(customer: Customer) {
-        appSharedPreference.setValue("shared_id", customer.customerId)
-        appSharedPreference.setValue("shared_email", customer.email)
-        appSharedPreference.setValue("shared_cart_id", customer.cartId)
-        appSharedPreference.setValue("shared_favourite_id", customer.customerId)
+        appSharedPreference.setValue(SHARED_ID, customer.customerId)
+        appSharedPreference.setValue(SHARED_MAIL, customer.email)
+        appSharedPreference.setValue(SHARED_CART_ID, customer.cartId)
+        appSharedPreference.setValue(SHARED_FAV_ID, customer.customerId)
     }
 
     override suspend fun login(

@@ -3,7 +3,6 @@ package com.example.e_commerceapp.ui.auth.register.view
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
@@ -11,7 +10,7 @@ import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentRegisterBinding
 import com.example.e_commerceapp.ui.auth.model.Customer
 import com.example.e_commerceapp.ui.auth.model.CustomerModel
-import com.example.e_commerceapp.ui.auth.model.Either
+import com.example.e_commerceapp.utils.Either
 import com.example.e_commerceapp.ui.auth.register.viewModel.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint

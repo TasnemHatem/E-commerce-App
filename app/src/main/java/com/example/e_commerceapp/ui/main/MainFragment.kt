@@ -1,5 +1,6 @@
 package com.example.e_commerceapp.ui.main
 
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -16,6 +17,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         setUpBottomNavigation()
         setOnDestinationChangedListener()
 
+
         binding.btnFavorite.setOnClickListener{
             navController.navigate(R.id.action_mainFragment_to_wishlistFragment)
         }
@@ -27,6 +29,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         binding.settingsBtnId.setOnClickListener{
             navController.navigate(R.id.action_mainFragment_to_settingsFragment)
         }
+
     }
 
     private fun setUpBottomNavigation() {
@@ -36,7 +39,24 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     }
 
 
-    open fun setOnDestinationChangedListener(){
+    private fun setOnDestinationChangedListener() {
+        localNavController.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id){
+                R.id.homeFragment ->{
+                    binding.SearchBar.visibility=View.VISIBLE
+                }
+                R.id.categoryFragment ->{
+                    binding.SearchBar.visibility=View.VISIBLE
+
+                }
+                R.id.meFragment ->{
+                    binding.settingsBtnId.visibility=View.VISIBLE
+                    binding.SearchBar.visibility=View.GONE
+                }
+
+
+            }
+        }
     }
 
 }

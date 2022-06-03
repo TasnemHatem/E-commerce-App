@@ -1,4 +1,4 @@
-package com.example.e_commerceapp.ui.auth.model
+package com.example.e_commerceapp.utils
 
 
 enum class RepoErrors {

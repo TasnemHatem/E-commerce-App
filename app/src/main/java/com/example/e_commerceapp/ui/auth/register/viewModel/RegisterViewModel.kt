@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commerceapp.ui.auth.model.CustomerModel
-import com.example.e_commerceapp.ui.auth.model.Either
-import com.example.e_commerceapp.ui.auth.model.SignUpErrors
+import com.example.e_commerceapp.utils.Either
+import com.example.e_commerceapp.utils.SignUpErrors
 import com.example.e_commerceapp.ui.auth.repo.AuthRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler

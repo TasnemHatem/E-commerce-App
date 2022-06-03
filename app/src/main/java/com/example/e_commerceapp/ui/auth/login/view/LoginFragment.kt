@@ -3,19 +3,16 @@ package com.example.e_commerceapp.ui.auth.login.view
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentLoginBinding
 import com.example.e_commerceapp.ui.auth.login.viewModel.LoginViewModel
-import com.example.e_commerceapp.ui.auth.model.Either
-import com.example.e_commerceapp.ui.auth.model.LoginErrors
-import com.example.e_commerceapp.ui.auth.register.viewModel.RegisterViewModel
+import com.example.e_commerceapp.utils.Either
+import com.example.e_commerceapp.utils.LoginErrors
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.internal.Contexts
 
 private const val TAG = "LoginFragment"
 @AndroidEntryPoint
@@ -35,6 +32,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         super.afterOnCreateView()
         binding.tvRegistry.setOnClickListener {
             navController.navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        binding.backLogin.setOnClickListener {
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_loginFragment_to_mainFragment)
+
         }
 
         binding.btnLogin.setOnClickListener {
