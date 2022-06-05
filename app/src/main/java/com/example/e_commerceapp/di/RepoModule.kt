@@ -48,8 +48,8 @@ object RepoModule {
     
     @ViewModelScoped
     @Provides
-    fun getCartRepo(cartService: CartService):CartRepo{
-        return CartRepoImpl(cartService)
+    fun getCartRepo(cartService: CartService,appSharedPreference: AppSharedPreference):CartRepo{
+        return CartRepoImpl(cartService,appSharedPreference)
     }
     
     @ViewModelScoped

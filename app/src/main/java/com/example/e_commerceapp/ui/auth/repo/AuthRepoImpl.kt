@@ -45,7 +45,7 @@ class AuthRepoImpl(
     private fun cacheData(customer: Customer) {
         appSharedPreference.setValue(SHARED_ID, customer.customerId)
         appSharedPreference.setValue(SHARED_MAIL, customer.email)
-        appSharedPreference.setValue(SHARED_CART_ID, customer.cartId)
+        appSharedPreference.setValue(SHARED_CART_ID, (customer.cartId?.toLong())?:896992641196L)
         appSharedPreference.setValue(SHARED_FAV_ID, customer.favouriteId)
         appSharedPreference.setValue("login", true)
     }

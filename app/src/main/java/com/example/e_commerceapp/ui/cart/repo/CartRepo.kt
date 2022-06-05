@@ -18,17 +18,16 @@ interface CartRepo {
     ): Response<CreateCartResponse>
 
     fun updateOrder(
-        id: Long,
         createCartBody: CreateCartBody,
         dispatcher: CoroutineDispatcher,
-    ): Flow<DataState<CreateCartResponse>>
+    ): Flow<DataState<CartResponse>>
 
     suspend fun getCart(
-        id: Long, dispatcher: CoroutineDispatcher,
+         dispatcher: CoroutineDispatcher,
     ): Flow<DataState<CartResponse>>
 
     suspend fun deleteCart(
-        id: Long, dispatcher: CoroutineDispatcher,
+         dispatcher: CoroutineDispatcher,
     )
 
     suspend fun getAllCarts(
@@ -36,6 +35,6 @@ interface CartRepo {
     ): Flow<DataState<AllCartsResponse>>
 
     suspend fun completeCart(
-        id: Long, dispatcher: CoroutineDispatcher,
+      dispatcher: CoroutineDispatcher,
     ): Flow<DataState<AllCartsResponse>>
 }

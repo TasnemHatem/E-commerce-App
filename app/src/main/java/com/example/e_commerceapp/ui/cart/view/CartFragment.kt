@@ -2,10 +2,7 @@ package com.example.e_commerceapp.ui.cart.view
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,11 +12,12 @@ import com.example.e_commerceapp.base.network.DataState
 import com.example.e_commerceapp.base.network.NetworkExceptions
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentCartBinding
-import com.example.e_commerceapp.databinding.FragmentCategoryBinding
+import com.example.e_commerceapp.ui.cart.model.CreateCartBody
+import com.example.e_commerceapp.ui.cart.model.DraftOrder
 import com.example.e_commerceapp.ui.cart.model.LineItemsItem
 import com.example.e_commerceapp.ui.cart.viewmodel.CartViewModel
+import com.example.e_commerceapp.utils.toTwoDecimalDigits
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.NullPointerException
 
 private const val TAG = "CartFragment"
 
@@ -30,25 +28,35 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
     private lateinit var mAdapter: CartAdapter
     override fun afterOnCreateView() {
         super.afterOnCreateView()
-        mViewModel.cart.observeInFragment(viewLifecycleOwner) {
-            when (it) {
+        setupListeners()
+        mViewModel.cart.observeInFragment(viewLifecycleOwner) { data ->
+            binding.swipeLayout.isRefreshing = false
+            when (data) {
                 is DataState.Success -> {
-                    Log.e(TAG, "afterOnCreateView: " + it)
+                    Log.e(TAG, "afterOnCreateView: " + data)
                     binding.apply {
                         viewFlipperState.visibility = View.GONE
+                        rvCartListItems.visibility = View.VISIBLE
                     }
-                    it.data.draftOrder?.lineItems?.filterNotNull()?.let {
-                        Log.e(TAG, "afterOnCreateView: $it")
-                        showData(it)
-                    }
+                    data.data.draftOrder?.lineItems?.filterNotNull()
+                        ?.filter { (it.name ?: "") != "lipton" }
+                        ?.filterNot { (it.name ?: "") == "lipton" }
+                        ?.let {
+                            Log.e(TAG, "afterOnCreateView: $data")
+                            if (::mAdapter.isInitialized)
+                                mAdapter.list.clear()
+                            showData(it.toMutableList())
+                        }
 
                 }
                 is DataState.Error -> {
-                    checkError(it)
+                    binding.rvCartListItems.visibility = View.GONE
+                    checkError(data)
                 }
                 DataState.Idle -> {
                     binding.apply {
                         viewFlipperState.visibility = View.GONE
+                        rvCartListItems.visibility = View.VISIBLE
                     }
                 }
                 DataState.Loading -> {
@@ -61,18 +69,53 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
             }
         }
 
-        mViewModel.requestCart(896992641196L)
+        mViewModel.requestCart()
     }
 
-    private fun showData(it: List<LineItemsItem>) {
+    private fun setupListeners() {
         binding.apply {
-            rvCartListItems.apply {
-                mAdapter = CartAdapter(it, this@CartFragment)
-                adapter = mAdapter
-                layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                hasFixedSize()
+            swipeLayout.setOnRefreshListener {
+                mViewModel.requestCart()
+            }
+            btnBack.setOnClickListener {
+                navController.navigateUp()
+            }
+            btnCheckout.setOnClickListener {
+
             }
         }
+    }
+
+    private fun showData(it: MutableList<LineItemsItem>) {
+        when (it.size) {
+            0 -> {
+                binding.apply {
+                    viewFlipperState.visibility = View.VISIBLE
+                    viewFlipperState.displayedChild =
+                        viewFlipperState.indexOfChild(noDataLayout.root)
+                }
+            }
+            else -> {
+                binding.apply {
+                    rvCartListItems.apply {
+                        mAdapter = CartAdapter(it, this@CartFragment)
+                        adapter = mAdapter
+                        layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                        hasFixedSize()
+                    }
+                    updatePrice()
+                }
+            }
+        }
+    }
+
+    private fun updatePrice() {
+        var totalPrice = 0.0
+        mAdapter.list.forEach {
+            totalPrice += (it.price ?: "0.0").toDouble() * (it.quantity ?: 0)
+        }
+        binding.textViewTotalPrice.text =
+            resources.getString(R.string.price_money, totalPrice.toTwoDecimalDigits().toString())
     }
 
     private fun checkError(it: DataState.Error) {
@@ -110,15 +153,13 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
         }
     }
 
-    override fun onClickPlus(item: LineItemsItem) {
-        TODO("Not yet implemented")
+    override fun onChangeValue() {
+        val mutableList: MutableList<LineItemsItem?>? = mutableListOf<LineItemsItem?>()
+        mutableList?.addAll(mAdapter.list)
+        mViewModel.updateCart(CreateCartBody(DraftOrder(lineItems = mutableList )))
     }
 
-    override fun onClickMinus(item: LineItemsItem) {
-        TODO("Not yet implemented")
-    }
 
     override fun onClickItem(item: LineItemsItem) {
-        TODO("Not yet implemented")
     }
 }

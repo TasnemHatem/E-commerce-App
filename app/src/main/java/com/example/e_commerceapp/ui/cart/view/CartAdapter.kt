@@ -1,39 +1,73 @@
 package com.example.e_commerceapp.ui.cart.view
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.ItemCartBinding
 import com.example.e_commerceapp.ui.cart.model.LineItemsItem
+import com.example.e_commerceapp.utils.addOne
+import com.example.e_commerceapp.utils.subOneButEnsureNotNegative
+import com.example.e_commerceapp.utils.toTwoDecimalDigits
 
 class CartAdapter(
-    val list: List<LineItemsItem>,
-    val onCartItemClickListeners: OnCartItemClickListeners,
+    var list: MutableList<LineItemsItem>,
+    private val onCartItemClickListeners: OnCartItemClickListeners,
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         return CartViewHolder(ItemCartBinding.inflate(LayoutInflater.from(parent.context),
             parent,
-            false))
+            false), list, onCartItemClickListeners)
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        holder.bind(list[position],onCartItemClickListeners)
+        holder.bind(list[position], position)
     }
 
     override fun getItemCount() = list.size
 
-    class CartViewHolder(private val mItem: ItemCartBinding) :
+    class CartViewHolder(
+        private val mItem: ItemCartBinding,
+        val list: MutableList<LineItemsItem>,
+        private val onCartItemClickListeners: OnCartItemClickListeners,
+    ) :
         RecyclerView.ViewHolder(mItem.root) {
-        fun bind(item: LineItemsItem,onCartItemClickListeners: OnCartItemClickListeners) {
-            mItem.textViewItemPrice.text = item.price
+        fun bind(
+            item: LineItemsItem,
+            position: Int,
+        ) {
+            mItem.textViewItemPrice.text =
+                mItem.root.context.resources.getString(R.string.price_money,
+                    item.price?.toDouble()?.toTwoDecimalDigits().toString())
+
             mItem.imageViewItem.load("https://www.deltamarble.com/wp-content/uploads/woocommerce-placeholder.png")
             mItem.textViewItemName.text = item.name
             mItem.textViewOrderCount.text = item.quantity.toString()
-            mItem.imageButtonMinus.setOnClickListener{
-                
+            mItem.imageButtonMinus.setOnClickListener {
+                showProgress()
+                list[position].quantity = list[position].quantity.subOneButEnsureNotNegative()
+                if (list[position].quantity == 0){
+                    list.removeAt(position)
+                }
+                onCartItemClickListeners.onChangeValue()
             }
+            mItem.imageButtonPlus.setOnClickListener {
+                showProgress()
+                list[position].quantity = list[position].quantity.addOne()
+                onCartItemClickListeners.onChangeValue()
+            }
+            mItem.root.setOnClickListener {
+                onCartItemClickListeners.onClickItem(item)
+            }
+
+        }
+
+        private fun showProgress() {
+            mItem.quantityLayout.visibility = View.GONE
+            mItem.progressBar.visibility = View.VISIBLE
         }
     }
 
