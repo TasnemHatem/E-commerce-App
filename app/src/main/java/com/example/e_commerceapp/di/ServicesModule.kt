@@ -3,6 +3,7 @@ package com.example.e_commerceapp.di
 import com.example.e_commerceapp.BuildConfig.SERVER_URL
 import com.example.e_commerceapp.ui.category.network.CategoryService
 import com.example.e_commerceapp.ui.home.network.VendorService
+import com.example.e_commerceapp.ui.product.network.ProductService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +27,12 @@ object ServicesModule {
     @Provides
     fun providesCategoryService(client: OkHttpClient):CategoryService{
         return getDynamicRetrofitClient(client).create(CategoryService::class.java)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun providesProductService(client: OkHttpClient):ProductService{
+        return getDynamicRetrofitClient(client).create(ProductService::class.java)
     }
 
     private fun getDynamicRetrofitClient(
