@@ -61,7 +61,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
             }
         }
 
-        mViewModel.requestCart(1091293511915L)
+        mViewModel.requestCart(896992641196L)
     }
 
     private fun showData(it: List<LineItemsItem>) {

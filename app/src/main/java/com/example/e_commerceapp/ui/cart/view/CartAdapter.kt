@@ -19,7 +19,7 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(list[position],onCartItemClickListeners)
     }
 
     override fun getItemCount() = list.size
@@ -32,7 +32,7 @@ class CartAdapter(
             mItem.textViewItemName.text = item.name
             mItem.textViewOrderCount.text = item.quantity.toString()
             mItem.imageButtonMinus.setOnClickListener{
-
+                
             }
         }
     }
