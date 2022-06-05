@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commerceapp.ui.auth.model.*
 import com.example.e_commerceapp.ui.auth.repo.AuthRepo
+import com.example.e_commerceapp.ui.cart.repo.CartRepo
 import com.example.e_commerceapp.utils.Either
 import com.example.e_commerceapp.utils.LoginErrors
 import dagger.hilt.android.lifecycle.HiltViewModel
