@@ -29,6 +29,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         binding.settingsBtnId.setOnClickListener{
             navController.navigate(R.id.action_mainFragment_to_settingsFragment)
         }
+        binding.SearchBar.isIconifiedByDefault = true
+
+        binding.SearchBar.setOnSearchClickListener{
+            navController.navigate(R.id.action_mainFragment_to_searchFragment2)
+        }
 
     }
 

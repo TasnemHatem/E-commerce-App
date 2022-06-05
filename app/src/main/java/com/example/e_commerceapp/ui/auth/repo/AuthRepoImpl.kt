@@ -46,7 +46,7 @@ class AuthRepoImpl(
         appSharedPreference.setValue(SHARED_ID, customer.customerId)
         appSharedPreference.setValue(SHARED_MAIL, customer.email)
         appSharedPreference.setValue(SHARED_CART_ID, customer.cartId)
-        appSharedPreference.setValue(SHARED_FAV_ID, customer.customerId)
+        appSharedPreference.setValue(SHARED_FAV_ID, customer.favouriteId)
     }
 
     override suspend fun login(
@@ -57,6 +57,7 @@ class AuthRepoImpl(
             val res = authService.login(email)
             if (res.isSuccessful) {
                 val customer = res.body()?.customer?.first() {
+                    cacheData(it!!)
                     it?.email.equals(email)
                 } ?: return Either.Error(LoginErrors.CustomerNotFound, "CustomerNotFound")
                 return if (customer.password.equals(password)) {

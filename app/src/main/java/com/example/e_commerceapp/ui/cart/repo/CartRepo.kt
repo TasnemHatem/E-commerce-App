@@ -7,6 +7,7 @@ import com.example.e_commerceapp.ui.cart.model.CreateCartBody
 import com.example.e_commerceapp.ui.cart.model.CreateCartResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import retrofit2.Response
 
 
@@ -14,7 +15,7 @@ interface CartRepo {
     suspend fun createNewCart(
         createCartBody: CreateCartBody,
         dispatcher: CoroutineDispatcher,
-    ): Flow<DataState<CreateCartResponse>>
+    ): Response<CreateCartResponse>
 
     fun updateOrder(
         id: Long,
