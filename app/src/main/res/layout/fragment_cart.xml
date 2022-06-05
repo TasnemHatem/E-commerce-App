@@ -6,20 +6,95 @@
     android:layout_height="match_parent"
     android:background="@color/colorLightGray">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/cart"
+            android:textColor="@color/black"
+            android:textSize="@dimen/btn_textSize"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/transparent"
+            android:foregroundTint="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_arrow_back"
+            app:tint="@color/black"
+            tools:ignore="TouchTargetSizeCheck"
+            android:contentDescription="@string/back" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ViewFlipper
+        android:id="@+id/viewFlipperState"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:inAnimation="@anim/alph"
+        android:outAnimation="@anim/alph"
+        app:layout_constraintBottom_toBottomOf="@+id/swipeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_title">
+        <include
+            android:id="@+id/loadingLayout"
+            layout="@layout/loading_layout" />
+
+        <include
+            android:id="@+id/noDataLayout"
+            layout="@layout/no_data_layout" />
+
+        <include
+            android:id="@+id/noNetworkLayout"
+            layout="@layout/no_network_layout" />
+
+        <include
+            android:id="@+id/unAuthLayout"
+            layout="@layout/unauthorized_layout" />
+
+        <include
+            android:id="@+id/someThingWentWrong"
+            layout="@layout/some_thing_went_wrong_layout" />
+    </ViewFlipper>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/header_title"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cart_list_items"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            >
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -37,7 +112,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCheckout"
             android:layout_width="200dp"
-            android:layout_height="52dp"
+            android:layout_height="64dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
@@ -51,16 +126,18 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            tools:text="EGP346.93"
+            android:layout_marginEnd="8dp"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:textSize="@dimen/toolbar_title_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/materialButton"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnCheckout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/materialButton" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="EGP346.93" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
