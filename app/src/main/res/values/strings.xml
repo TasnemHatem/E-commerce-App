@@ -69,6 +69,11 @@
     <string name="newAddressTitle">New Address</string>
     <string name="incorrect_email_or_password">Incorrect Email or Password</string>
     <string name="login_successfully">login successfully</string>
+    <string name="no_network_connection">No network connection<font color='red'>!</font></string>
+    <string name="something_went_wrong">Something went wrong<font color='red'>!</font></string>
+    <string name="oops_no_data_here">Oops no data here<font color='red'>!</font></string>
+    <string name="try_sign_out_and_signin_again">Try signout then signin again<font color='red'>!</font></string>
+    <string name="back">Back</string>
 
     <string-array name="currencyArr">
         <item>EGP</item>

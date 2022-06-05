@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_gragh"
     app:startDestination="@id/mainFragment">
 
@@ -104,8 +105,8 @@
         android:label="CheckoutFragment" />
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.example.e_commerceapp.ui.cart.CartFragment"
-        android:label="CartFragment" >
+        android:name="com.example.e_commerceapp.ui.cart.view.CartFragment"
+        android:label="CartFragment">
         <action
             android:id="@+id/action_cartFragment_to_checkoutFragment"
             app:destination="@id/checkoutFragment" />

@@ -16,7 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-val NETWORK_TIMEOUT = 1000L
+const val NETWORK_TIMEOUT = 2000L
 
 @Module
 @InstallIn(SingletonComponent::class)

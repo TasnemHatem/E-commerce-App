@@ -18,7 +18,6 @@ suspend fun <K, T : Response<K>?> safeApiCall(
     apiCall: suspend () -> Response<K>?,
 ): Flow<DataState<K>> = flow {
     withTimeout(NETWORK_TIMEOUT) {
-
         val response = apiCall.invoke()
         if (response != null) {
             val body = response.body()
