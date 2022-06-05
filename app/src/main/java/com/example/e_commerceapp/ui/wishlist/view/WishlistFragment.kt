@@ -53,11 +53,16 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
             wishlistAdapter.data = wishlistResponse
             wishlistAdapter.notifyDataSetChanged()
         }
-        //viewmodel.requestWishlist()
+        viewmodel.requestWishlist()
 
     }
 
-    override fun clickDeleteListener(id: Long) {
 
+    override fun clickDeleteListener(deletedItem: LineItem) {
+        viewmodel.deleteWish(deletedItem)
+    }
+
+    override fun clickAddToCartListener() {
+        TODO("Not yet implemented")
     }
 }

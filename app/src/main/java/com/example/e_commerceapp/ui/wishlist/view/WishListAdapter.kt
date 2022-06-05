@@ -1,6 +1,8 @@
 package com.example.e_commerceapp.ui.wishlist.view
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,18 +34,46 @@ class WishListAdapter(var context: Context, var data: List<LineItem>, var listen
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        holder.binding.wishlistPriceId.text = data[position].properties[2].value
-//        holder.binding.wishlistImgId.load(data[position].properties[1].value)
-//        holder.binding.deleteIconId.setOnClickListener {
-//        }
-        //holder.binding.wishlistPriceId.text = "33.33 EGP"
+        //if(data[position].title == "wishlist") {
+            holder.binding.wishlistPriceId.text = data[position].properties[2].value
+            holder.binding.wishlistImgId.load(data[position].properties[1].value)
+            holder.binding.deleteIconId.setOnClickListener {
+                delete(position)
+            }
+            holder.binding.addCartIconId.setOnClickListener {
+                addToCart()
+            }
+        //}
 
     }
 
     override fun getItemCount(): Int {
-//        if(data != null)
-//            return data.size
-//        else return 0
-        return 10
+        if(data != null)
+            return data.size
+        else return 0
+
+    }
+
+    fun delete(position: Int){
+        var buildr = AlertDialog.Builder(context)
+        buildr.setTitle("Confirm Remove")
+        buildr.setMessage("Are you sure you want to remove this item from your wishlist?")
+        buildr.setPositiveButton("Yes", DialogInterface.OnClickListener{
+                dialog, id ->
+            Log.i("TAG", "onBindViewHolder: Remove it")
+            listener.clickDeleteListener(data[position])
+            dialog.cancel()
+        })
+        buildr.setNegativeButton("Cancel", DialogInterface.OnClickListener{
+                dialog, id ->
+            Log.i("TAG", "onBindViewHolder: Don't remove it")
+            dialog.cancel()
+        })
+        var alert = buildr.create()
+        alert.show()
+    }
+
+    fun addToCart(){
+
     }
 }

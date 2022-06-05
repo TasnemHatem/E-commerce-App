@@ -34,4 +34,8 @@ class ProductViewModel @Inject constructor(val productRepo: ProductRepo) : ViewM
             }.launchIn(viewModelScope)
         }
     }
+
+    fun addFavProduct(){
+
+    }
 }

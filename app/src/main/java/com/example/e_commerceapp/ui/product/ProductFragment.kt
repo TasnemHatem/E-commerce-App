@@ -14,12 +14,14 @@ import com.example.e_commerceapp.databinding.FragmentProductBinding
 import com.example.e_commerceapp.ui.category.model.Product
 import com.example.e_commerceapp.ui.category.model.ProductsResponse
 import com.example.e_commerceapp.ui.product.viewmodel.ProductViewModel
+import com.example.e_commerceapp.ui.wishlist.viewmodel.WishlistVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBinding::inflate),OnProductClickLisenter {
     lateinit var productAdapter:ProductAdapter
     val mViewModel: ProductViewModel by viewModels()
+    val wishlistViewmodel: WishlistVM by viewModels()
     lateinit var products:ProductsResponse
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,6 +49,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
             }
         }
         mViewModel.requestVendorsProduct(arguments?.getString("amount").toString())
+        wishlistViewmodel.requestWishlist()
     }
 
     private fun initProductReyclerView(){
@@ -106,7 +109,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
     }
 
     override fun addTOFavourite() {
-        TODO("Not yet implemented")
+
     }
 
 
