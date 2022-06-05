@@ -57,6 +57,7 @@ class AuthRepoImpl(
             val res = authService.login(email)
             if (res.isSuccessful) {
                 val customer = res.body()?.customer?.first() {
+                    cacheData(it!!)
                     it?.email.equals(email)
                 } ?: return Either.Error(LoginErrors.CustomerNotFound, "CustomerNotFound")
                 return if (customer.password.equals(password)) {

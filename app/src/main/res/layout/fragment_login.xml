@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/back_search"
+            android:id="@+id/back_login"
             android:layout_width="@dimen/back_btn_dimen"
             android:layout_height="@dimen/back_btn_dimen"
             android:layout_marginStart="12dp"

@@ -55,6 +55,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 vm.signupState.observe(viewLifecycleOwner) {
                     when(it) {
                         is Either.Success -> {
+                            val snackBar = Snackbar.make(binding.root, R.string.registered_successfully, Snackbar.LENGTH_LONG)
+                            snackBar.view.setBackgroundColor(Color.GREEN)
+                            snackBar.show()
                             endProgress()
                             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_registerFragment_to_mainFragment)
                         }
