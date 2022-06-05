@@ -116,4 +116,5 @@ class SearchFragment: BaseFragment<FragmentSearchBinding>(FragmentSearchBinding:
         binding.imageError.visibility= View.GONE
     }
 
+
 }

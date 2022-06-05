@@ -29,10 +29,10 @@ data class Customer(
     val verified_email: Boolean? = true,
 
     @SerializedName("multipass_identifier")
-    val cartId: String? = "",
+    var cartId: String? = "",
 
     @SerializedName("note")
-    val favouriteId: String? = "",
+    var favouriteId: String? = "",
 
     ) {
 

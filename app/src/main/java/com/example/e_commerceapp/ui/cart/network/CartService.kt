@@ -9,7 +9,7 @@ import retrofit2.http.*
 
 interface CartService {
     @POST("draft_orders.json")
-    fun createNewCart(@Body createCartBody: CreateCartBody): Response<CreateCartResponse>
+    suspend fun createNewCart(@Body createCartBody: CreateCartBody): Response<CreateCartResponse>
 
     @PUT("draft_orders/{id}.json")
     fun updateOrder(
