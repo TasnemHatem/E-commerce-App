@@ -93,7 +93,7 @@ class SearchFragment: BaseFragment<FragmentSearchBinding>(FragmentSearchBinding:
         }
     }
 
-    override fun viewProductDetailes() {
+    override fun viewProductDetailes(product:Product) {
         TODO("Not yet implemented")
     }
 
