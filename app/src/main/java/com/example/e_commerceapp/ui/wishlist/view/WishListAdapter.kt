@@ -32,15 +32,18 @@ class WishListAdapter(var context: Context, var data: List<LineItem>, var listen
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.wishlistPriceId.text = data[position].properties[2].value
-        holder.binding.wishlistImgId.load(data[position].properties[1].value)
-        holder.binding.deleteIconId.setOnClickListener {
-        }
+//        holder.binding.wishlistPriceId.text = data[position].properties[2].value
+//        holder.binding.wishlistImgId.load(data[position].properties[1].value)
+//        holder.binding.deleteIconId.setOnClickListener {
+//        }
+        //holder.binding.wishlistPriceId.text = "33.33 EGP"
+
     }
 
     override fun getItemCount(): Int {
-        if(data != null)
-            return data.size
-        else return 0
+//        if(data != null)
+//            return data.size
+//        else return 0
+        return 10
     }
 }

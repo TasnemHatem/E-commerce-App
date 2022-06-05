@@ -45,7 +45,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
             wishlistAdapter.data = wishlistResponse
             wishlistAdapter.notifyDataSetChanged()
         }
-        viewmodel.requestWishlist()
+        //viewmodel.requestWishlist()
 
     }
 
