@@ -15,6 +15,9 @@ import com.example.e_commerceapp.ui.home.repo.VendorsRepo
 import com.example.e_commerceapp.ui.home.repo.VendorsRepoImpl
 import com.example.e_commerceapp.ui.wishlist.network.WishlistService
 import com.example.e_commerceapp.ui.wishlist.repo.WishlistRepo
+import com.example.e_commerceapp.ui.product.network.ProductService
+import com.example.e_commerceapp.ui.product.repo.ProductRepo
+import com.example.e_commerceapp.ui.product.repo.ProductRepoImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,4 +58,11 @@ object RepoModule {
         return WishlistRepo(wishlistService)
     }
     
+
+    @ViewModelScoped
+    @Provides
+    fun getProductRepo(productService: ProductService):ProductRepo{
+        return ProductRepoImpl(productService)
+    }
+
 }

@@ -4,14 +4,18 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentCategoryBinding
 import com.example.e_commerceapp.local.AppSharedPreference
+import com.example.e_commerceapp.ui.category.model.Product
 import com.example.e_commerceapp.ui.category.model.ProductsResponse
 import com.example.e_commerceapp.ui.category.view.OnClickCategoryListener
 import com.example.e_commerceapp.ui.category.view.OnClickFilterListener
@@ -94,7 +98,10 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding> (FragmentCategory
          }
     }
 
-    override fun viewProductDetailes() {
+    override fun viewProductDetailes(product:Product) {
+        val bundle = bundleOf("product" to product)
+        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_mainFragment_to_productDetailes,bundle)
+
     }
 
     override fun filter(productType: String,topProductType:String) {
