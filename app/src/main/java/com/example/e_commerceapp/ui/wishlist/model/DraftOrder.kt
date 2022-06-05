@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class DraftOrder(
     @SerializedName("id")
-    val id: Long,
+    val id: Long?,
     @SerializedName("customer")
-    val customer: Customer,
+    val customer: Customer?,
     @SerializedName("line_items")
     val lineItems: List<LineItem>
 )

@@ -37,6 +37,7 @@
                         android:layout_weight="8"/>
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/add_to_favourit_btn"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_favorite"

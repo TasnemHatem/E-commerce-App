@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentLoginBinding
+import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.auth.login.viewModel.LoginViewModel
 import com.example.e_commerceapp.utils.Either
 import com.example.e_commerceapp.utils.LoginErrors
@@ -17,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 
 private const val TAG = "LoginFragment"
@@ -27,6 +29,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     var userPassword: String? = null
 
     val vm: LoginViewModel by viewModels()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
