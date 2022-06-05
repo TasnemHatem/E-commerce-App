@@ -34,7 +34,7 @@ class WishListAdapter(var context: Context, var data: List<LineItem>, var listen
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //if(data[position].title == "wishlist") {
+        if(data[position].title == "wishlist") {
             holder.binding.wishlistPriceId.text = data[position].properties[2].value
             holder.binding.wishlistImgId.load(data[position].properties[1].value)
             holder.binding.deleteIconId.setOnClickListener {
@@ -43,7 +43,7 @@ class WishListAdapter(var context: Context, var data: List<LineItem>, var listen
             holder.binding.addCartIconId.setOnClickListener {
                 addToCart()
             }
-        //}
+        }
 
     }
 

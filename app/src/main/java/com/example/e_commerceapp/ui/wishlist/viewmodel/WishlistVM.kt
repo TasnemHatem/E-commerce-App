@@ -44,8 +44,8 @@ class WishlistVM @Inject constructor(val wishlistRepo: WishlistRepo) : ViewModel
             var wishlistId = appSharedPreference.getStringValue(Constants.SHARED_FAV_ID, "nothing")
             wishlistRepo.getWishlist(wishlistId).onEach {
 
-                _wishlist.postValue(it.body()?.draftOrder?.lineItems?.filter { it.title == "wishlist" })
-                //_wishlist.postValue(it.body()?.draftOrder?.lineItems)
+                //_wishlist.postValue(it.body()?.draftOrder?.lineItems?.filter { it.title == "wishlist" })
+                _wishlist.postValue(it.body()?.draftOrder?.lineItems)
 
             }.launchIn(viewModelScope)
         }

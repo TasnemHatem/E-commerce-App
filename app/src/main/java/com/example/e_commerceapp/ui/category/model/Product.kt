@@ -2,6 +2,8 @@ package com.example.e_commerceapp.ui.category.model
 
 
 import android.os.Parcelable
+import androidx.room.Ignore
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import java.util.ArrayList
@@ -33,5 +35,7 @@ data class Product(
     @SerializedName("updated_at")
     var updatedAt: String,
     var variants: ArrayList<Variant>,
-    var vendor: String
+    var vendor: String,
+    @Expose(deserialize = false, serialize = false)
+    var isFavourite: Boolean = false
 ) : Parcelable
