@@ -4,17 +4,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentProductBinding
+import com.example.e_commerceapp.ui.category.model.Product
 import com.example.e_commerceapp.ui.category.model.ProductsResponse
 import com.example.e_commerceapp.ui.product.viewmodel.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBinding::inflate) {
+class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBinding::inflate),OnProductClickLisenter {
     lateinit var productAdapter:ProductAdapter
     val mViewModel: ProductViewModel by viewModels()
     lateinit var products:ProductsResponse
@@ -49,7 +52,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
     private fun initProductReyclerView(){
         val grid = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
         var  productsResponse = ProductsResponse(ArrayList())
-        productAdapter = ProductAdapter( productsResponse)
+        productAdapter = ProductAdapter( productsResponse,this)
         binding.productRecyclerview.apply {
             layoutManager = grid
                 adapter = productAdapter
@@ -94,6 +97,16 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
        var _product = products.products.filter {s-> s.variants.get(0).price.toDouble() <= price }
        var _productResponse = ProductsResponse(_product)
        productAdapter.setListTOAdaptr(_productResponse)
+    }
+
+    override fun viewProductDetailes(product: Product) {
+        val bundle = bundleOf("product" to product)
+        navController.navigate(R.id.action_productFragment2_to_productDetailes,bundle)
+
+    }
+
+    override fun addTOFavourite() {
+        TODO("Not yet implemented")
     }
 
 
