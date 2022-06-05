@@ -11,17 +11,18 @@ interface CartService {
     @POST("draft_orders.json")
     suspend fun createNewCart(@Body createCartBody: CreateCartBody): Response<CreateCartResponse>
 
+    @Headers("Content-Type: application/json")
     @PUT("draft_orders/{id}.json")
-    fun updateOrder(
-        @Path(value = "id", encoded = true) id: Long,
+    suspend fun updateOrder(
+        @Path(value = "id") id: Long,
         @Body createCartBody: CreateCartBody,
-    ): Response<CreateCartResponse>
+    ): Response<CartResponse>
 
     @GET("draft_orders/{id}.json")
     suspend fun getCart(@Path(value = "id") id: Long): Response<CartResponse>
 
     @DELETE("draft_orders/{id}.json")
-    fun deleteCart(@Path(value = "id", encoded = true) id: Long)
+    suspend fun deleteCart(@Path(value = "id", encoded = true) id: Long)
 
     @GET("draft_orders.json")
     suspend fun getAllCarts(): Response<AllCartsResponse>

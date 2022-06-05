@@ -1,414 +1,332 @@
 package com.example.e_commerceapp.ui.cart.model
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class AllCartsResponse(
 
 	@field:SerializedName("draft_orders")
-	val draftOrders: List<DraftOrder?>? = null
+	@Expose val draftOrders: List<DraftOrder?>? = null
 )
 
 data class LineItemsItem(
 
 	@field:SerializedName("variant_title")
-	val variantTitle: String? = null,
+	@Expose val variantTitle: String? = null,
 
 	@field:SerializedName("quantity")
-	val quantity: Int? = null,
+	var quantity: Int? = null,
 
 	@field:SerializedName("taxable")
-	val taxable: Boolean? = null,
+	@Expose val taxable: Boolean? = null,
 
 	@field:SerializedName("gift_card")
-	val giftCard: Boolean? = null,
+	@Expose val giftCard: Boolean? = null,
 
 	@field:SerializedName("fulfillment_service")
-	val fulfillmentService: String? = null,
+	@Expose val fulfillmentService: String? = null,
 
 	@field:SerializedName("applied_discount")
-	val appliedDiscount: Any? = null,
+	@Expose val appliedDiscount: AppliedDiscount? = null,
 
 	@field:SerializedName("requires_shipping")
-	val requiresShipping: Boolean? = null,
+	@Expose val requiresShipping: Boolean? = null,
 
 	@field:SerializedName("custom")
-	val custom: Boolean? = null,
+	@Expose val custom: Boolean? = null,
 
 	@field:SerializedName("title")
-	val title: String? = null,
+	@Expose val title: String? = null,
 
 	@field:SerializedName("variant_id")
-	val variantId: Long? = null,
+	@Expose val variantId: Long? = null,
 
 	@field:SerializedName("tax_lines")
-	val taxLines: List<Any?>? = null,
+	@Expose val taxLines: List<Any?>? = null,
 
 	@field:SerializedName("vendor")
-	val vendor: Any? = null,
+	@Expose val vendor: Any? = null,
 
 	@field:SerializedName("price")
-	val price: String? = null,
+	@Expose val price: String? = null,
 
 	@field:SerializedName("product_id")
-	val productId: Long? = null,
+	@Expose val productId: Long? = null,
 
 	@field:SerializedName("admin_graphql_api_id")
-	val adminGraphqlApiId: String? = null,
+	@Expose val adminGraphqlApiId: String? = null,
 
 	@field:SerializedName("name")
-	val name: String? = null,
+	@Expose val name: String? = null,
 
 	@field:SerializedName("id")
-	val id: Long? = null,
+	@Expose val id: Long? = null,
 
 	@field:SerializedName("sku")
-	val sku: String? = null,
+	@Expose val sku: String? = null,
 
 	@field:SerializedName("grams")
-	val grams: Int? = null,
+	@Expose val grams: Int? = null,
 
 	@field:SerializedName("properties")
-	val properties: List<Any?>? = null
+	@Expose val properties: List<Any?>? = null
 )
 
 data class ShippingAddress(
 
 	@field:SerializedName("zip")
-	val zip: String? = null,
+	@Expose val zip: String? = null,
 
 	@field:SerializedName("country")
-	val country: String? = null,
+	@Expose val country: String? = null,
 
 	@field:SerializedName("city")
-	val city: String? = null,
+	@Expose val city: String? = null,
 
 	@field:SerializedName("address2")
-	val address2: String? = null,
+	@Expose val address2: String? = null,
 
 	@field:SerializedName("address1")
-	val address1: String? = null,
+	@Expose val address1: String? = null,
 
 	@field:SerializedName("latitude")
-	val latitude: Double? = null,
+	@Expose val latitude: Double? = null,
 
 	@field:SerializedName("last_name")
-	val lastName: String? = null,
+	@Expose val lastName: String? = null,
 
 	@field:SerializedName("province_code")
-	val provinceCode: String? = null,
+	@Expose val provinceCode: String? = null,
 
 	@field:SerializedName("country_code")
-	val countryCode: String? = null,
+	@Expose val countryCode: String? = null,
 
 	@field:SerializedName("province")
-	val province: String? = null,
+	@Expose val province: String? = null,
 
 	@field:SerializedName("phone")
-	val phone: String? = null,
+	@Expose val phone: String? = null,
 
 	@field:SerializedName("name")
-	val name: String? = null,
+	@Expose val name: String? = null,
 
 	@field:SerializedName("company")
-	val company: Any? = null,
+	@Expose val company: Any? = null,
 
 	@field:SerializedName("first_name")
-	val firstName: String? = null,
+	@Expose val firstName: String? = null,
 
 	@field:SerializedName("longitude")
-	val longitude: Double? = null
+	@Expose val longitude: Double? = null
 )
 
 data class AppliedDiscount(
 
 	@field:SerializedName("amount")
-	val amount: String? = null,
+	@Expose val amount: String? = null,
 
 	@field:SerializedName("value_type")
-	val valueType: String? = null,
+	@Expose val valueType: String? = null,
 
 	@field:SerializedName("description")
-	val description: String? = null,
+	@Expose val description: String? = null,
 
 	@field:SerializedName("title")
-	val title: Any? = null,
+	@Expose val title: String? = null,
 
 	@field:SerializedName("value")
-	val value: String? = null
+	@Expose val value: String? = null
 )
 
-data class DraftOrdersItem(
-
-	@field:SerializedName("note")
-	val note: String? = null,
-
-	@field:SerializedName("applied_discount")
-	val appliedDiscount: Any? = null,
-
-	@field:SerializedName("created_at")
-	val createdAt: String? = null,
-
-	@field:SerializedName("billing_address")
-	val billingAddress: BillingAddress? = null,
-
-	@field:SerializedName("taxes_included")
-	val taxesIncluded: Boolean? = null,
-
-	@field:SerializedName("line_items")
-	val lineItems: List<LineItemsItem?>? = null,
-
-	@field:SerializedName("updated_at")
-	val updatedAt: String? = null,
-
-	@field:SerializedName("tax_lines")
-	val taxLines: List<Any?>? = null,
-
-	@field:SerializedName("currency")
-	val currency: String? = null,
-
-	@field:SerializedName("id")
-	val id: Long? = null,
-
-	@field:SerializedName("shipping_address")
-	val shippingAddress: ShippingAddress? = null,
-
-	@field:SerializedName("email")
-	val email: String? = null,
-
-	@field:SerializedName("subtotal_price")
-	val subtotalPrice: String? = null,
-
-	@field:SerializedName("total_price")
-	val totalPrice: String? = null,
-
-	@field:SerializedName("tax_exempt")
-	val taxExempt: Boolean? = null,
-
-	@field:SerializedName("invoice_sent_at")
-	val invoiceSentAt: Any? = null,
-
-	@field:SerializedName("total_tax")
-	val totalTax: String? = null,
-
-	@field:SerializedName("tags")
-	val tags: String? = null,
-
-	@field:SerializedName("completed_at")
-	val completedAt: Any? = null,
-
-	@field:SerializedName("note_attributes")
-	val noteAttributes: List<Any?>? = null,
-
-	@field:SerializedName("admin_graphql_api_id")
-	val adminGraphqlApiId: String? = null,
-
-	@field:SerializedName("name")
-	val name: String? = null,
-
-	@field:SerializedName("shipping_line")
-	val shippingLine: Any? = null,
-
-	@field:SerializedName("order_id")
-	val orderId: Long? = null,
-
-	@field:SerializedName("invoice_url")
-	val invoiceUrl: String? = null,
-
-	@field:SerializedName("status")
-	val status: String? = null,
-
-	@field:SerializedName("customer")
-	val customer: Customer? = null
-)
 
 data class Customer(
 
 	@field:SerializedName("total_spent")
-	val totalSpent: String? = null,
+	@Expose val totalSpent: String? = null,
 
 	@field:SerializedName("note")
-	val note: Any? = null,
+	@Expose val note: Any? = null,
 
 	@field:SerializedName("last_order_name")
-	val lastOrderName: String? = null,
+	@Expose val lastOrderName: String? = null,
 
 	@field:SerializedName("last_order_id")
-	val lastOrderId: Long? = null,
+	@Expose val lastOrderId: Long? = null,
 
 	@field:SerializedName("tax_exempt")
-	val taxExempt: Boolean? = null,
+	@Expose val taxExempt: Boolean? = null,
 
 	@field:SerializedName("created_at")
-	val createdAt: String? = null,
+	@Expose val createdAt: String? = null,
 
 	@field:SerializedName("last_name")
-	val lastName: String? = null,
+	@Expose val lastName: String? = null,
 
 	@field:SerializedName("multipass_identifier")
-	val multipassIdentifier: Any? = null,
+	@Expose val multipassIdentifier: Any? = null,
 
 	@field:SerializedName("verified_email")
-	val verifiedEmail: Boolean? = null,
+	@Expose val verifiedEmail: Boolean? = null,
 
 	@field:SerializedName("tags")
-	val tags: String? = null,
+	@Expose val tags: String? = null,
 
 	@field:SerializedName("accepts_marketing_updated_at")
-	val acceptsMarketingUpdatedAt: String? = null,
+	@Expose val acceptsMarketingUpdatedAt: String? = null,
 
 	@field:SerializedName("orders_count")
-	val ordersCount: Int? = null,
+	@Expose val ordersCount: Int? = null,
 
 	@field:SerializedName("default_address")
-	val defaultAddress: DefaultAddress? = null,
+	@Expose val defaultAddress: DefaultAddress? = null,
 
 	@field:SerializedName("updated_at")
-	val updatedAt: String? = null,
+	@Expose val updatedAt: String? = null,
 
 	@field:SerializedName("accepts_marketing")
-	val acceptsMarketing: Boolean? = null,
+	@Expose val acceptsMarketing: Boolean? = null,
 
 	@field:SerializedName("phone")
-	val phone: String? = null,
+	@Expose val phone: String? = null,
 
 	@field:SerializedName("admin_graphql_api_id")
-	val adminGraphqlApiId: String? = null,
+	@Expose val adminGraphqlApiId: String? = null,
 
 	@field:SerializedName("tax_exemptions")
-	val taxExemptions: List<Any?>? = null,
+	@Expose val taxExemptions: List<Any?>? = null,
 
 	@field:SerializedName("currency")
-	val currency: String? = null,
+	@Expose val currency: String? = null,
 
 	@field:SerializedName("id")
-	val id: Long? = null,
+	@Expose val id: Long? = null,
 
 	@field:SerializedName("state")
-	val state: String? = null,
+	@Expose val state: String? = null,
 
 	@field:SerializedName("marketing_opt_in_level")
-	val marketingOptInLevel: Any? = null,
+	@Expose val marketingOptInLevel: Any? = null,
 
 	@field:SerializedName("first_name")
-	val firstName: String? = null,
+	@Expose val firstName: String? = null,
 
 	@field:SerializedName("email")
-	val email: String? = null
+	@Expose val email: String? = null
 )
 
 data class DefaultAddress(
 
 	@field:SerializedName("zip")
-	val zip: String? = null,
+	@Expose val zip: String? = null,
 
 	@field:SerializedName("country")
-	val country: String? = null,
+	@Expose val country: String? = null,
 
 	@field:SerializedName("address2")
-	val address2: String? = null,
+	@Expose val address2: String? = null,
 
 	@field:SerializedName("city")
-	val city: String? = null,
+	@Expose val city: String? = null,
 
 	@field:SerializedName("address1")
-	val address1: String? = null,
+	@Expose val address1: String? = null,
 
 	@field:SerializedName("last_name")
-	val lastName: Any? = null,
+	@Expose val lastName: Any? = null,
 
 	@field:SerializedName("province_code")
-	val provinceCode: String? = null,
+	@Expose val provinceCode: String? = null,
 
 	@field:SerializedName("country_code")
-	val countryCode: String? = null,
+	@Expose val countryCode: String? = null,
 
 	@field:SerializedName("default")
-	val jsonMemberDefault: Boolean? = null,
+	@Expose val jsonMemberDefault: Boolean? = null,
 
 	@field:SerializedName("province")
-	val province: String? = null,
+	@Expose val province: String? = null,
 
 	@field:SerializedName("phone")
-	val phone: String? = null,
+	@Expose val phone: String? = null,
 
 	@field:SerializedName("name")
-	val name: String? = null,
+	@Expose val name: String? = null,
 
 	@field:SerializedName("country_name")
-	val countryName: String? = null,
+	@Expose val countryName: String? = null,
 
 	@field:SerializedName("company")
-	val company: Any? = null,
+	@Expose val company: Any? = null,
 
 	@field:SerializedName("id")
-	val id: Long? = null,
+	@Expose val id: Long? = null,
 
 	@field:SerializedName("customer_id")
-	val customerId: Int? = null,
+	@Expose val customerId: Int? = null,
 
 	@field:SerializedName("first_name")
-	val firstName: Any? = null
+	@Expose val firstName: Any? = null
 )
 
 data class BillingAddress(
 
 	@field:SerializedName("zip")
-	val zip: String? = null,
+	@Expose val zip: String? = null,
 
 	@field:SerializedName("country")
-	val country: String? = null,
+	@Expose val country: String? = null,
 
 	@field:SerializedName("city")
-	val city: String? = null,
+	@Expose val city: String? = null,
 
 	@field:SerializedName("address2")
-	val address2: String? = null,
+	@Expose val address2: String? = null,
 
 	@field:SerializedName("address1")
-	val address1: String? = null,
+	@Expose val address1: String? = null,
 
 	@field:SerializedName("latitude")
-	val latitude: Double? = null,
+	@Expose val latitude: Double? = null,
 
 	@field:SerializedName("last_name")
-	val lastName: String? = null,
+	@Expose val lastName: String? = null,
 
 	@field:SerializedName("province_code")
-	val provinceCode: String? = null,
+	@Expose val provinceCode: String? = null,
 
 	@field:SerializedName("country_code")
-	val countryCode: String? = null,
+	@Expose val countryCode: String? = null,
 
 	@field:SerializedName("province")
-	val province: String? = null,
+	@Expose val province: String? = null,
 
 	@field:SerializedName("phone")
-	val phone: String? = null,
+	@Expose val phone: String? = null,
 
 	@field:SerializedName("name")
-	val name: String? = null,
+	@Expose val name: String? = null,
 
 	@field:SerializedName("company")
-	val company: Any? = null,
+	@Expose val company: Any? = null,
 
 	@field:SerializedName("first_name")
-	val firstName: String? = null,
+	@Expose val firstName: String? = null,
 
 	@field:SerializedName("longitude")
-	val longitude: Double? = null
+	@Expose val longitude: Double? = null
 )
 
 data class ShippingLine(
 
 	@field:SerializedName("price")
-	val price: String? = null,
+	@Expose val price: String? = null,
 
 	@field:SerializedName("custom")
-	val custom: Boolean? = null,
+	@Expose val custom: Boolean? = null,
 
 	@field:SerializedName("handle")
-	val handle: Any? = null,
+	@Expose val handle: Any? = null,
 
 	@field:SerializedName("title")
-	val title: String? = null
+	@Expose val title: String? = null
 )
