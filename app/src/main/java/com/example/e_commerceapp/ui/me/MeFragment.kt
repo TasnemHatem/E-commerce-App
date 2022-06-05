@@ -30,6 +30,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>(FragmentMeBinding::inflate){
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_mainFragment_to_wishlistFragment)
         }
 
+
     }
 
 
