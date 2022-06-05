@@ -21,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBinding::inflate),OnProductClickLisenter {
     lateinit var productAdapter:ProductAdapter
     val mViewModel: ProductViewModel by viewModels()
-    val wishlistViewmodel: WishlistVM by viewModels()
     lateinit var products:ProductsResponse
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +48,6 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
             }
         }
         mViewModel.requestVendorsProduct(arguments?.getString("amount").toString())
-        wishlistViewmodel.requestWishlist()
     }
 
     private fun initProductReyclerView(){
