@@ -49,9 +49,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
             when(destination.id){
                 R.id.homeFragment ->{
                     binding.SearchBar.visibility=View.VISIBLE
+                    binding.settingsBtnId.visibility=View.GONE
+
                 }
                 R.id.categoryFragment ->{
                     binding.SearchBar.visibility=View.VISIBLE
+                    binding.settingsBtnId.visibility=View.GONE
 
                 }
                 R.id.meFragment ->{

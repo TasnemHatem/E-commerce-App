@@ -43,7 +43,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
 
         binding.backLogin.setOnClickListener {
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_loginFragment_to_mainFragment)
+            navController.navigate( R.id.action_loginFragment_to_mainFragment)
 
         }
 
@@ -79,9 +79,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                             snackBar.view.setBackgroundColor(Color.GREEN)
                             snackBar.show()
                             endProgress()
-                            runBlocking {
-                                Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_loginFragment_to_mainFragment)
-                            }
+                             navController.navigate( R.id.action_loginFragment_to_mainFragment)
+
                         }
                     }
                 }
