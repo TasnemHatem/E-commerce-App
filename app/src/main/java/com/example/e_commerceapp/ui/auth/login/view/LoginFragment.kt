@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.ui.BaseFragment
@@ -13,6 +14,10 @@ import com.example.e_commerceapp.utils.Either
 import com.example.e_commerceapp.utils.LoginErrors
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+
 
 private const val TAG = "LoginFragment"
 @AndroidEntryPoint
@@ -34,7 +39,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             navController.navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
-        binding.backSearch.setOnClickListener {
+        binding.backLogin.setOnClickListener {
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_loginFragment_to_mainFragment)
 
         }
@@ -71,7 +76,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                             snackBar.view.setBackgroundColor(Color.GREEN)
                             snackBar.show()
                             endProgress()
-                            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_loginFragment_to_mainFragment)
+                            runBlocking {
+                                Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_loginFragment_to_mainFragment)
+                            }
                         }
                     }
                 }
@@ -79,6 +86,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
 
     }
+
+
 
     private fun startProgress(){
         binding.progressBarLogin.visibility = View.VISIBLE
