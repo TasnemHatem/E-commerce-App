@@ -9,14 +9,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentWishlistBinding
+import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.wishlist.model.Customer
 import com.example.e_commerceapp.ui.wishlist.model.DraftOrder
 import com.example.e_commerceapp.ui.wishlist.model.LineItem
 import com.example.e_commerceapp.ui.wishlist.viewmodel.WishlistVM
+import com.example.e_commerceapp.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistBinding::inflate), OnWishlistClickListenert{
+
+    @Inject
+    lateinit var appSharedPreference: AppSharedPreference
 
     private lateinit var wishlistResponse: List<LineItem>
     lateinit var wishlistAdapter: WishListAdapter
@@ -26,6 +32,8 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.i("EMYTAG", "onViewCreated: user id = ${appSharedPreference.getLongValue(Constants.SHARED_ID, 2222)}")
+        Log.i("EMYTAG", "onViewCreated: wishlist id = ${appSharedPreference.getStringValue(Constants.SHARED_FAV_ID, "2222")}")
         wishlistResponse = listOf<LineItem>()
         wishlistAdapter = WishListAdapter(requireContext(), wishlistResponse, this)
         binding.wishlistRecycleViewId.adapter = wishlistAdapter
