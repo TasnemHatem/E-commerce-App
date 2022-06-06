@@ -16,6 +16,7 @@ import com.example.e_commerceapp.utils.LoginErrors
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -39,11 +40,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun afterOnCreateView() {
         super.afterOnCreateView()
         binding.tvRegistry.setOnClickListener {
-            navController.navigate(R.id.action_loginFragment_to_registerFragment)
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         binding.backLogin.setOnClickListener {
-            navController.navigate( R.id.action_loginFragment_to_mainFragment)
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_loginFragment_to_mainFragment)
 
         }
 
@@ -79,7 +80,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                             snackBar.view.setBackgroundColor(Color.GREEN)
                             snackBar.show()
                             endProgress()
-                             navController.navigate( R.id.action_loginFragment_to_mainFragment)
+                            runBlocking {
+                                delay(200)
+                                Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_loginFragment_to_mainFragment)
+                            }
 
                         }
                     }
