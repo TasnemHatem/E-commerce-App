@@ -14,6 +14,8 @@ import com.example.e_commerceapp.utils.Either
 import com.example.e_commerceapp.ui.auth.register.viewModel.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 private const val TAG = "RegisterFragment"
 @AndroidEntryPoint
@@ -55,11 +57,18 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 vm.signupState.observe(viewLifecycleOwner) {
                     when(it) {
                         is Either.Success -> {
-                            val snackBar = Snackbar.make(binding.root, R.string.registered_successfully, Snackbar.LENGTH_LONG)
+                            val snackBar = Snackbar.make(
+                                binding.root,
+                                R.string.registered_successfully,
+                                Snackbar.LENGTH_LONG
+                            )
                             snackBar.view.setBackgroundColor(Color.GREEN)
                             snackBar.show()
                             endProgress()
-                            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_registerFragment_to_mainFragment)
+                            runBlocking {
+                                delay(200)
+                                Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_registerFragment_to_mainFragment)
+                            }
                         }
                         else -> {
                             val snackBar = Snackbar.make(binding.root, getString(R.string.registered_failed), Snackbar.LENGTH_LONG)
