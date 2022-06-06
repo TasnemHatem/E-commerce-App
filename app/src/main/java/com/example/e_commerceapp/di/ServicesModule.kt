@@ -5,6 +5,7 @@ import com.example.e_commerceapp.ui.cart.network.CartService
 import com.example.e_commerceapp.ui.auth.network.AuthService
 import com.example.e_commerceapp.ui.category.network.CategoryService
 import com.example.e_commerceapp.ui.home.network.VendorService
+import com.example.e_commerceapp.ui.order.network.OrderService
 import com.example.e_commerceapp.ui.wishlist.network.WishlistService
 import com.example.e_commerceapp.ui.product.network.ProductService
 import dagger.Module
@@ -48,6 +49,12 @@ object ServicesModule {
     @Provides
     fun providesWishlistService(client: OkHttpClient): WishlistService {
         return getDynamicRetrofitClient(client).create(WishlistService::class.java)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun providesOrderService(client: OkHttpClient): OrderService {
+        return getDynamicRetrofitClient(client).create(OrderService::class.java)
     }
     
     @ViewModelScoped

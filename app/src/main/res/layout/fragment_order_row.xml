@@ -25,27 +25,38 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/orderId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="1dp"
+                android:text="Total: 700.0EGP"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <TextView
                 android:id="@+id/itemNumId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="1dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:text="2 item" />
+                android:text="2 item"
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/orderTotalId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="1dp"
-                android:text="Total: 700.0EGP" />
+                android:text="Total: 700.0EGP"
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/orderDateId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="1dp"
-                android:text="May 25 2022 02:16:19" />
+                android:text="May 25 2022 02:16:19"
+                android:textSize="20sp"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

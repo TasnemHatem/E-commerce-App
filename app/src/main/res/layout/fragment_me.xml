@@ -27,7 +27,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 tools:text="Hello, Emy"
-                android:text="Hello, ya"/>
+                android:textStyle="bold"/>
 
 
             <LinearLayout
