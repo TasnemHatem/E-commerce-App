@@ -13,6 +13,8 @@ import com.example.e_commerceapp.ui.category.repo.CategoryRepoImpl
 import com.example.e_commerceapp.ui.home.network.VendorService
 import com.example.e_commerceapp.ui.home.repo.VendorsRepo
 import com.example.e_commerceapp.ui.home.repo.VendorsRepoImpl
+import com.example.e_commerceapp.ui.order.network.OrderService
+import com.example.e_commerceapp.ui.order.repo.OrderRepo
 import com.example.e_commerceapp.ui.wishlist.network.WishlistService
 import com.example.e_commerceapp.ui.wishlist.repo.WishlistRepo
 import com.example.e_commerceapp.ui.product.network.ProductService
@@ -63,6 +65,12 @@ object RepoModule {
     @Provides
     fun getProductRepo(productService: ProductService):ProductRepo{
         return ProductRepoImpl(productService)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun getOrderRepo(orderService: OrderService): OrderRepo {
+        return OrderRepo(orderService)
     }
 
 }

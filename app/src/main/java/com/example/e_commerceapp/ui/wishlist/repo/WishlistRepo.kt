@@ -14,15 +14,15 @@ class WishlistRepo(var wishlistService: WishlistService) : WishlistRepoI {
         wishlistService.addWishlist(wishlist)
     }
 
-    override suspend fun addFavouriteProduct(wishlistId: String, modifiedWishlist: DraftOrderResponse) {
+    override suspend fun addFavouriteProduct(wishlistId: Long, modifiedWishlist: DraftOrderResponse) {
         wishlistService.addFavouriteProduct(wishlistId, modifiedWishlist)
     }
 
-    override suspend fun getWishlist(id: String) = flow {
+    override suspend fun getWishlist(id: Long) = flow {
         emit(wishlistService.getWishlist(id))
     }
 
-    override suspend fun deleteFavouriteProduct(wishlistId: String, modifiedWishlist: DraftOrderResponse) {
+    override suspend fun deleteFavouriteProduct(wishlistId: Long, modifiedWishlist: DraftOrderResponse) {
         wishlistService.deleteFavouriteProduct(wishlistId, modifiedWishlist)
     }
 

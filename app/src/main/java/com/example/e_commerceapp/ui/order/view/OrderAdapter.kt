@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.FragmentMeWhishlistRowBinding
 import com.example.e_commerceapp.databinding.FragmentOrderRowBinding
+import com.example.e_commerceapp.ui.order.model.Order
 import com.example.e_commerceapp.ui.wishlist.model.LineItem
 import com.example.e_commerceapp.ui.wishlist.view.OnWishlistClickListenert
 
-class OrderAdapter(var context: Context) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
+class OrderAdapter(var context: Context, var data: List<Order>) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val binding = FragmentOrderRowBinding.bind(itemView)
@@ -25,15 +26,20 @@ class OrderAdapter(var context: Context) : RecyclerView.Adapter<OrderAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.itemNumId.text = "4 items"
-        holder.binding.orderTotalId.text = "765.00 EGP"
-        holder.binding.orderDateId.text = "6/6/2022"
+        data[position].number
+        holder.binding.orderId.text = "Order Num: " + data[position].orderNumber
+        holder.binding.itemNumId.text = "Num of items: " + data[position].number + "items"
+        holder.binding.orderTotalId.text = "Total Price: " + data[position].currentTotalPrice +"$"
+        holder.binding.orderDateId.text = "Created at: " + data[position].createdAt
     }
 
     override fun getItemCount(): Int {
-//        if(data != null)
-//            return data.size
-//        else return 0
-        return 10
+        if(data != null)
+            return data.size
+        else return 0
+    }
+
+    fun convertTime(){
+        
     }
 }

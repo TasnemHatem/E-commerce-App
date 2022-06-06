@@ -7,6 +7,7 @@ import com.example.e_commerceapp.utils.Constants.SHARED_CART_ID
 import com.example.e_commerceapp.utils.Constants.SHARED_FAV_ID
 import com.example.e_commerceapp.utils.Constants.SHARED_ID
 import com.example.e_commerceapp.utils.Constants.SHARED_MAIL
+import com.example.e_commerceapp.utils.Constants.SHARED_NAME
 import com.example.e_commerceapp.utils.Either
 import com.example.e_commerceapp.utils.LoginErrors
 import com.example.e_commerceapp.utils.SignUpErrors
@@ -46,7 +47,8 @@ class AuthRepoImpl(
         appSharedPreference.setValue(SHARED_ID, customer.customerId)
         appSharedPreference.setValue(SHARED_MAIL, customer.email)
         appSharedPreference.setValue(SHARED_CART_ID, (customer.cartId?.toLong())?:896992641196L)
-        appSharedPreference.setValue(SHARED_FAV_ID, customer.favouriteId)
+        appSharedPreference.setValue(SHARED_FAV_ID, (customer.favouriteId?.toLong())?:2)
+        appSharedPreference.setValue(SHARED_NAME, customer.firstName + " " + customer.lastName)
         appSharedPreference.setValue("login", true)
     }
 

@@ -10,8 +10,8 @@ import retrofit2.http.Body
 interface WishlistRepoI {
 
     suspend fun addWishlist(wishlist: DraftOrderResponse)
-    suspend fun addFavouriteProduct(wishlistId: String, modifiedWishlist: DraftOrderResponse)
-    suspend fun getWishlist(id: String = "1091599171819"): Flow<Response<DraftOrderResponse>>
-    suspend fun deleteFavouriteProduct(wishlistId: String, modifiedWishlist: DraftOrderResponse)
+    suspend fun addFavouriteProduct(wishlistId: Long, modifiedWishlist: DraftOrderResponse)
+    suspend fun getWishlist(id: Long = 1091599171819): Flow<Response<DraftOrderResponse>>
+    suspend fun deleteFavouriteProduct(wishlistId: Long, modifiedWishlist: DraftOrderResponse)
 
 }

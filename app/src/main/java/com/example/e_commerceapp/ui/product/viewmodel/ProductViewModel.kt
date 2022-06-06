@@ -39,7 +39,7 @@ class ProductViewModel @Inject constructor(
 
     fun requestVendorsProduct(vendor: String) {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            var wishlistId = appSharedPreference.getStringValue(Constants.SHARED_FAV_ID, "nothing")
+            var wishlistId = appSharedPreference.getLongValue(Constants.SHARED_FAV_ID, 2222)
 
             wishlistRepo.getWishlist(wishlistId).onEach {wishlistResponse ->
                 productRepo.getVendorProducts(vendor).onEach {productlistResponse->
@@ -49,10 +49,6 @@ class ProductViewModel @Inject constructor(
             }.launchIn(viewModelScope)
 
         }
-    }
-
-    fun getWishlist() {
-
     }
 
     fun addFavProduct() {

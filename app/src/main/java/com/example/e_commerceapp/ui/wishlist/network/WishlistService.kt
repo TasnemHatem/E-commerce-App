@@ -11,12 +11,12 @@ interface WishlistService {
     suspend fun addWishlist(@Body wishlist: DraftOrderResponse)
     //@Query("lat") lat: Double
     @PUT("draft_orders/{wishlistId}.json")
-    suspend fun addFavouriteProduct(@Path("wishlistId") wishlistId: String, @Body modifiedWishlist: DraftOrderResponse)
+    suspend fun addFavouriteProduct(@Path("wishlistId") wishlistId: Long, @Body modifiedWishlist: DraftOrderResponse)
 
     //change it to bring only the order draft of the user
     @GET("draft_orders/{id}.json")
-    suspend fun getWishlist(@Path("id") id: String): Response<DraftOrderResponse>
+    suspend fun getWishlist(@Path("id") id: Long): Response<DraftOrderResponse>
 
     @PUT("draft_orders/{wishlistId}.json")
-    suspend fun deleteFavouriteProduct(@Path("wishlistId") wishlistId: String, @Body modifiedWishlist: DraftOrderResponse)
+    suspend fun deleteFavouriteProduct(@Path("wishlistId") wishlistId: Long, @Body modifiedWishlist: DraftOrderResponse)
 }
