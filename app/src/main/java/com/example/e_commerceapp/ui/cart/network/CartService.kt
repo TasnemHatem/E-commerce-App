@@ -1,9 +1,6 @@
 package com.example.e_commerceapp.ui.cart.network
 
-import com.example.e_commerceapp.ui.cart.model.AllCartsResponse
-import com.example.e_commerceapp.ui.cart.model.CartResponse
-import com.example.e_commerceapp.ui.cart.model.CreateCartBody
-import com.example.e_commerceapp.ui.cart.model.CreateCartResponse
+import com.example.e_commerceapp.ui.cart.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -28,5 +25,8 @@ interface CartService {
     suspend fun getAllCarts(): Response<AllCartsResponse>
 
     @PUT("draft_orders/{id}/complete.json")
-    fun completeCart(@Path(value = "id", encoded = true) id: Long): Response<AllCartsResponse>
+    suspend fun completeCart(@Path(value = "id", encoded = true) id: Long): Response<AllCartsResponse>
+
+    @GET("discount_codes/lookup.json")
+    suspend fun applyCoupon(@Query("code") code:String) : Response<CouponResponse>
 }
