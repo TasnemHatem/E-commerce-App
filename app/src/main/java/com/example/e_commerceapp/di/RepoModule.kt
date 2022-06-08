@@ -4,6 +4,9 @@ import com.example.e_commerceapp.ui.cart.network.CartService
 import com.example.e_commerceapp.ui.cart.repo.CartRepo
 import com.example.e_commerceapp.ui.cart.repo.CartRepoImpl
 import com.example.e_commerceapp.local.AppSharedPreference
+import com.example.e_commerceapp.ui.address.network.AddressService
+import com.example.e_commerceapp.ui.address.repo.AddressRepo
+import com.example.e_commerceapp.ui.address.repo.AddressRepoI
 import com.example.e_commerceapp.ui.auth.network.AuthService
 import com.example.e_commerceapp.ui.auth.repo.AuthRepo
 import com.example.e_commerceapp.ui.auth.repo.AuthRepoImpl
@@ -13,6 +16,8 @@ import com.example.e_commerceapp.ui.category.repo.CategoryRepoImpl
 import com.example.e_commerceapp.ui.home.network.VendorService
 import com.example.e_commerceapp.ui.home.repo.VendorsRepo
 import com.example.e_commerceapp.ui.home.repo.VendorsRepoImpl
+import com.example.e_commerceapp.ui.newaddress.network.NewAddressService
+import com.example.e_commerceapp.ui.newaddress.repo.NewAddressRepo
 import com.example.e_commerceapp.ui.order.network.OrderService
 import com.example.e_commerceapp.ui.order.repo.OrderRepo
 import com.example.e_commerceapp.ui.wishlist.network.WishlistService
@@ -59,6 +64,12 @@ object RepoModule {
     fun getWishlistRepo(wishlistService: WishlistService): WishlistRepo {
         return WishlistRepo(wishlistService)
     }
+
+    @ViewModelScoped
+    @Provides
+    fun getAddressRepo(addressService: AddressService): AddressRepoI {
+        return AddressRepo(addressService)
+    }
     
 
     @ViewModelScoped
@@ -71,6 +82,12 @@ object RepoModule {
     @Provides
     fun getOrderRepo(orderService: OrderService): OrderRepo {
         return OrderRepo(orderService)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun getNewAddressRepo(newAddressService: NewAddressService): NewAddressRepo {
+        return NewAddressRepo(newAddressService)
     }
 
 }

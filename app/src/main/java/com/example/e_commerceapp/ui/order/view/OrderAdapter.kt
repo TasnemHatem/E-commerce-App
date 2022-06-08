@@ -40,6 +40,6 @@ class OrderAdapter(var context: Context, var data: List<Order>) : RecyclerView.A
     }
 
     fun convertTime(){
-        
+
     }
 }
