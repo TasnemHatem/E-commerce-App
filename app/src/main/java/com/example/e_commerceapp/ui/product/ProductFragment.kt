@@ -13,17 +13,23 @@ import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentProductBinding
+import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.category.model.Product
 import com.example.e_commerceapp.ui.category.model.ProductsResponse
 import com.example.e_commerceapp.ui.product.viewmodel.ProductViewModel
 import com.example.e_commerceapp.ui.wishlist.viewmodel.WishlistVM
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBinding::inflate),OnProductClickLisenter {
+    @Inject
+    lateinit var appSharedPreference: AppSharedPreference
+
     lateinit var productAdapter:ProductAdapter
     val mViewModel: ProductViewModel by viewModels()
     lateinit var products:ProductsResponse
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,7 +73,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
     private fun initProductReyclerView(){
         val grid = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
         var  productsResponse = ProductsResponse(ArrayList())
-        productAdapter = ProductAdapter( productsResponse,this)
+        productAdapter = ProductAdapter( productsResponse,this,appSharedPreference)
         binding.productRecyclerview.apply {
             layoutManager = grid
                 adapter = productAdapter
@@ -123,6 +129,14 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
 
     override fun addTOFavourite() {
 
+    }
+
+    override fun deletFromFavourite() {
+
+    }
+
+    override fun goToLogin() {
+        navController.navigate(R.id.action_productFragment2_to_loginFragment)
     }
 
 

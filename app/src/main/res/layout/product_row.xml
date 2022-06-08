@@ -44,11 +44,12 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:backgroundTint="#EBFFFFFF">
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_favorite"/>
+                            android:src="@drawable/ic_favorite" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
