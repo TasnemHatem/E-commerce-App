@@ -75,7 +75,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="RadioButton" />
+            android:text="@string/setAsDefaultAddress" />
 
         <ImageView
             android:id="@+id/deleteAddressId"

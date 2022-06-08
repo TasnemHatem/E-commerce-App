@@ -57,4 +57,8 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>(FragmentAddressBind
     override fun clickDelete(userId: Long, addressId: Long) {
         viewmodel.deleteAddress(userId, addressId)
     }
+
+    override fun changeDefault(userId: Long, addressId: Long) {
+        viewmodel.changeDefaultAddress(userId, addressId)
+    }
 }

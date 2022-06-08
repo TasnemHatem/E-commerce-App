@@ -4,6 +4,7 @@ import com.example.e_commerceapp.ui.address.model.AddressResponse
 import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface AddressService {
@@ -12,4 +13,7 @@ interface AddressService {
 
     @DELETE("customers/{userid}/addresses/{addressid}.json")
     suspend fun deleteAddress(@Path("userid") userId: Long, @Path("addressid") addressId: Long)
+
+    @PUT("customers/{userid}/addresses/{addressid}/default.json")
+    suspend fun setDefaultAddress(@Path("userid") userId: Long, @Path("addressid") addressId: Long)
 }
