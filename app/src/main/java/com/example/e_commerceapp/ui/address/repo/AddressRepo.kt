@@ -14,4 +14,8 @@ class AddressRepo (var addressService: AddressService) : AddressRepoI {
     override suspend fun deleteAddress(userId: Long, addressId: Long) {
         addressService.deleteAddress(userId, addressId)
     }
+
+    override suspend fun setDefaultAddress(userId: Long, addressId: Long) {
+        addressService.setDefaultAddress(userId, addressId)
+    }
 }
