@@ -10,10 +10,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.e_commerceapp.R
+import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.category.model.ProductsResponse
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: OnProductClickLisenter) : RecyclerView.Adapter<ProductAdapter.ViewHolder>(){
+class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: OnProductClickLisenter,
+ var appSharedPreference: AppSharedPreference) : RecyclerView.Adapter<ProductAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_row,parent,false)
@@ -25,7 +27,28 @@ class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: 
         holder.textNameProduct.text = "US$ ${current.variants.get(0).price}"
         holder.image.load(current.image.src)
         holder.adddBtn.setOnClickListener{
+            holder.adddBtn.visibility = View.GONE
+            holder.deleteBtn.visibility=View.VISIBLE
+            onProductClickLisenter.addTOFavourite()
+        }
 
+        holder.deleteBtn.setOnClickListener{
+            if (appSharedPreference.getBooleanValue("login")) {
+                holder.adddBtn.visibility = View.VISIBLE
+                holder.deleteBtn.visibility=View.GONE
+                onProductClickLisenter.addTOFavourite()
+            }else{
+               onProductClickLisenter.goToLogin()
+            }
+        }
+        holder.adddBtn.setOnClickListener{
+            if (appSharedPreference.getBooleanValue("login")) {
+                holder.adddBtn.visibility = View.GONE
+                holder.deleteBtn.visibility=View.VISIBLE
+                onProductClickLisenter.deletFromFavourite()
+            }else{
+                onProductClickLisenter.goToLogin()
+            }
         }
         holder.layout.setOnClickListener{
            onProductClickLisenter.viewProductDetailes(current)
@@ -46,6 +69,7 @@ class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: 
         val textNameProduct:TextView = itemView.findViewById(R.id.productName_text)
         val image : ImageView = itemView.findViewById(R.id.product_imageview)
         val adddBtn:CardView = itemView.findViewById(R.id.add_to_favourit_btn)
+        val deleteBtn:CardView = itemView.findViewById(R.id.add_to_fullfavourit_btn)
         val layout:ConstraintLayout = itemView.findViewById(R.id.product_Layout)
 
 

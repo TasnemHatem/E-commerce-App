@@ -47,6 +47,9 @@
         <action
             android:id="@+id/action_productFragment2_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_productFragment2_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -134,7 +137,21 @@
     <fragment
         android:id="@+id/productDetailes"
         android:name="com.example.e_commerceapp.ui.productdetailes.ProductDetailes"
-        android:label="ProductDetailes" />
+        android:label="ProductDetailes" >
+        <action
+            android:id="@+id/action_productDetailes_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_productDetailes_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_productDetailes_to_wishlistFragment"
+            app:destination="@id/wishlistFragment" />
+        <action
+            android:id="@+id/action_productDetailes_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
+        
     <fragment
         android:id="@+id/paymentFragment"
         android:name="com.example.e_commerceapp.ui.payment.PaymentFragment"

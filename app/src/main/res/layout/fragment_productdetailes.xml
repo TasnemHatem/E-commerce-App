@@ -146,7 +146,7 @@
         <LinearLayout
             android:id="@+id/linerrLayout_Add_To_cart_favourit"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="50dp"
             android:orientation="horizontal"
             android:background="@color/white"
             android:layout_margin="6dp"
@@ -163,6 +163,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight=".5"
                 android:src="@drawable/ic_favorite"/>
+
+            <ImageView
+                android:id="@+id/delete_to_favourite_from_detailes"
+                android:layout_margin="6dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:visibility="gone"
+                android:src="@drawable/ic_favorite_full"/>
 
             <Button
                 android:id="@+id/add_to_bag"
