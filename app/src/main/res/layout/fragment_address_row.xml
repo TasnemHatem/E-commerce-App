@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="10dp">
 
 
     <LinearLayout
@@ -51,7 +52,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/addressGeberalId"
+        android:id="@+id/addressGeneralId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cairo Egypt 11511" />

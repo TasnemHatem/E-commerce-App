@@ -59,7 +59,7 @@
         android:label="OrderFragment" />
     <fragment
         android:id="@+id/addressFragment"
-        android:name="com.example.e_commerceapp.ui.address.AddressFragment"
+        android:name="com.example.e_commerceapp.ui.address.view.AddressFragment"
         android:label="AddressFragment" >
         <action
             android:id="@+id/action_addressFragment_to_newAddressFragment"
@@ -67,7 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/newAddressFragment"
-        android:name="com.example.e_commerceapp.ui.newaddress.NewAddressFragment"
+        android:name="com.example.e_commerceapp.ui.newaddress.view.NewAddressFragment"
         android:label="NewAddressFragment" />
     <fragment
         android:id="@+id/categoryFragment2"

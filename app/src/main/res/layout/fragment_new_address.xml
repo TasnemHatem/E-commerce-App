@@ -151,6 +151,12 @@
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Switch
+        android:id="@+id/defaultSwitchId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/makeDefault" />
+
     <Button
         android:id="@+id/saveAddressBtnId"
         android:layout_width="match_parent"

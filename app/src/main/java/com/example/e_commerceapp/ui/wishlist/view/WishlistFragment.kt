@@ -40,6 +40,10 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
 
         var layoutManager: RecyclerView.LayoutManager = GridLayoutManager(view.context, 2, )
         binding.wishlistRecycleViewId.layoutManager = layoutManager
+
+        binding.btnBack.setOnClickListener {
+            navController.navigateUp()
+        }
     }
     override fun afterOnCreateView() {
         super.afterOnCreateView()

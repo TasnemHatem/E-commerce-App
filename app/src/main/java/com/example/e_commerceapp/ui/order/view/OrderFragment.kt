@@ -31,6 +31,10 @@ class OrderFragment : BaseFragment<FragmentOrdersBinding>(FragmentOrdersBinding:
 
         var layoutManager: RecyclerView.LayoutManager =  LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
         binding.ordersRecycleViewId.layoutManager = layoutManager
+
+        binding.btnBack.setOnClickListener {
+            navController.navigateUp()
+        }
     }
     override fun afterOnCreateView() {
         super.afterOnCreateView()
