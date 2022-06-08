@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
@@ -26,6 +28,18 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initProductReyclerView()
+        binding.filterProductBtn.setOnClickListener{
+            if(!binding.constrainlayout.isVisible) {
+                binding.constrainlayout.visibility = View.VISIBLE
+            }else{
+                binding.constrainlayout.visibility = View.GONE
+
+            }
+        }
+        binding.productBackBtn.setOnClickListener{
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_productFragment2_to_mainFragment)
+
+        }
         seekBar()
         mViewModel.vendorsProduct.observeInFragment(viewLifecycleOwner){
             when(it.body()){
@@ -72,6 +86,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
 
     fun seekBar(){
 
+        binding.seekBar.progress = 300
         binding.seekBar.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar,

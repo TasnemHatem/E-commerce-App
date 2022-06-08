@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -27,7 +28,7 @@ class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: 
 
         }
         holder.layout.setOnClickListener{
-         //   onProductClickLisenter.viewProductDetailes(current)
+           onProductClickLisenter.viewProductDetailes(current)
         }
 
     }
@@ -44,7 +45,7 @@ class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: 
     class ViewHolder (val itemView: View): RecyclerView.ViewHolder(itemView){
         val textNameProduct:TextView = itemView.findViewById(R.id.productName_text)
         val image : ImageView = itemView.findViewById(R.id.product_imageview)
-        val adddBtn:FloatingActionButton = itemView.findViewById(R.id.add_to_favourit_btn)
+        val adddBtn:CardView = itemView.findViewById(R.id.add_to_favourit_btn)
         val layout:ConstraintLayout = itemView.findViewById(R.id.product_Layout)
 
 
