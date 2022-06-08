@@ -3,6 +3,8 @@ package com.example.e_commerceapp.ui.cart.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,7 @@ import com.example.e_commerceapp.base.network.NetworkExceptions
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentCartBinding
 import com.example.e_commerceapp.ui.cart.model.CreateCartBody
+import com.example.e_commerceapp.ui.cart.model.DiscountCode
 import com.example.e_commerceapp.ui.cart.model.DraftOrder
 import com.example.e_commerceapp.ui.cart.model.LineItemsItem
 import com.example.e_commerceapp.ui.cart.viewmodel.CartViewModel
@@ -24,11 +27,17 @@ private const val TAG = "CartFragment"
 @AndroidEntryPoint
 class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::inflate),
     OnCartItemClickListeners {
+
+    private var coupon: DiscountCode? = null
     private val mViewModel: CartViewModel by viewModels()
     private lateinit var mAdapter: CartAdapter
     override fun afterOnCreateView() {
         super.afterOnCreateView()
         setupListeners()
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
         mViewModel.cart.observeInFragment(viewLifecycleOwner) { data ->
             binding.swipeLayout.isRefreshing = false
             when (data) {
@@ -68,12 +77,66 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                 }
             }
         }
-
         mViewModel.requestCart()
+        mViewModel.coupon.observeInFragment(viewLifecycleOwner) { data ->
+            binding.apply {
+                progressBarCoupon.visibility = View.GONE
+                btnApplyCoupon.visibility = View.VISIBLE
+            }
+            when (data) {
+                is DataState.Success -> {
+                    Log.e(TAG, "afterOnCreateView: " + data)
+                    coupon = data.data.discountCode
+                    updatePrice()
+                    Toast.makeText(context, resources.getString(R.string.coupon_applied_successfully), Toast.LENGTH_SHORT).show()
+                }
+                is DataState.Error -> {
+                    displayMsg(data)
+                }
+                DataState.Loading -> {
+                    binding.apply {
+                        progressBarCoupon.visibility = View.VISIBLE
+                        btnApplyCoupon.visibility = View.GONE
+                    }
+                }
+            }
+        }
+    }
+
+    private fun displayMsg(it: DataState.Error) {
+        when (it.exception) {
+            is NetworkExceptions.NetworkConnectionException -> {
+                binding.textInputLayoutCoupon.error =
+                    resources.getString(R.string.no_network_connection)
+            }
+            is NetworkExceptions.NotAllowedException,
+            is NetworkExceptions.UnAuthorizedException,
+            -> {
+                binding.apply {
+                    textInputLayoutCoupon.error =
+                        resources.getString(R.string.try_sign_out_and_signin_again)
+                }
+            }
+            else -> {
+                binding.apply {
+                    textInputLayoutCoupon.error = resources.getString(R.string.invalid_coupon)
+                }
+            }
+        }
+
     }
 
     private fun setupListeners() {
         binding.apply {
+            textInputEditText.doOnTextChanged() {
+                    _: CharSequence?,
+                    _: Int,
+                    _: Int,
+                    _: Int,
+                ->
+                textInputLayoutCoupon.error = null
+
+            }
             swipeLayout.setOnRefreshListener {
                 mViewModel.requestCart()
             }
@@ -82,6 +145,17 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
             }
             btnCheckout.setOnClickListener {
 
+            }
+            btnApplyCoupon.setOnClickListener {
+                val coupon = textInputEditText.text.toString()
+                when {
+                    coupon.isEmpty() -> {
+                        textInputLayoutCoupon.error = resources.getString(R.string.fill_the_coupon)
+                    }
+                    else -> {
+                        mViewModel.applyCoupon(coupon)
+                    }
+                }
             }
         }
     }
@@ -114,8 +188,12 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
         mAdapter.list.forEach {
             totalPrice += (it.price ?: "0.0").toDouble() * (it.quantity ?: 0)
         }
-        binding.textViewTotalPrice.text =
-            resources.getString(R.string.price_money, totalPrice.toTwoDecimalDigits().toString())
+        if (coupon != null)
+            totalPrice -= 10
+
+            binding.textViewTotalPrice.text =
+                resources.getString(R.string.price_money,
+                    totalPrice.toTwoDecimalDigits().toString())
     }
 
     private fun checkError(it: DataState.Error) {
@@ -141,6 +219,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                     viewFlipperState.visibility = View.VISIBLE
                     viewFlipperState.displayedChild =
                         viewFlipperState.indexOfChild(someThingWentWrong.root)
+
                 }
             }
         }
@@ -154,9 +233,9 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
     }
 
     override fun onChangeValue() {
-        val mutableList: MutableList<LineItemsItem?>? = mutableListOf<LineItemsItem?>()
-        mutableList?.addAll(mAdapter.list)
-        mViewModel.updateCart(CreateCartBody(DraftOrder(lineItems = mutableList )))
+        val mutableList: MutableList<LineItemsItem?> = mutableListOf<LineItemsItem?>()
+        mutableList.addAll(mAdapter.list)
+        mViewModel.updateCart(CreateCartBody(DraftOrder(lineItems = mutableList)))
     }
 
 

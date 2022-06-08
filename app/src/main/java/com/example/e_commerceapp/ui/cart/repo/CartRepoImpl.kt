@@ -1,11 +1,9 @@
 package com.example.e_commerceapp.ui.cart.repo
 
+import com.example.e_commerceapp.base.network.DataState
 import com.example.e_commerceapp.base.network.safeApiCall
 import com.example.e_commerceapp.local.AppSharedPreference
-import com.example.e_commerceapp.ui.cart.model.CreateCartBody
-import com.example.e_commerceapp.ui.cart.model.CreateCartResponse
-import com.example.e_commerceapp.ui.cart.model.DraftOrder
-import com.example.e_commerceapp.ui.cart.model.LineItemsItem
+import com.example.e_commerceapp.ui.cart.model.*
 import com.example.e_commerceapp.ui.cart.network.CartService
 import com.example.e_commerceapp.utils.Constants
 import kotlinx.coroutines.CoroutineDispatcher
@@ -76,6 +74,17 @@ class CartRepoImpl(
         emitAll(
             safeApiCall(dispatcher) {
                 cartService.completeCart(id)
+            }
+        )
+    }
+
+    override suspend fun applyCoupon(
+        coupon: String,
+        dispatcher: CoroutineDispatcher,
+    ) = flow {
+        emitAll(
+            safeApiCall(dispatcher) {
+                cartService.applyCoupon(coupon)
             }
         )
     }
