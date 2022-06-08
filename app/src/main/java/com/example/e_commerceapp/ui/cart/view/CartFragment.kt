@@ -228,7 +228,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnCheckout.setOnClickListener {
-            navController.navigate(R.id.action_cartFragment_to_checkoutFragment)
+            navController.navigate(R.id.action_cartFragment_to_paymentFragment2)
         }
     }
 
