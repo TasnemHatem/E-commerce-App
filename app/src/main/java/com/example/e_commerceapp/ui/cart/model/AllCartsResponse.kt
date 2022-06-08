@@ -1,14 +1,16 @@
 package com.example.e_commerceapp.ui.cart.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class AllCartsResponse(
 
 	@field:SerializedName("draft_orders")
 	@Expose val draftOrders: List<DraftOrder?>? = null
 )
-
+@Parcelize
 data class LineItemsItem(
 
 	@field:SerializedName("variant_title")
@@ -41,12 +43,6 @@ data class LineItemsItem(
 	@field:SerializedName("variant_id")
 	@Expose val variantId: Long? = null,
 
-	@field:SerializedName("tax_lines")
-	@Expose val taxLines: List<Any?>? = null,
-
-	@field:SerializedName("vendor")
-	@Expose val vendor: Any? = null,
-
 	@field:SerializedName("price")
 	@Expose val price: String? = null,
 
@@ -68,9 +64,7 @@ data class LineItemsItem(
 	@field:SerializedName("grams")
 	@Expose val grams: Int? = null,
 
-	@field:SerializedName("properties")
-	@Expose val properties: List<Any?>? = null
-)
+):Parcelable
 
 data class ShippingAddress(
 
@@ -120,6 +114,7 @@ data class ShippingAddress(
 	@Expose val longitude: Double? = null
 )
 
+@Parcelize
 data class AppliedDiscount(
 
 	@field:SerializedName("amount")
@@ -136,7 +131,7 @@ data class AppliedDiscount(
 
 	@field:SerializedName("value")
 	@Expose val value: String? = null
-)
+):Parcelable
 
 
 data class Customer(
