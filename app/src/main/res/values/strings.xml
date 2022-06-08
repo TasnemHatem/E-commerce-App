@@ -89,4 +89,9 @@
     <string name="invalid_coupon">Invalid coupon!</string>
     <string name="coupon_applied_successfully">Coupon applied successfully</string>
     <string name="makeDefault">Make Default</string>
+    <string name="payment">Payment</string>
+    <string name="cash">Cash on delivery</string>
+    <string name="choose_your_preferred_payment_method">Choose your preferred payment method</string>
+    <string name="payment_method">Payment method</string>
+    <string name="paypal">Paypal</string>
 </resources>
