@@ -46,4 +46,11 @@ class AddressVM @Inject constructor(val addressRepo: AddressRepoI, val appShared
         }
         requestAddresses()
     }
+
+    fun changeDefaultAddress(userId: Long, addressId: Long){
+        viewModelScope.launch(Dispatchers.IO) {
+            addressRepo.setDefaultAddress(userId, addressId)
+        }
+        requestAddresses()
+    }
 }
