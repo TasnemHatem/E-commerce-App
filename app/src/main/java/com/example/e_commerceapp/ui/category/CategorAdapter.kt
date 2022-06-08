@@ -26,7 +26,7 @@ class CategorAdapter(var category: ProductsResponse,val onClickCategoryListener:
         holder.txtCategoryName.text = current.title
         holder.image.load(current.image.src)
         holder.layout.setOnClickListener{
-         // onClickCategoryListener.viewProductDetailes(current)
+          onClickCategoryListener.viewProductDetailes(current)
         }
 
     }
