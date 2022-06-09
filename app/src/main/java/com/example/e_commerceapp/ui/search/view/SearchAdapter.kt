@@ -25,7 +25,7 @@ class SearchAdapter (var searchProd: List<Product>, val onClickCategoryListener:
         holder.txtCategoryName.text = current.title
         holder.image.load(current.image.src)
         holder.layout.setOnClickListener{
-            // Todo product details
+            onClickCategoryListener.viewProductDetailes(current)
         }
     }
 

@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.e_commerceapp.R
@@ -16,6 +17,15 @@ import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
 import com.example.e_commerceapp.utils.Constants.PAYPAL_KEY
 import com.example.e_commerceapp.utils.POST_ORDER_BODY
 import com.paypal.android.sdk.payments.*
+import com.paypal.checkout.approve.OnApprove
+import com.paypal.checkout.createorder.CreateOrder
+import com.paypal.checkout.createorder.CurrencyCode
+import com.paypal.checkout.createorder.OrderIntent
+import com.paypal.checkout.createorder.UserAction
+import com.paypal.checkout.order.Amount
+import com.paypal.checkout.order.AppContext
+import com.paypal.checkout.order.Order
+import com.paypal.checkout.order.PurchaseUnit
 import org.json.JSONException
 import java.math.BigDecimal
 
@@ -24,7 +34,6 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
 
     override fun afterOnCreateView() {
         super.afterOnCreateView()
-        postOrderBody = arguments?.getParcelable<PostOrderBody>(POST_ORDER_BODY)
         setUpPayPal()
         binding.backPayment.setOnClickListener {
             navController.navigateUp()
@@ -43,8 +52,38 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
                 })
         }
 
+        binding.payPalButton.setup(
+            createOrder =
+            CreateOrder { createOrderActions ->
+                val order =
+                    Order(
+                        intent = OrderIntent.CAPTURE,
+                        appContext = AppContext(userAction = UserAction.PAY_NOW),
+                        purchaseUnitList =
+                        listOf(
+                            PurchaseUnit(
+                                amount =
+                                Amount(currencyCode = CurrencyCode.USD, value = "10.00")
+                            )
+                        )
+                    )
+                createOrderActions.create(order)
+            },
+            onApprove =
+            OnApprove { approval ->
+                approval.orderActions.capture { captureOrderResult ->
+                    Log.i("CaptureOrder", "CaptureOrderResult: $captureOrderResult")
+                }
+            }
+        )
+
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postOrderBody = arguments?.getParcelable<PostOrderBody>(POST_ORDER_BODY)
+
+    }
 
     /******************paypal***********************************/
     private fun payPalPaymentMethod() {
@@ -97,7 +136,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
         }
     private val payPalConfiguration =
         PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
-            .clientId(PAYPAL_KEY)
+            .clientId(PAYPAL_KEY).sandboxUserPassword("87654321")
 
     private fun setUpPayPal() {
         var intent = Intent(activity, PayPalService::class.java)

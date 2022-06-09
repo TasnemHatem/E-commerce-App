@@ -139,6 +139,9 @@
         <action
             android:id="@+id/action_searchFragment_to_mainFragment2"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_productDetailes"
+            app:destination="@id/productDetailes" />
     </fragment>
     <fragment
         android:id="@+id/productDetailes"
