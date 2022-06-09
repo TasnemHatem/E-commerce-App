@@ -21,10 +21,10 @@ data class ShippingAddress(
     val firstName: String,
     @SerializedName("last_name")
     val lastName: String,
-    @SerializedName("latitude")
-    val latitude: Any,
-    @SerializedName("longitude")
-    val longitude: Any,
+//    @SerializedName("latitude")
+//    val latitude: Any,
+//    @SerializedName("longitude")
+//    val longitude: Any,
     @SerializedName("name")
     val name: String,
     @SerializedName("phone")

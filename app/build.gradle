@@ -46,6 +46,9 @@ android {
 
 dependencies {
 
+    //reflection
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.21")
+
     //maps
     implementation 'com.google.android.gms:play-services-location:19.0.1'
     implementation 'com.google.android.gms:play-services-maps:18.0.2'

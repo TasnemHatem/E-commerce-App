@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.FragmentCurrencyRowBinding
 import com.example.e_commerceapp.ui.currency.model.ConversionRates
+import com.example.e_commerceapp.ui.currency.model.Currency
 
-class CurrencyAdapter(var context: Context, var data: ConversionRates?) : RecyclerView.Adapter<CurrencyAdapter.ViewHolder>() {
+class CurrencyAdapter(var context: Context, var data: List<Currency>) : RecyclerView.Adapter<CurrencyAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val binding = FragmentCurrencyRowBinding.bind(itemView)
@@ -24,14 +25,11 @@ class CurrencyAdapter(var context: Context, var data: ConversionRates?) : Recycl
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        holder.binding.currencyCodeId.text = data[position].currnecyName
     }
 
     override fun getItemCount(): Int {
-        if(data != null)
-            return 10
-        else
-            return 0
+        return data.size
     }
 
 }
