@@ -26,17 +26,17 @@ class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: 
         var current = product.products[position]
         holder.textNameProduct.text = "US$ ${current.variants.get(0).price}"
         holder.image.load(current.image.src)
-        holder.adddBtn.setOnClickListener{
+
+        if(product.products[position].isFavourite){
             holder.adddBtn.visibility = View.GONE
             holder.deleteBtn.visibility=View.VISIBLE
-            onProductClickLisenter.addTOFavourite()
         }
 
         holder.deleteBtn.setOnClickListener{
             if (appSharedPreference.getBooleanValue("login")) {
                 holder.adddBtn.visibility = View.VISIBLE
                 holder.deleteBtn.visibility=View.GONE
-                onProductClickLisenter.addTOFavourite()
+                onProductClickLisenter.deletFromFavourite(current)
             }else{
                onProductClickLisenter.goToLogin()
             }
@@ -45,7 +45,7 @@ class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: 
             if (appSharedPreference.getBooleanValue("login")) {
                 holder.adddBtn.visibility = View.GONE
                 holder.deleteBtn.visibility=View.VISIBLE
-                onProductClickLisenter.deletFromFavourite()
+                onProductClickLisenter.addTOFavourite(current)
             }else{
                 onProductClickLisenter.goToLogin()
             }

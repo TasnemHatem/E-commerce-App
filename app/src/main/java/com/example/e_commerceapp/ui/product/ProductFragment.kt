@@ -127,12 +127,14 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
 
     }
 
-    override fun addTOFavourite() {
-
+    override fun addTOFavourite(product: Product) {
+        Log.i("EMYTAG", "addTOFavourite: ")
+        mViewModel.addFavourite(product)
     }
 
-    override fun deletFromFavourite() {
-
+    override fun deletFromFavourite(product: Product) {
+        Log.i("EMYTAG", "deletFromFavourite: ")
+        mViewModel.deleteFavourite(product)
     }
 
     override fun goToLogin() {
