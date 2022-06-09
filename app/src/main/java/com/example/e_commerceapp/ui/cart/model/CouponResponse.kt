@@ -31,5 +31,5 @@ data class DiscountCode(
 	val id: Long? = null,
 
 	@field:SerializedName("amount")
-	val amount:String?=null
+	var amount:String?=null
 ):Parcelable

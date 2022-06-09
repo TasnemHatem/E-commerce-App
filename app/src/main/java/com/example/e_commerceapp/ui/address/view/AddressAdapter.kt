@@ -36,7 +36,7 @@ class AddressAdapter(var context: Context, var data: List<Address>, val listener
             listener.clickDelete(data[position].userId!!, data[position].id!!)
         }
         holder.binding.defaultRadioBtnId.setOnClickListener{
-            listener.changeDefault(data[position].userId!!, data[position].id!!)
+            listener.changeDefault(data[position].userId!!, data[position])
         }
     }
 

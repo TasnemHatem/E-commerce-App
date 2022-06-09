@@ -1,9 +1,9 @@
 package com.example.e_commerceapp.ui.checkout.model
 
 import android.os.Parcelable
+import com.example.e_commerceapp.ui.address.model.Address
 import com.example.e_commerceapp.ui.cart.model.DiscountCode
 import com.example.e_commerceapp.ui.cart.model.LineItemsItem
-import com.example.e_commerceapp.ui.order.model.ShippingAddress
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -18,11 +18,11 @@ data class PostOrderBody(
 @Parcelize
 data class Order(
     @field:SerializedName("shipping_address")
-    val shippingAddress: ShippingAddress? = null,
+    var shippingAddress: Address? = null,
 
     @field:SerializedName("line_items")
-    val lineItems: List<LineItemsItem?>? = null,
+    var lineItems: List<LineItemsItem?>? = null,
 
     @field:SerializedName("discount_codes")
-    val discountCodes: List<DiscountCode?>? = null,
+    var discountCodes: List<DiscountCode?>? = null,
 ) : Parcelable

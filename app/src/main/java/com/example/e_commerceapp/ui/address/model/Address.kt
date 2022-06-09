@@ -1,8 +1,11 @@
 package com.example.e_commerceapp.ui.address.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Address(
     @SerializedName("address1")//+address2
     val address1: String,
@@ -24,4 +27,4 @@ data class Address(
     val lastName: String,
     @SerializedName("phone")//
     val phone: String,
-)
+):Parcelable
