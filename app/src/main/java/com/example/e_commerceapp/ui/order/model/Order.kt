@@ -1,6 +1,7 @@
 package com.example.e_commerceapp.ui.order.model
 
 
+import com.example.e_commerceapp.ui.address.model.Address
 import com.google.gson.annotations.SerializedName
 
 data class Order(
@@ -115,7 +116,7 @@ data class Order(
     @SerializedName("refunds")
     val refunds: List<Any>,
     @SerializedName("shipping_address")
-    val shippingAddress: ShippingAddress,
+    val shippingAddress: Address,
     @SerializedName("shipping_lines")
     val shippingLines: List<Any>,
     @SerializedName("source_identifier")

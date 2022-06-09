@@ -19,7 +19,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
     override fun afterOnCreateView() {
         super.afterOnCreateView()
         setUpPayPal()
-        binding.backPayment.setOnClickListener{
+        binding.backPayment.setOnClickListener {
             navController.navigateUp()
         }
         binding.lyCardVisa.setOnClickListener {
@@ -29,32 +29,37 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
     }
 
 
-
-
     /******************paypal***********************************/
     private fun payPalPaymentMethod() {
-        var payment = PayPalPayment(BigDecimal(100),"USD","Shopify",PayPalPayment.PAYMENT_INTENT_SALE)
+        var payment =
+            PayPalPayment(BigDecimal(100), "USD", "Shopify", PayPalPayment.PAYMENT_INTENT_SALE)
         val intent = Intent(activity, PaymentActivity::class.java)
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,payPalConfiguration)
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration)
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment)
         requestPaymentMethod.launch(intent)
     }
+
     private val requestPaymentMethod =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                Toast.makeText(requireActivity(),"Payment made successfully",Toast.LENGTH_SHORT).show()
-                Log.e("TAG", ": ****requestPaymentMethod*********" )
+                Toast.makeText(requireActivity(), "Payment made successfully", Toast.LENGTH_SHORT)
+                    .show()
+                Log.e("TAG", ": ****requestPaymentMethod*********  ${result.data}")
+                
             }
         }
-    private val payPalConfiguration = PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
-        .clientId(PAYPAL_KEY)
+    private val payPalConfiguration =
+        PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
+            .clientId(PAYPAL_KEY)
+
     private fun setUpPayPal() {
         var intent = Intent(activity, PayPalService::class.java)
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,payPalConfiguration)
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration)
         this.requireActivity().startService(intent)
     }
+
     override fun onDestroy() {
         super.onDestroy()
-        this.requireActivity().stopService(Intent(activity,PayPalService::class.java))
+        this.requireActivity().stopService(Intent(activity, PayPalService::class.java))
     }
 }

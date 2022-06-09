@@ -10,14 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.ui.BaseFragment
+import com.example.e_commerceapp.base.utils.safeNavigation
 import com.example.e_commerceapp.databinding.FragmentAddressBinding
 import com.example.e_commerceapp.ui.address.model.Address
 import com.example.e_commerceapp.ui.address.viewmodel.AddressVM
+import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
+import com.example.e_commerceapp.utils.POST_ORDER_BODY
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddressFragment : BaseFragment<FragmentAddressBinding>(FragmentAddressBinding::inflate), OnAddressClickListener{
+class AddressFragment : BaseFragment<FragmentAddressBinding>(FragmentAddressBinding::inflate),
+    OnAddressClickListener {
 
+    private var postOrderBody: PostOrderBody? = null
     private lateinit var addresslist: List<Address>
     lateinit var addressAdapter: AddressAdapter
 
@@ -25,7 +30,8 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>(FragmentAddressBind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.addAdressBtnId.setOnClickListener{
+        postOrderBody = arguments?.getParcelable<PostOrderBody>(POST_ORDER_BODY)
+        binding.addAdressBtnId.setOnClickListener {
             navController.navigate(R.id.action_addressFragment_to_newAddressFragment)
         }
 
@@ -33,19 +39,20 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>(FragmentAddressBind
         addressAdapter = AddressAdapter(requireContext(), addresslist, this)
         binding.addressRecycleViewId.adapter = addressAdapter
 
-        var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
-        binding.addressRecycleViewId.layoutManager = layoutManager
+
+        binding.addressRecycleViewId.layoutManager =
+            LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
 
     }
 
     override fun afterOnCreateView() {
         super.afterOnCreateView()
 
-        viewmodel.error.observeInFragment(viewLifecycleOwner){
+        viewmodel.error.observeInFragment(viewLifecycleOwner) {
             //TODO Add logic depending on Exception Type
         }
 
-        viewmodel.addresslist.observeInFragment(viewLifecycleOwner){
+        viewmodel.addresslist.observeInFragment(viewLifecycleOwner) {
             Log.i("TAG", "afterOnCreateView: Ya address data ${it}")
             addresslist = it
             addressAdapter.data = addresslist
@@ -58,7 +65,17 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>(FragmentAddressBind
         viewmodel.deleteAddress(userId, addressId)
     }
 
-    override fun changeDefault(userId: Long, addressId: Long) {
-        viewmodel.changeDefaultAddress(userId, addressId)
+    override fun changeDefault(userId: Long, addressId: Address) {
+        if (postOrderBody != null) {
+            navController.safeNavigation(R.id.addressFragment,
+                R.id.action_addressFragment_to_paymentFragment,
+                Bundle().apply {
+                    putParcelable(POST_ORDER_BODY, postOrderBody?.order.apply {
+                        this?.shippingAddress = addressId
+                    })
+                })
+        } else {
+            viewmodel.changeDefaultAddress(userId, addressId.id!!)
+        }
     }
 }

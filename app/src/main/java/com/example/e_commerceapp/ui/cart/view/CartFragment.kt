@@ -13,12 +13,15 @@ import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.network.DataState
 import com.example.e_commerceapp.base.network.NetworkExceptions
 import com.example.e_commerceapp.base.ui.BaseFragment
+import com.example.e_commerceapp.base.utils.safeNavigation
 import com.example.e_commerceapp.databinding.FragmentCartBinding
 import com.example.e_commerceapp.ui.cart.model.CreateCartBody
 import com.example.e_commerceapp.ui.cart.model.DiscountCode
 import com.example.e_commerceapp.ui.cart.model.DraftOrder
 import com.example.e_commerceapp.ui.cart.model.LineItemsItem
 import com.example.e_commerceapp.ui.cart.viewmodel.CartViewModel
+import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
+import com.example.e_commerceapp.utils.POST_ORDER_BODY
 import com.example.e_commerceapp.utils.toTwoDecimalDigits
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +33,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
 
     private var coupon: DiscountCode? = null
     private val mViewModel: CartViewModel by viewModels()
+    private val postOrderBody: PostOrderBody = PostOrderBody()
     private lateinit var mAdapter: CartAdapter
     override fun afterOnCreateView() {
         super.afterOnCreateView()
@@ -88,7 +92,9 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                     Log.e(TAG, "afterOnCreateView: " + data)
                     coupon = data.data.discountCode
                     updatePrice()
-                    Toast.makeText(context, resources.getString(R.string.coupon_applied_successfully), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,
+                        resources.getString(R.string.coupon_applied_successfully),
+                        Toast.LENGTH_SHORT).show()
                 }
                 is DataState.Error -> {
                     displayMsg(data)
@@ -135,7 +141,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                     _: Int,
                 ->
                 textInputLayoutCoupon.error = null
-
             }
             swipeLayout.setOnRefreshListener {
                 mViewModel.requestCart()
@@ -156,6 +161,18 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                         mViewModel.applyCoupon(coupon)
                     }
                 }
+            }
+            binding.btnCheckout.setOnClickListener {
+                navController.safeNavigation(R.id.cartFragment,
+                    R.id.action_cartFragment_to_addressFragment,
+                    Bundle().apply {
+                        putParcelable(POST_ORDER_BODY, postOrderBody.apply {
+                            this.order?.discountCodes = listOf(coupon?.apply {
+                                amount = "10.0"
+                            })
+                            order?.lineItems = mAdapter.list
+                        })
+                    })
             }
         }
     }
@@ -190,10 +207,12 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
         }
         if (coupon != null)
             totalPrice -= 10
+        if (totalPrice < 0.0)
+            totalPrice = 0.0
 
-            binding.textViewTotalPrice.text =
-                resources.getString(R.string.price_money,
-                    totalPrice.toTwoDecimalDigits().toString())
+        binding.textViewTotalPrice.text =
+            resources.getString(R.string.price_money,
+                totalPrice.toTwoDecimalDigits().toString())
     }
 
     private fun checkError(it: DataState.Error) {
@@ -225,12 +244,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.btnCheckout.setOnClickListener {
-            navController.navigate(R.id.action_cartFragment_to_paymentFragment2)
-        }
-    }
 
     override fun onChangeValue() {
         val mutableList: MutableList<LineItemsItem?> = mutableListOf<LineItemsItem?>()
