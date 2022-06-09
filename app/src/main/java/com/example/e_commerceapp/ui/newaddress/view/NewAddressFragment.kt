@@ -1,8 +1,11 @@
 package com.example.e_commerceapp.ui.newaddress.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentNewAddressBinding
 import com.example.e_commerceapp.local.AppSharedPreference
@@ -25,7 +28,15 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding>(FragmentNewAd
 
 
         binding.saveAddressBtnId.setOnClickListener {
-            viewmodel.addAddress(makeAddrees())
+            if(validate()){
+                Log.i("TAG", "onViewCreated: is validated")
+                viewmodel.addAddress(makeAddrees())
+            }
+            //navController.navigateUp()
+        }
+
+        viewmodel.addAddressError.observeInFragment(viewLifecycleOwner){
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -33,7 +44,7 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding>(FragmentNewAd
         return PostAddress(Address(binding.address1Id.text.toString(),
             binding.address2Id.text.toString(),
             binding.cityId.text.toString(),
-            binding.countryId.text.toString(),
+            binding.countryId.text?.replace("\\s".toRegex(), "").toString(),
             binding.defaultSwitchId.isFocused,
             binding.firstNameId.text.toString(),
             null,
@@ -41,7 +52,47 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding>(FragmentNewAd
             lastName = binding.lastNameId.text.toString(),
             phone = binding.phoneId.text.toString()
         ))
+    }
 
+    private fun validate(): Boolean {
+
+        if(binding.firstNameId.text.toString().isEmpty()) {
+            binding.firstNameId.requestFocus()
+            binding.firstNameId.error = "Required"
+            return false
+        }
+        if(binding.lastNameId.text.toString().isEmpty()){
+            binding.lastNameId.requestFocus()
+            binding.lastNameId.error = "Required"
+            return false
+        }
+        if (binding.phoneId.text.toString().isEmpty()) {
+            binding.phoneId.requestFocus()
+            binding.phoneId.error = "Required"
+            return false
+        }
+        if (binding.countryId.text.toString().isEmpty()) {
+            binding.countryId.requestFocus()
+            binding.countryId.error = "Required"
+            return false
+        }
+        if (binding.cityId.text.toString().isEmpty()) {
+            binding.cityId.requestFocus()
+            binding.cityId.error = "Required"
+            return false
+        }
+        if (binding.address1Id.text.toString().isEmpty()) {
+            binding.address1Id.requestFocus()
+            binding.address1Id.error = "Required"
+            return false
+        }
+        if (binding.address2Id.text.toString().isEmpty()) {
+            binding.address2Id.requestFocus()
+            binding.address2Id.error = "Required"
+            return false
+        }
+
+        return true
 
     }
 }

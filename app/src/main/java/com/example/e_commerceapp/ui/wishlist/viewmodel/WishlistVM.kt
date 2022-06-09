@@ -59,7 +59,4 @@ class WishlistVM @Inject constructor(val wishlistRepo: WishlistRepo) : ViewModel
         }
     }
 
-    fun addWish(){
-
-    }
 }
