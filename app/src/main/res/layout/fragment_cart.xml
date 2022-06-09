@@ -11,12 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header_title"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/header_title">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cart_list_items"
@@ -75,7 +73,7 @@
         android:layout_height="0dp"
         android:inAnimation="@anim/alph"
         android:outAnimation="@anim/alph"
-        app:layout_constraintBottom_toBottomOf="@+id/swipeLayout"
+        app:layout_constraintBottom_toTopOf="@+id/materialCardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header_title">
@@ -102,12 +100,13 @@
     </ViewFlipper>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView2"
         android:layout_width="match_parent"
         android:layout_height="224dp"
         android:background="@color/white"
         app:cardCornerRadius="16dp"
-        app:cardElevation="16dp"
 
+        app:cardElevation="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
