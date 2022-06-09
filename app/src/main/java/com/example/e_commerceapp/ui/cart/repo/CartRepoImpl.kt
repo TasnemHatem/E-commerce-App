@@ -1,17 +1,16 @@
 package com.example.e_commerceapp.ui.cart.repo
 
-import com.example.e_commerceapp.base.network.DataState
 import com.example.e_commerceapp.base.network.safeApiCall
 import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.cart.model.*
 import com.example.e_commerceapp.ui.cart.network.CartService
 import com.example.e_commerceapp.utils.Constants
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
+
+val cartBody = LineItemsItem(title = "lipton", price = "20.00", quantity = 1)
 
 class CartRepoImpl(
     private val cartService: CartService,
@@ -25,8 +24,6 @@ class CartRepoImpl(
     ): Response<CreateCartResponse> {
         return cartService.createNewCart(createCartBody)
     }
-
-    private val cartBody = LineItemsItem(title = "lipton", price = "20.00", quantity = 1)
 
 
     override fun updateOrder(

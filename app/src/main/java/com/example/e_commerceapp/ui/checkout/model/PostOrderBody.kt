@@ -12,7 +12,7 @@ const val PAYPAL="paypal"
 data class PostOrderBody(
 
     @field:SerializedName("order")
-    val order: Order? = null,
+    var order: Order? = null,
 ) : Parcelable
 
 

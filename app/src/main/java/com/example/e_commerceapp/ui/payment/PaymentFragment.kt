@@ -49,7 +49,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
     /******************paypal***********************************/
     private fun payPalPaymentMethod() {
         var payment =
-            PayPalPayment(BigDecimal(100), "USD", "Shopify", PayPalPayment.PAYMENT_INTENT_SALE)
+            PayPalPayment(BigDecimal(1), "USD", "Shopify", PayPalPayment.PAYMENT_INTENT_SALE)
         val intent = Intent(activity, PaymentActivity::class.java)
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration)
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment)
@@ -61,10 +61,13 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
             val resultCode = data.resultCode
 
             if (resultCode == Activity.RESULT_OK) {
+                val auth = data?.data?.getParcelableExtra<PayPalAuthorization>(PayPalProfileSharingActivity.EXTRA_RESULT_AUTHORIZATION)
                 val confirm =
+
                     data?.data?.getParcelableExtra<PaymentConfirmation>(PaymentActivity.EXTRA_RESULT_CONFIRMATION)
                 if (confirm != null) {
                     try {
+                        Log.e(TAG, ": auth ${auth}" )
                         Log.i(TAG, confirm.toJSONObject().toString(4))
                         Log.i(TAG, confirm.payment.toJSONObject().toString(4))
                         navController.safeNavigation(R.id.paymentFragment,
@@ -98,6 +101,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
     private val payPalConfiguration =
         PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
             .clientId(PAYPAL_KEY)
+
 
     private fun setUpPayPal() {
         var intent = Intent(activity, PayPalService::class.java)
