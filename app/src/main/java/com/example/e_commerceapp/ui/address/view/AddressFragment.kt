@@ -70,8 +70,10 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>(FragmentAddressBind
             navController.safeNavigation(R.id.addressFragment,
                 R.id.action_addressFragment_to_paymentFragment,
                 Bundle().apply {
-                    putParcelable(POST_ORDER_BODY, postOrderBody?.order.apply {
-                        this?.shippingAddress = addressId
+                    putParcelable(POST_ORDER_BODY, postOrderBody?.apply {
+                        order.apply {
+                            this?.shippingAddress = addressId
+                        }
                     })
                 })
         } else {
