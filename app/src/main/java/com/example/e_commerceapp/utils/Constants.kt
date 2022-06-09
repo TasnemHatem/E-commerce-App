@@ -7,4 +7,5 @@ object Constants {
     const val SHARED_FAV_ID = "shared_favourite_id"
     const val SHARED_NAME = "shared_name_id"
     const val PAYPAL_KEY="ATR2jife_ThjLkOd7Fb5ADeFa0LbvKj1GSQsLBYeB5alrswGaNrfZh_7Noob8oBDGR_PY36UJqPbJSxm"
+    const val CURRENCY_SERVER_URL="https://v6.exchangerate-api.com/"
 }

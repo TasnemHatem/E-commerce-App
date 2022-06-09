@@ -58,6 +58,12 @@
         <action
             android:id="@+id/action_settingsFragment_to_addressFragment"
             app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_currencyFragment"
+            app:destination="@id/currencyFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderFragment"
