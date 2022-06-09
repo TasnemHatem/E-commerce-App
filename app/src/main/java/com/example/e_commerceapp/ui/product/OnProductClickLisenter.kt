@@ -4,7 +4,7 @@ import com.example.e_commerceapp.ui.category.model.Product
 
 interface OnProductClickLisenter {
     fun viewProductDetailes(product: Product)
-    fun addTOFavourite()
-    fun deletFromFavourite()
+    fun addTOFavourite(product: Product)
+    fun deletFromFavourite(product: Product)
     fun goToLogin()
 }

@@ -44,7 +44,6 @@ class WishlistVM @Inject constructor(val wishlistRepo: WishlistRepo) : ViewModel
             var wishlistId = appSharedPreference.getLongValue(Constants.SHARED_FAV_ID, 2222)
             wishlistRepo.getWishlist(wishlistId).onEach {
 
-                //_wishlist.postValue(it.body()?.draftOrder?.lineItems?.filter { it.title == "wishlist" })
                 _wishlist.postValue(it.body()?.draftOrder?.lineItems)
 
             }.launchIn(viewModelScope)
@@ -53,13 +52,7 @@ class WishlistVM @Inject constructor(val wishlistRepo: WishlistRepo) : ViewModel
 
     fun deleteWish(deletedItem: LineItem){
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            Log.i("TAG", "deleteWish: size before${_wishlist.value?.size}")
-            Log.i("TAG", "deleteWish: info")
-//            _wishlist.postValue(_wishlist.value?.filter { it.properties[0].value != deletedItem.properties[0].value })
-            //_wishlist.postValue(_wishlist.value?.filter { it != deletedItem })
-            var putWishlist = _wishlist.value?.filter { it != deletedItem }
-//            Log.i("TAG", "deleteWish: size after ${_wishlist.value?.size}")
-            Log.i("TAG", "deleteWish: size after ${putWishlist?.size}")
+            var putWishlist :  List<LineItem>? = _wishlist.value?.filter { it != deletedItem }
             var wishlistId = appSharedPreference.getLongValue(Constants.SHARED_FAV_ID, 2222)
             wishlistRepo.deleteFavouriteProduct(wishlistId, DraftOrderResponse(DraftOrder(null,null, putWishlist!!)))
             requestWishlist()
