@@ -43,7 +43,7 @@ class CartAdapter(
                 mItem.root.context.resources.getString(R.string.price_money,
                     item.price?.toDouble()?.toTwoDecimalDigits().toString())
 
-            mItem.imageViewItem.load("https://www.deltamarble.com/wp-content/uploads/woocommerce-placeholder.png")
+            mItem.imageViewItem.load(item.properties?.get(0)?.value)
             mItem.textViewItemName.text = item.name
             mItem.textViewOrderCount.text = item.quantity.toString()
             mItem.imageButtonMinus.setOnClickListener {

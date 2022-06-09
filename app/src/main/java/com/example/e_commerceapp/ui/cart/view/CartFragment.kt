@@ -20,10 +20,12 @@ import com.example.e_commerceapp.ui.cart.model.DiscountCode
 import com.example.e_commerceapp.ui.cart.model.DraftOrder
 import com.example.e_commerceapp.ui.cart.model.LineItemsItem
 import com.example.e_commerceapp.ui.cart.viewmodel.CartViewModel
+import com.example.e_commerceapp.ui.checkout.model.Order
 import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
 import com.example.e_commerceapp.utils.POST_ORDER_BODY
 import com.example.e_commerceapp.utils.toTwoDecimalDigits
 import dagger.hilt.android.AndroidEntryPoint
+
 
 private const val TAG = "CartFragment"
 
@@ -33,7 +35,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
 
     private var coupon: DiscountCode? = null
     private val mViewModel: CartViewModel by viewModels()
-    private val postOrderBody: PostOrderBody = PostOrderBody()
+    private val postOrderBody: PostOrderBody = PostOrderBody(Order())
     private lateinit var mAdapter: CartAdapter
     override fun afterOnCreateView() {
         super.afterOnCreateView()
@@ -73,10 +75,12 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                     }
                 }
                 DataState.Loading -> {
-                    binding.apply {
-                        viewFlipperState.visibility = View.VISIBLE
-                        viewFlipperState.displayedChild =
-                            viewFlipperState.indexOfChild(loadingLayout.root)
+                    if (::mAdapter.isInitialized && mAdapter.list.size == 0) {
+                        binding.apply {
+                            viewFlipperState.visibility = View.VISIBLE
+                            viewFlipperState.displayedChild =
+                                viewFlipperState.indexOfChild(loadingLayout.root)
+                        }
                     }
                 }
             }
@@ -100,6 +104,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                     displayMsg(data)
                 }
                 DataState.Loading -> {
+
                     binding.apply {
                         progressBarCoupon.visibility = View.VISIBLE
                         btnApplyCoupon.visibility = View.GONE
@@ -164,7 +169,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
             }
             binding.btnCheckout.setOnClickListener {
                 navController.safeNavigation(R.id.cartFragment,
-                    R.id.action_cartFragment_to_addressFragment,
+                    R.id.action_cartFragment_to_paymentFragment,
                     Bundle().apply {
                         putParcelable(POST_ORDER_BODY, postOrderBody.apply {
                             this.order?.discountCodes = listOf(coupon?.apply {
@@ -184,7 +189,11 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                     viewFlipperState.visibility = View.VISIBLE
                     viewFlipperState.displayedChild =
                         viewFlipperState.indexOfChild(noDataLayout.root)
+                    btnCheckout.isEnabled = false
+                    btnCheckout.isClickable = false
+                    textViewTotalPrice.text = ""
                 }
+
             }
             else -> {
                 binding.apply {
@@ -194,6 +203,8 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                         layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                         hasFixedSize()
                     }
+                    btnCheckout.isEnabled = true
+                    btnCheckout.isClickable = true
                     updatePrice()
                 }
             }

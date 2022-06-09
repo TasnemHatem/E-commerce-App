@@ -128,9 +128,6 @@
         <action
             android:id="@+id/action_cartFragment_to_paymentFragment"
             app:destination="@id/paymentFragment" />
-        <action
-            android:id="@+id/action_cartFragment_to_paymentFragment2"
-            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
