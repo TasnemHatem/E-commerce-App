@@ -117,6 +117,8 @@ dependencies {
 
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
+    implementation 'com.paypal.checkout:android-sdk:0.6.2'
+
 
 }
 kapt {

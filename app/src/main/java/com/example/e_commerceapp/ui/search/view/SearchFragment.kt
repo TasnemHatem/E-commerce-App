@@ -5,7 +5,9 @@ import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
@@ -94,7 +96,8 @@ class SearchFragment: BaseFragment<FragmentSearchBinding>(FragmentSearchBinding:
     }
 
     override fun viewProductDetailes(product:Product) {
-        TODO("Not yet implemented")
+        val bundle = bundleOf("product" to product)
+        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_searchFragment_to_productDetailes,bundle)
     }
 
     override fun filterAll(productName: String) {
