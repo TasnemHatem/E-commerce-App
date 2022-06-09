@@ -48,7 +48,8 @@ class CartViewModel @Inject constructor(val cartRepo: CartRepo) : BaseViewModel(
             cartRepo.getCart(Dispatchers.IO).onEach { dataState ->
                 when (dataState) {
                     is DataState.Success -> {
-                        dataState.data.draftOrder?.lineItems?.find { it?.variantId == item.variantId }
+                        val x = dataState.data.draftOrder?.lineItems?.find { it?.variantId == item.variantId }
+                        dataState.data.draftOrder?.lineItems?.remove(x)
                         dataState.data.draftOrder?.lineItems?.remove(cartBody)
                         dataState.data.draftOrder?.lineItems?.add(item)
                         cartRepo.updateOrder(
