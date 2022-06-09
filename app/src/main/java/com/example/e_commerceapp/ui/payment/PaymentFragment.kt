@@ -1,6 +1,7 @@
 package com.example.e_commerceapp.ui.payment
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,10 +14,8 @@ import com.example.e_commerceapp.databinding.FragmentPaymentBinding
 import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
 import com.example.e_commerceapp.utils.Constants.PAYPAL_KEY
 import com.example.e_commerceapp.utils.POST_ORDER_BODY
-import com.paypal.android.sdk.payments.PayPalConfiguration
-import com.paypal.android.sdk.payments.PayPalPayment
-import com.paypal.android.sdk.payments.PayPalService
-import com.paypal.android.sdk.payments.PaymentActivity
+import com.paypal.android.sdk.payments.*
+import org.json.JSONException
 import java.math.BigDecimal
 
 class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBinding::inflate) {
@@ -57,13 +56,33 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
     }
 
     private val requestPaymentMethod =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                Toast.makeText(requireActivity(), "Payment made successfully", Toast.LENGTH_SHORT)
-                    .show()
-                Log.e("TAG", ": ****requestPaymentMethod*********  ${result.data}")
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { data ->
+            val resultCode = data.resultCode
 
+            if (resultCode == Activity.RESULT_OK) {
+                val confirm =
+                    data?.data?.getParcelableExtra<PaymentConfirmation>(PaymentActivity.EXTRA_RESULT_CONFIRMATION)
+                if (confirm != null) {
+                    try {
+                        Log.i(TAG, confirm.toJSONObject().toString(4))
+                        Log.i(TAG, confirm.payment.toJSONObject().toString(4))
+
+
+                    } catch (e: JSONException) {
+                        Log.e(TAG, "an extremely unlikely failure occurred: ", e)
+                    }
+
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                Log.i(TAG, "The user canceled.")
+
+            } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
+                Log.i(
+                    TAG,
+                    "An invalid Payment or PayPalConfiguration was submitted. Please see the docs."
+                )
             }
+
         }
     private val payPalConfiguration =
         PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
