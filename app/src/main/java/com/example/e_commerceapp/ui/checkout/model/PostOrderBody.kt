@@ -6,7 +6,8 @@ import com.example.e_commerceapp.ui.cart.model.DiscountCode
 import com.example.e_commerceapp.ui.cart.model.LineItemsItem
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-
+const val CASH="cash"
+const val PAYPAL="paypal"
 @Parcelize
 data class PostOrderBody(
 
@@ -19,6 +20,9 @@ data class PostOrderBody(
 data class Order(
     @field:SerializedName("shipping_address")
     var shippingAddress: Address? = null,
+
+    @field:SerializedName("gateway")
+    var gateway: String? = null,
 
     @field:SerializedName("line_items")
     var lineItems: List<LineItemsItem?>? = null,

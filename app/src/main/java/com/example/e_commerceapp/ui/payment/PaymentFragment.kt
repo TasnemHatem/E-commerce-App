@@ -11,6 +11,7 @@ import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.base.utils.safeNavigation
 import com.example.e_commerceapp.databinding.FragmentPaymentBinding
+import com.example.e_commerceapp.ui.checkout.model.CASH
 import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
 import com.example.e_commerceapp.utils.Constants.PAYPAL_KEY
 import com.example.e_commerceapp.utils.POST_ORDER_BODY
@@ -33,11 +34,11 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
         }
 
         binding.lyCardCasht.setOnClickListener {
-            navController.safeNavigation(R.id.addressFragment,
-                R.id.action_addressFragment_to_paymentFragment,
+            navController.safeNavigation(R.id.paymentFragment,
+                R.id.action_paymentFragment_to_checkoutFragment,
                 Bundle().apply {
-                    putParcelable(POST_ORDER_BODY, postOrderBody?.order.apply {
-
+                    putParcelable(POST_ORDER_BODY, postOrderBody?.order?.apply {
+                        gateway = CASH
                     })
                 })
         }
@@ -66,21 +67,31 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
                     try {
                         Log.i(TAG, confirm.toJSONObject().toString(4))
                         Log.i(TAG, confirm.payment.toJSONObject().toString(4))
-
-
+                        navController.safeNavigation(R.id.paymentFragment,
+                            R.id.action_paymentFragment_to_checkoutFragment,
+                            Bundle().apply {
+                                putParcelable(POST_ORDER_BODY, postOrderBody?.order?.apply {
+                                    gateway = CASH
+                                })
+                            })
                     } catch (e: JSONException) {
                         Log.e(TAG, "an extremely unlikely failure occurred: ", e)
+                        Toast.makeText(context,
+                            "Payment failed please try Again!",
+                            Toast.LENGTH_SHORT).show()
                     }
 
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 Log.i(TAG, "The user canceled.")
+                Toast.makeText(context, "Payment Canceled!", Toast.LENGTH_SHORT).show()
 
             } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
                 Log.i(
                     TAG,
                     "An invalid Payment or PayPalConfiguration was submitted. Please see the docs."
                 )
+                Toast.makeText(context, "Invalid Payment Data!", Toast.LENGTH_SHORT).show()
             }
 
         }
