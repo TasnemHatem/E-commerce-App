@@ -52,6 +52,12 @@
         <action
             android:id="@+id/action_settingsFragment_to_addressFragment"
             app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_currencyFragment"
+            app:destination="@id/currencyFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderFragment"
@@ -123,4 +129,9 @@
         android:id="@+id/productDetailes"
         android:name="com.example.e_commerceapp.ui.productdetailes.ProductDetailes"
         android:label="ProductDetailes" />
+    <fragment
+        android:id="@+id/currencyFragment"
+        android:name="com.example.e_commerceapp.ui.currency.view.CurrencyFragment"
+        android:label="fragment_currency"
+        tools:layout="@layout/fragment_currency" />
 </navigation>

@@ -13,6 +13,8 @@ import com.example.e_commerceapp.ui.auth.repo.AuthRepoImpl
 import com.example.e_commerceapp.ui.category.network.CategoryService
 import com.example.e_commerceapp.ui.category.repo.CategoryRepo
 import com.example.e_commerceapp.ui.category.repo.CategoryRepoImpl
+import com.example.e_commerceapp.ui.currency.network.CurrencyService
+import com.example.e_commerceapp.ui.currency.repo.CurrencyRepo
 import com.example.e_commerceapp.ui.home.network.VendorService
 import com.example.e_commerceapp.ui.home.repo.VendorsRepo
 import com.example.e_commerceapp.ui.home.repo.VendorsRepoImpl
@@ -88,6 +90,12 @@ object RepoModule {
     @Provides
     fun getNewAddressRepo(newAddressService: NewAddressService): NewAddressRepo {
         return NewAddressRepo(newAddressService)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun getCurrencyRepo(currencyService: CurrencyService): CurrencyRepo {
+        return CurrencyRepo(currencyService)
     }
 
 }

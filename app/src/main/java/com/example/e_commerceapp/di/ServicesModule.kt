@@ -5,11 +5,13 @@ import com.example.e_commerceapp.ui.address.network.AddressService
 import com.example.e_commerceapp.ui.cart.network.CartService
 import com.example.e_commerceapp.ui.auth.network.AuthService
 import com.example.e_commerceapp.ui.category.network.CategoryService
+import com.example.e_commerceapp.ui.currency.network.CurrencyService
 import com.example.e_commerceapp.ui.home.network.VendorService
 import com.example.e_commerceapp.ui.newaddress.network.NewAddressService
 import com.example.e_commerceapp.ui.order.network.OrderService
 import com.example.e_commerceapp.ui.wishlist.network.WishlistService
 import com.example.e_commerceapp.ui.product.network.ProductService
+import com.example.e_commerceapp.utils.Constants.CURRENCY_SERVER_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -71,11 +73,16 @@ object ServicesModule {
         return getDynamicRetrofitClient(client).create(NewAddressService::class.java)
     }
 
-
     @ViewModelScoped
     @Provides
     fun providesProductService(client: OkHttpClient):ProductService{
         return getDynamicRetrofitClient(client).create(ProductService::class.java)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun providesCurrencyService(client: OkHttpClient):CurrencyService{
+        return getCurrencyDynamicRetrofitClient(client).create(CurrencyService::class.java)
     }
 
     private fun getDynamicRetrofitClient(
@@ -84,6 +91,16 @@ object ServicesModule {
     ): Retrofit {
         return Retrofit.Builder()
             .client(client)
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    private fun getCurrencyDynamicRetrofitClient(
+        client: OkHttpClient,
+        baseUrl: String = CURRENCY_SERVER_URL,
+    ): Retrofit {
+        return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
