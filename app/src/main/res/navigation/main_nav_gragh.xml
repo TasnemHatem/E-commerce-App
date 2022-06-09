@@ -166,4 +166,9 @@
             android:id="@+id/action_paymentFragment_to_checkoutFragment"
             app:destination="@id/checkoutFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/currencyFragment"
+        android:name="com.example.e_commerceapp.ui.currency.view.CurrencyFragment"
+        android:label="fragment_currency"
+        tools:layout="@layout/fragment_currency" />
 </navigation>

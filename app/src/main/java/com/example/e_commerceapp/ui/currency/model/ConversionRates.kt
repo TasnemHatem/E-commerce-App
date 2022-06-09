@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ConversionRates(
     @SerializedName("USD")
-    val uSD: Int,
+    val uSD: Double,
     @SerializedName("EUR")
     val eUR: Double,
     @SerializedName("GBP")

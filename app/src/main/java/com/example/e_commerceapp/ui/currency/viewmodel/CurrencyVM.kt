@@ -24,6 +24,7 @@ class CurrencyVM @Inject constructor(val currencyRepo: CurrencyRepo) : ViewModel
 
                 _currencyResponse.postValue(it.body())
 
+
             }.launchIn(viewModelScope)
         }
     }
