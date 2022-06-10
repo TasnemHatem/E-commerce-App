@@ -13,6 +13,7 @@ import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.base.utils.safeNavigation
 import com.example.e_commerceapp.databinding.FragmentPaymentBinding
 import com.example.e_commerceapp.ui.checkout.model.CASH
+import com.example.e_commerceapp.ui.checkout.model.PAYPAL
 import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
 import com.example.e_commerceapp.utils.Constants.PAYPAL_KEY
 import com.example.e_commerceapp.utils.POST_ORDER_BODY
@@ -34,6 +35,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
 
     override fun afterOnCreateView() {
         super.afterOnCreateView()
+        postOrderBody = arguments?.getParcelable<PostOrderBody>(POST_ORDER_BODY)
         setUpPayPal()
         binding.backPayment.setOnClickListener {
             navController.navigateUp()
@@ -81,7 +83,6 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        postOrderBody = arguments?.getParcelable<PostOrderBody>(POST_ORDER_BODY)
 
     }
 
@@ -113,7 +114,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
                             R.id.action_paymentFragment_to_checkoutFragment,
                             Bundle().apply {
                                 putParcelable(POST_ORDER_BODY, postOrderBody?.order?.apply {
-                                    gateway = CASH
+                                    gateway = PAYPAL
                                 })
                             })
                     } catch (e: JSONException) {

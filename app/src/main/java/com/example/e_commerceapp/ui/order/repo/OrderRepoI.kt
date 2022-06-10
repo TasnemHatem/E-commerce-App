@@ -4,6 +4,8 @@ import com.example.e_commerceapp.base.network.DataState
 import com.example.e_commerceapp.ui.checkout.model.OrderResponse
 import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
 import com.example.e_commerceapp.ui.order.model.MyOrdersResponse
+import com.example.e_commerceapp.utils.Either
+import com.example.e_commerceapp.utils.SignUpErrors
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
@@ -13,5 +15,5 @@ interface OrderRepoI {
     suspend fun postOrder(
         dispatcher: CoroutineDispatcher,
         postOrderBody: PostOrderBody,
-    ): Flow<DataState<OrderResponse>>
+    ): Either<OrderResponse, SignUpErrors>
 }

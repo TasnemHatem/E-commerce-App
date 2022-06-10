@@ -6,8 +6,8 @@ import com.example.e_commerceapp.ui.cart.model.DiscountCode
 import com.example.e_commerceapp.ui.cart.model.LineItemsItem
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-const val CASH="cash"
-const val PAYPAL="paypal"
+const val CASH="Cash on delivery"
+const val PAYPAL="Paypal"
 @Parcelize
 data class PostOrderBody(
 
