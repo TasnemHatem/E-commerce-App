@@ -4,6 +4,8 @@ import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.auth.model.*
 import com.example.e_commerceapp.ui.auth.network.AuthService
 import com.example.e_commerceapp.utils.Constants.SHARED_CART_ID
+import com.example.e_commerceapp.utils.Constants.SHARED_CURRENCY_CODE
+import com.example.e_commerceapp.utils.Constants.SHARED_CURRENCY_VALUE
 import com.example.e_commerceapp.utils.Constants.SHARED_FAV_ID
 import com.example.e_commerceapp.utils.Constants.SHARED_ID
 import com.example.e_commerceapp.utils.Constants.SHARED_MAIL
@@ -50,6 +52,8 @@ class AuthRepoImpl(
         appSharedPreference.setValue(SHARED_FAV_ID, (customer.favouriteId?.toLong())?:2)
         appSharedPreference.setValue(SHARED_NAME, customer.firstName + " " + customer.lastName)
         appSharedPreference.setValue("login", true)
+        appSharedPreference.setValue(SHARED_CURRENCY_CODE, "USD")
+        appSharedPreference.setValue(SHARED_CURRENCY_VALUE, 1.0)
     }
 
     override suspend fun login(

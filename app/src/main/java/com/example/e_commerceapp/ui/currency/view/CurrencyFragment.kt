@@ -17,13 +17,16 @@ import com.example.e_commerceapp.ui.currency.viewmodel.CurrencyVM
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.reflect.full.memberProperties
 import androidx.recyclerview.widget.DividerItemDecoration
-
-
+import com.example.e_commerceapp.local.AppSharedPreference
+import com.example.e_commerceapp.utils.Constants
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyBinding::inflate){
 
+    @Inject
+    lateinit var appSharedPreference: AppSharedPreference
 
     private var currencyResponse: ConversionRates? = null
     private var currencyData: MutableList<Currency> = mutableListOf<Currency>()
@@ -33,7 +36,8 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        currencyAdapter = CurrencyAdapter(requireContext(), currencyData)
+        currencyAdapter = CurrencyAdapter(requireContext(), currencyData, appSharedPreference.getStringValue(
+            Constants.SHARED_CURRENCY_CODE, "USD"), ::changeCurrency)
         binding.currencyRecycleviewId.adapter = currencyAdapter
 
 
@@ -62,6 +66,13 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
             //Log.i("EMYTAG", "onViewCreated: Ya Currency $it")
         }
         viewmodel.requestCurrency()
+    }
+
+    fun changeCurrency(currencyCode: String, currencyValue: Double){
+        appSharedPreference.setValue(Constants.SHARED_CURRENCY_CODE, currencyCode)
+        appSharedPreference.setValue(Constants.SHARED_CURRENCY_VALUE, currencyValue)
+        currencyAdapter.currencyCode = currencyCode
+        currencyAdapter.notifyDataSetChanged()
     }
 
 
