@@ -116,8 +116,12 @@
         android:label="WishlistFragment" />
     <fragment
         android:id="@+id/checkoutFragment"
-        android:name="com.example.e_commerceapp.ui.checkout.CheckoutFragment"
-        android:label="CheckoutFragment" />
+        android:name="com.example.e_commerceapp.ui.checkout.view.CheckoutFragment"
+        android:label="CheckoutFragment" >
+        <action
+            android:id="@+id/action_checkoutFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.e_commerceapp.ui.cart.view.CartFragment"

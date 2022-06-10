@@ -169,7 +169,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
             }
             binding.btnCheckout.setOnClickListener {
                 navController.safeNavigation(R.id.cartFragment,
-                    R.id.action_cartFragment_to_paymentFragment,
+                    R.id.action_cartFragment_to_addressFragment,
                     Bundle().apply {
                         putParcelable(POST_ORDER_BODY, postOrderBody.apply {
                             this.order?.discountCodes = listOf(coupon?.apply {
