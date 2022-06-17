@@ -7,8 +7,9 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.network.DataState
@@ -19,6 +20,8 @@ import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.cart.viewmodel.CartViewModel
 import com.example.e_commerceapp.ui.category.model.Product
 import com.example.e_commerceapp.ui.category.model.toListItem
+import com.example.e_commerceapp.ui.reviews.RewiewsAdapter
+import com.example.e_commerceapp.ui.reviews.model.getOnlyTwoReviews
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +45,7 @@ class ProductDetailes :
         super.onViewCreated(view, savedInstanceState)
         product = arguments?.getParcelable<Product>("product")
         initUI(product!!)
+        initReviewsRecycler()
         addToFavourite()
         deletFromFavourite()
         addToBag()
@@ -49,6 +53,7 @@ class ProductDetailes :
         goToCart()
         goToWishList()
         observeViewModel()
+        goToReviewsFragment()
     }
 
     private fun observeViewModel() {
@@ -118,6 +123,16 @@ class ProductDetailes :
         bindingAddToFavourite = binding.addToFavouriteFromDetailes
         bindingDeletFromFavourite = binding.deleteToFavouriteFromDetailes
 
+    }
+
+    private fun initReviewsRecycler(){
+        val _layoutManager = LinearLayoutManager(context)
+        _layoutManager.orientation = RecyclerView.VERTICAL
+        var reviewAdapter = RewiewsAdapter(getOnlyTwoReviews())
+        binding.reviewsRecyclerView.apply {
+            adapter = reviewAdapter
+            layoutManager= _layoutManager
+        }
     }
 
     private fun addToFavourite() {
@@ -191,6 +206,13 @@ class ProductDetailes :
             } else {
                 goToLogin()
             }
+
+        }
+    }
+
+    private fun goToReviewsFragment(){
+        binding.textViewMore.setOnClickListener {
+            navController.navigate(R.id.action_productDetailes_to_reviewsFragment)
 
         }
     }
