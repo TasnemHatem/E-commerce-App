@@ -2,6 +2,7 @@ package com.example.e_commerceapp.ui.checkout.model
 
 import android.os.Parcelable
 import com.example.e_commerceapp.ui.address.model.Address
+import com.example.e_commerceapp.ui.cart.model.Customer
 import com.example.e_commerceapp.ui.cart.model.DiscountCode
 import com.example.e_commerceapp.ui.cart.model.LineItemsItem
 import com.google.gson.annotations.SerializedName
@@ -29,4 +30,6 @@ data class Order(
 
     @field:SerializedName("discount_codes")
     var discountCodes: List<DiscountCode?>? = null,
+    @SerializedName("customer")
+    var customer: Customer? = null
 ) : Parcelable

@@ -82,8 +82,9 @@ object RepoModule {
 
     @ViewModelScoped
     @Provides
-    fun getOrderRepo(orderService: OrderService): OrderRepo {
-        return OrderRepo(orderService)
+    fun getOrderRepo(orderService: OrderService, appSharedPreference: AppSharedPreference,
+    ): OrderRepo {
+        return OrderRepo(orderService,appSharedPreference)
     }
 
     @ViewModelScoped
