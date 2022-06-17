@@ -48,7 +48,7 @@ class ProductViewModel @Inject constructor(
             wishlistRepo.getWishlist(wishlistId).onEach {wishlistResponse ->
                 _wishlist.postValue(wishlistResponse.body()?.draftOrder?.lineItems)
                 productRepo.getVendorProducts(vendor).onEach {productlistResponse->
-                    mapFavourite(wishlistResponse.body()!!.draftOrder.lineItems, productlistResponse.body()!!.products)
+                //    mapFavourite(wishlistResponse.body()!!.draftOrder.lineItems, productlistResponse.body()!!.products)
                     _vendorsProduct.postValue(productlistResponse)
                 }.launchIn(viewModelScope)
             }.launchIn(viewModelScope)

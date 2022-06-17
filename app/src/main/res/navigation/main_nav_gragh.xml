@@ -160,6 +160,9 @@
         <action
             android:id="@+id/action_productDetailes_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_productDetailes_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
     </fragment>
         
     <fragment
@@ -175,4 +178,12 @@
         android:name="com.example.e_commerceapp.ui.currency.view.CurrencyFragment"
         android:label="fragment_currency"
         tools:layout="@layout/fragment_currency" />
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="com.example.e_commerceapp.ui.reviews.ReviewsFragment"
+        android:label="ReviewsFragment" >
+        <action
+            android:id="@+id/action_reviewsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>
