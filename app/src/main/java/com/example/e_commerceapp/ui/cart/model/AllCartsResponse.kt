@@ -140,14 +140,14 @@ data class AppliedDiscount(
 	@Expose val value: String? = null
 ):Parcelable
 
-
+@Parcelize
 data class Customer(
 
 	@field:SerializedName("total_spent")
 	@Expose val totalSpent: String? = null,
 
 	@field:SerializedName("note")
-	@Expose val note: Any? = null,
+	@Expose val note: String? = null,
 
 	@field:SerializedName("last_order_name")
 	@Expose val lastOrderName: String? = null,
@@ -164,8 +164,8 @@ data class Customer(
 	@field:SerializedName("last_name")
 	@Expose val lastName: String? = null,
 
-	@field:SerializedName("multipass_identifier")
-	@Expose val multipassIdentifier: Any? = null,
+//	@field:SerializedName("multipass_identifier")
+//	@Expose val multipassIdentifier: Any? = null,
 
 	@field:SerializedName("verified_email")
 	@Expose val verifiedEmail: Boolean? = null,
@@ -194,8 +194,8 @@ data class Customer(
 	@field:SerializedName("admin_graphql_api_id")
 	@Expose val adminGraphqlApiId: String? = null,
 
-	@field:SerializedName("tax_exemptions")
-	@Expose val taxExemptions: List<Any?>? = null,
+//	@field:SerializedName("tax_exemptions")
+//	@Expose val taxExemptions: List<Any?>? = null,
 
 	@field:SerializedName("currency")
 	@Expose val currency: String? = null,
@@ -206,16 +206,17 @@ data class Customer(
 	@field:SerializedName("state")
 	@Expose val state: String? = null,
 
-	@field:SerializedName("marketing_opt_in_level")
-	@Expose val marketingOptInLevel: Any? = null,
+//	@field:SerializedName("marketing_opt_in_level")
+//	@Expose val marketingOptInLevel: Any? = null,
 
 	@field:SerializedName("first_name")
 	@Expose val firstName: String? = null,
 
 	@field:SerializedName("email")
 	@Expose val email: String? = null
-)
+):Parcelable
 
+@Parcelize
 data class DefaultAddress(
 
 	@field:SerializedName("zip")
@@ -234,7 +235,7 @@ data class DefaultAddress(
 	@Expose val address1: String? = null,
 
 	@field:SerializedName("last_name")
-	@Expose val lastName: Any? = null,
+	@Expose val lastName: String? = null,
 
 	@field:SerializedName("province_code")
 	@Expose val provinceCode: String? = null,
@@ -257,8 +258,8 @@ data class DefaultAddress(
 	@field:SerializedName("country_name")
 	@Expose val countryName: String? = null,
 
-	@field:SerializedName("company")
-	@Expose val company: Any? = null,
+//	@field:SerializedName("company")
+//	@Expose val company: Any? = null,
 
 	@field:SerializedName("id")
 	@Expose val id: Long? = null,
@@ -267,8 +268,8 @@ data class DefaultAddress(
 	@Expose val customerId: Int? = null,
 
 	@field:SerializedName("first_name")
-	@Expose val firstName: Any? = null
-)
+	@Expose val firstName: String? = null
+):Parcelable
 
 data class BillingAddress(
 
@@ -332,3 +333,5 @@ data class ShippingLine(
 	@field:SerializedName("title")
 	@Expose val title: String? = null
 )
+
+
