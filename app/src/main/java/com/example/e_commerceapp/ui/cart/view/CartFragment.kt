@@ -266,3 +266,5 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
     override fun onClickItem(item: LineItemsItem) {
     }
 }
+
+class Empty

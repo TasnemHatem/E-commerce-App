@@ -8,12 +8,24 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentMainBinding
+import com.example.e_commerceapp.utils.ConnectionLiveData
 
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate){
     lateinit var localNavController: NavController
-
+    lateinit var connectionLiveData: ConnectionLiveData
     override fun afterOnViewCreated() {
         super.afterOnViewCreated()
+        listenerToNetwork()
+
+//        connectionLiveData = ConnectionLiveData(requireContext())
+////        connectionLiveData.observe(this,{isNetworkAvailable->
+////            binding.constrainCheckNetwork.visibility = View.GONE
+////
+////        })
+//
+//                setContent {
+//
+//        }
         setUpBottomNavigation()
         setOnDestinationChangedListener()
 
@@ -65,6 +77,18 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
             }
         }
+    }
+
+    private fun listenerToNetwork() {
+        ConnectionLiveData(requireContext()).observe(this, {
+            if (it) {
+                binding.constrainCheckNetwork.visibility = View.VISIBLE
+                binding.imageView.visibility = View.GONE
+            } else {
+                binding.constrainCheckNetwork.visibility = View.GONE
+                binding.imageView.visibility = View.VISIBLE
+            }
+        })
     }
 
 }
