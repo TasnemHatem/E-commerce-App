@@ -140,7 +140,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
         }
     private val payPalConfiguration =
         PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
-            .clientId(PAYPAL_KEY).sandboxUserPassword("87654321")
+            .clientId(PAYPAL_KEY)
 
 
     private fun setUpPayPal() {
