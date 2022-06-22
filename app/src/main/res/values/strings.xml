@@ -98,4 +98,5 @@
     <string name="added_successfully_to_cart">Added successfully to cart.</string>
     <string name="operation_failed">Operation Failed</string>
     <string name="operation_succeeded">Operation Succeeded</string>
+    <string name="you_have_to_login_first">You have to login first</string>
 </resources>
