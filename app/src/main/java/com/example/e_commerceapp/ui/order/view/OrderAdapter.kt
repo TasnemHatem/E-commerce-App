@@ -11,6 +11,8 @@ import com.example.e_commerceapp.databinding.FragmentOrderRowBinding
 import com.example.e_commerceapp.ui.order.model.Order
 import com.example.e_commerceapp.ui.wishlist.model.LineItem
 import com.example.e_commerceapp.ui.wishlist.view.OnWishlistClickListenert
+import java.text.SimpleDateFormat
+import java.util.*
 
 class OrderAdapter(var context: Context, var data: List<Order>) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -39,7 +41,5 @@ class OrderAdapter(var context: Context, var data: List<Order>) : RecyclerView.A
         else return 0
     }
 
-    fun convertTime(){
 
-    }
 }

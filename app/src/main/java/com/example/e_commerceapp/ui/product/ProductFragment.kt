@@ -133,7 +133,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
     }
 
     override fun deletFromFavourite(product: Product) {
-        Log.i("EMYTAG", "deletFromFavourite: ")
+        Log.i("EMYTAG", "deletFromFavourite: fragment")
         mViewModel.deleteFavourite(product)
     }
 

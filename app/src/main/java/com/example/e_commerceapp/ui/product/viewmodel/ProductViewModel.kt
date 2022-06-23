@@ -1,5 +1,6 @@
 package com.example.e_commerceapp.ui.product.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,6 +36,7 @@ class ProductViewModel @Inject constructor(
     val vendorsProduct: LiveData<Response<ProductsResponse>> = _vendorsProduct
     private val _error: MutableLiveData<Throwable> = MutableLiveData()
     val error: LiveData<Throwable> = _error
+    var vendor: String? = null
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
         _error.postValue(throwable)
@@ -42,18 +44,20 @@ class ProductViewModel @Inject constructor(
     }
 
     fun requestVendorsProduct(vendor: String) {
+        this.vendor = vendor
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             var wishlistId = appSharedPreference.getLongValue(Constants.SHARED_FAV_ID, 2222)
 
             wishlistRepo.getWishlist(wishlistId).onEach {wishlistResponse ->
                 _wishlist.postValue(wishlistResponse.body()?.draftOrder?.lineItems)
                 productRepo.getVendorProducts(vendor).onEach {productlistResponse->
-                //    mapFavourite(wishlistResponse.body()!!.draftOrder.lineItems, productlistResponse.body()!!.products)
+                    mapFavourite(wishlistResponse.body()!!.draftOrder.lineItems, productlistResponse.body()!!.products)
                     _vendorsProduct.postValue(productlistResponse)
                 }.launchIn(viewModelScope)
             }.launchIn(viewModelScope)
 
         }
+
     }
 
     fun mapFavourite(wishlist: List<LineItem>, products: List<Product>) {
@@ -72,18 +76,25 @@ class ProductViewModel @Inject constructor(
             var favProduct = LineItem(0, "199.00", favData, 1, "wishlist")
             var putWishlist : List<LineItem>? = _wishlist.value!!.plus(favProduct)
             wishlistRepo.addFavouriteProduct(wishlistId, DraftOrderResponse(DraftOrder(null,null, putWishlist!!)))
-            //requestWishlist()
+            requestVendorsProduct(vendor!!)
         }
     }
 
     fun deleteFavourite(product: Product){
+        //Log.i("TAG", "deleteFavourite: profuct id ${product.id}")
+        //var s = _wishlist.value?.size
+        //_wishlist.value?.map { println(it.properties[0].value) }
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             var wishlistId = appSharedPreference.getLongValue(Constants.SHARED_FAV_ID, 2222)
-            var putWishlist : List<LineItem>? = _wishlist.value!!.filter { it.properties[0].value == product.id.toString() }
-            wishlistRepo.addFavouriteProduct(wishlistId, DraftOrderResponse(DraftOrder(null,null, putWishlist!!)))
-            //requestWishlist()
+            Log.i("EMYTAG", "deleteFavourite: before ${_wishlist.value?.size}") //5 -> 4
+//            var putWishlist : List<LineItem>? = _wishlist.value?.filter { it.title == "wishlist" }
+//            Log.i("EMYTAG", "deleteFavourite: after1 ${putWishlist?.size}")
+            //var putWishlist : List<LineItem>? = _wishlist.value?.filter { it.properties[0].value != product.id.toString() }
+            var putWishlist = _wishlist.value?.filter {it.properties.isNullOrEmpty() || it.properties[0].value != product.id.toString() }
+            //Log.i("EMYTAG", "deleteFavourite: after ${putWishlist?.size}")
+            wishlistRepo.deleteFavouriteProduct(wishlistId, DraftOrderResponse(DraftOrder(null,null, putWishlist!!)))
+            requestVendorsProduct(vendor!!)
         }
-
-
     }
+
 }
