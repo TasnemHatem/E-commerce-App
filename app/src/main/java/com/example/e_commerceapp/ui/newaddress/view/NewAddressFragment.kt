@@ -32,11 +32,19 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding>(FragmentNewAd
                 Log.i("TAG", "onViewCreated: is validated")
                 viewmodel.addAddress(makeAddrees())
             }
-            //navController.navigateUp()
+
         }
 
+        viewmodel.addAddressSuccess.observeInFragment(viewLifecycleOwner){
+            Toast.makeText(requireContext(), "Address successfully added", Toast.LENGTH_SHORT).show()
+            clearTexts()
+        }
         viewmodel.addAddressError.observeInFragment(viewLifecycleOwner){
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnBack.setOnClickListener {
+            navController.navigateUp()
         }
     }
 
@@ -94,5 +102,16 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding>(FragmentNewAd
 
         return true
 
+    }
+
+    fun clearTexts(){
+        binding.firstNameId.setText("")
+        binding.lastNameId.setText("")
+        binding.phoneId.setText("")
+        binding.countryId.setText("")
+        binding.cityId.setText("")
+        binding.address1Id.setText("")
+        binding.address2Id.setText("")
+        binding.defaultSwitchId.isChecked = false
     }
 }

@@ -25,6 +25,7 @@ class NewAddressVM @Inject constructor(val newAddressRepo: NewAddressRepo, val a
     val error: LiveData<Throwable> =_error
     private val _addAddressError: MutableLiveData<String> = MutableLiveData()
     val addAddressError: LiveData<String> = _addAddressError
+    val addAddressSuccess: MutableLiveData<String> = MutableLiveData()
 
     private val coroutineExceptionHandler= CoroutineExceptionHandler { _, throwable ->
         _error.postValue(throwable)
@@ -36,7 +37,7 @@ class NewAddressVM @Inject constructor(val newAddressRepo: NewAddressRepo, val a
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val state = newAddressRepo.addNewAddress(userId, addrees)
             if(state.isSuccessful){
-
+                addAddressSuccess.postValue("Success")
             }else{
                 val jsonError = state.errorBody()?.string() as String
                 val gson = Gson()
