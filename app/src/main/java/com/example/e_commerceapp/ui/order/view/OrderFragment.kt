@@ -30,7 +30,6 @@ class OrderFragment : BaseFragment<FragmentOrdersBinding>(FragmentOrdersBinding:
         super.onViewCreated(view, savedInstanceState)
 
         ordersResponse = listOf<Order>()
-        // = WishListAdapter(requireContext(), wishlistResponse, this)
         orderAdapter = OrderAdapter(requireContext(), ordersResponse)
         binding.ordersRecycleViewId.adapter = orderAdapter
 

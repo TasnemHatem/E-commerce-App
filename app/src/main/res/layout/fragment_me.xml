@@ -14,7 +14,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:orientation="vertical">
 
 
@@ -49,7 +48,6 @@
                     android:textSize="20sp"
                     android:padding="10dp"/>
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -64,7 +62,7 @@
                         android:text="@string/viewAll"
                         android:textColor="@color/colorDarkGrey"
                         android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/viewallOrdersIconId"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -87,6 +85,42 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"/>
 
+            <ProgressBar
+                android:id="@+id/progressBarOrdersId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:indeterminateTint="@color/black"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/ordersEmptyMsgId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/white"
+                android:padding="30dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/ordersEmptyMsgImgId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/noitem"/>
+
+                <TextView
+                    android:id="@+id/ordersEmptyMsgTextId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/emptyOrdersMessage"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="20dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,15 +139,36 @@
                     android:textSize="20sp"
                     android:padding="10dp"/>
 
-                <Button
-                    android:id="@+id/viewallWishlistBtnId"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/viewall"
-                    android:textColor="@color/gray"
-                    android:drawableEnd="@drawable/ic_chevron_right"
-                    android:background="@android:color/transparent"/>
+                    android:id="@+id/viewallWishlistBtnId">
+
+                    <TextView
+                        android:id="@+id/viewallWishlistTextId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/viewAll"
+                        android:textColor="@color/colorDarkGrey"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toStartOf="@+id/viewallWishlistIconId"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <ImageView
+                        android:id="@+id/viewallWishlistIconId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_chevron_right"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:tint="@color/colorDarkGrey" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </LinearLayout>
 
 
@@ -122,6 +177,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"/>
+
+            <ProgressBar
+                android:id="@+id/progressBarWishlistId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:indeterminateTint="@color/black"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/wishlistEmptyMsgId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/white"
+                android:padding="30dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/wishlistEmptyMsgImgId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/empty_favourites"
+                    app:tint="@color/colorDarkGrey"
+                    android:layout_marginBottom="20dp"/>
+
+                <TextView
+                    android:id="@+id/wishlistEmptyMsgTextId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/emptyWishlistMessage"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="20dp" />
+            </LinearLayout>
 
 
         </LinearLayout>
