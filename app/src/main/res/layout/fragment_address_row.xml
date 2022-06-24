@@ -64,16 +64,10 @@
                     android:id="@+id/addressDetailsId"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
+                    android:layout_weight="6"
                     tools:text="5 mergawy, rod el farag"
                     android:textSize="20dp"/>
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_chevron_right" />
             </LinearLayout>
 
             <TextView
@@ -106,7 +100,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
                     android:text="@string/setAsDefaultAddress"
-                    android:textSize="16dp"/>
+                    android:textSize="16dp"
+                    android:buttonTint="@color/black"/>
 
                 <ImageView
                     android:id="@+id/deleteAddressId"

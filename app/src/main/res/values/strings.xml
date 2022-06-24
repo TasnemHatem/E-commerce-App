@@ -105,4 +105,6 @@
     <string name="search">Search</string>
     <string name="currencyTitle">Change Currency</string>
     <string name="emptyWishlistMessage">No favourites yet :-(</string>
+    <string name="addressTitle">My Address</string>
+    <string name="emptyAddressMessage">There are no addresses yet :-(</string>
 </resources>
