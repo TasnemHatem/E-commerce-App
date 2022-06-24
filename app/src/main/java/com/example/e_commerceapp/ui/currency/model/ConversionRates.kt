@@ -48,7 +48,6 @@ data class ConversionRates(
     val bHD: Double,
     @SerializedName("NZD")
     val nZD: Double,
-
     @SerializedName("EGP")
     val eGP: Double,
 

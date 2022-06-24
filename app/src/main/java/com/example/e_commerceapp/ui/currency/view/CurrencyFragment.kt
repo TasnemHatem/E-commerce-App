@@ -52,20 +52,23 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
 
         viewmodel.currencyResponse.observeInFragment(viewLifecycleOwner){
             this.currencyResponse = it.conversionRates
-
-            Log.i("EMYTAG", "onViewCreated: Ya Reflect")
-
+            var count = 0
             for (prop in ConversionRates::class.memberProperties) {
                 currencyData.add(Currency(prop.name.capitalize(), prop.get(currencyResponse!!) as Double))
-                //println("${prop.name} = ${prop.get(currencyResponse!!)}")
+                count++
             }
+            Log.i("TAG", "onViewCreated: currency count = $count")
+            binding.progressBarCurrencyId.visibility = View.GONE
             currencyAdapter.data = currencyData
             currencyAdapter.notifyDataSetChanged()
 
-            Log.i("EMYTAG", "onViewCreated: Bye bye")
-            //Log.i("EMYTAG", "onViewCreated: Ya Currency $it")
         }
+        binding.progressBarCurrencyId.visibility = View.VISIBLE
         viewmodel.requestCurrency()
+
+        binding.btnBack.setOnClickListener {
+            navController.navigateUp()
+        }
     }
 
     fun changeCurrency(currencyCode: String, currencyValue: Double){
