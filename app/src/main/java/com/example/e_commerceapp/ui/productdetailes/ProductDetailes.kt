@@ -25,6 +25,8 @@ import com.example.e_commerceapp.ui.reviews.model.getOnlyTwoReviews
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
+import java.math.RoundingMode
 import javax.inject.Inject
 
 private const val TAG = "ProductDetailes"
@@ -118,7 +120,13 @@ class ProductDetailes :
         binding.imageSliderProductDetailes.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION)
         binding.imageSliderProductDetailes.startAutoCycle()
         binding.productDetailesName.text = product.title
-        binding.productDetailesPrice.text = "US$ ${product?.variants?.get(0)?.price}"
+        var value= appSharedPreference.getStringValue("shared_currency_value").toDouble()
+        val df = DecimalFormat("#.##")
+        df.roundingMode = RoundingMode.CEILING
+        val valu =  df.format(value)
+        val price = product.variants.get(0).price.toDouble()
+
+        binding.productDetailesPrice.text = "${appSharedPreference.getStringValue("shared_currency_code")} ${df.format(price).toDouble()*valu.toDouble()  }"
         binding.productDescription.text = product.bodyHtml
         bindingAddToFavourite = binding.addToFavouriteFromDetailes
         bindingDeletFromFavourite = binding.deleteToFavouriteFromDetailes
