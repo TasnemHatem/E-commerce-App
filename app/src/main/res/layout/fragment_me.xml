@@ -27,7 +27,8 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 tools:text="Hello, Emy"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:padding="10dp"/>
 
 
             <LinearLayout
@@ -39,23 +40,45 @@
 
                 <TextView
                     android:id="@+id/ordersHeaderId"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="@string/myOrders"
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:padding="10dp"/>
 
-                <Button
-                    android:id="@+id/viewallOrdersBtnId"
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/viewall"
-                    android:textColor="@color/gray"
-                    android:drawableEnd="@drawable/ic_chevron_right"
-                    android:background="@android:color/transparent"/>
+                    android:id="@+id/viewallOrdersBtnId">
+
+                    <TextView
+                        android:id="@+id/viewallOrdersTextId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/viewAll"
+                        android:textColor="@color/colorDarkGrey"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <ImageView
+                        android:id="@+id/viewallOrdersIconId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_chevron_right"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:tint="@color/colorDarkGrey" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -79,7 +102,8 @@
                     android:text="@string/wishlist"
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:padding="10dp"/>
 
                 <Button
                     android:id="@+id/viewallWishlistBtnId"
