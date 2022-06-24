@@ -54,30 +54,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
                 })
         }
 
-        binding.payPalButton.setup(
-            createOrder =
-            CreateOrder { createOrderActions ->
-                val order =
-                    Order(
-                        intent = OrderIntent.CAPTURE,
-                        appContext = AppContext(userAction = UserAction.PAY_NOW),
-                        purchaseUnitList =
-                        listOf(
-                            PurchaseUnit(
-                                amount =
-                                Amount(currencyCode = CurrencyCode.USD, value = "10.00")
-                            )
-                        )
-                    )
-                createOrderActions.create(order)
-            },
-            onApprove =
-            OnApprove { approval ->
-                approval.orderActions.capture { captureOrderResult ->
-                    Log.i("CaptureOrder", "CaptureOrderResult: $captureOrderResult")
-                }
-            }
-        )
+
 
     }
 
