@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.local.AppSharedPreference
@@ -20,7 +21,7 @@ class TypeProductAdapter (var typeList: List<String>,val onClickFilterListener: 
         var current = typeList[position]
         holder.typeText.text = current
 
-        holder.typeText.setOnClickListener{
+        holder.layout.setOnClickListener{
             onClickFilterListener.filter(current, sharedPreference.getStringValue("index","Men"))
         }
 
@@ -31,6 +32,7 @@ class TypeProductAdapter (var typeList: List<String>,val onClickFilterListener: 
 
     class ViewHolder (val itemView: View): RecyclerView.ViewHolder(itemView){
         val typeText : TextView = itemView.findViewById(R.id.text_type_category)
+        val layout:ConstraintLayout = itemView.findViewById(R.id.filter_layout)
 
     }
 }

@@ -13,6 +13,8 @@ import com.example.e_commerceapp.R
 import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.category.model.ProductsResponse
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: OnProductClickLisenter,
  var appSharedPreference: AppSharedPreference) : RecyclerView.Adapter<ProductAdapter.ViewHolder>(){
@@ -24,7 +26,14 @@ class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var current = product.products[position]
-        holder.textNameProduct.text = "US$ ${current.variants.get(0).price}"
+     //   var valu= appSharedPreference.getStringValue("shared_currency_value").toDouble()
+
+        var value= appSharedPreference.getStringValue("shared_currency_value").toDouble()
+        val df = DecimalFormat("#.##")
+        df.roundingMode = RoundingMode.CEILING
+        val valu =  df.format(value)
+        val price = current.variants.get(0).price.toDouble()
+        holder.textNameProduct.text = "${appSharedPreference.getStringValue("shared_currency_code")} ${df.format(price).toDouble()*valu.toDouble()  }"
         holder.image.load(current.image.src)
 
         if(product.products[position].isFavourite){

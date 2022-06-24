@@ -45,17 +45,28 @@ class ProductViewModel @Inject constructor(
 
     fun requestVendorsProduct(vendor: String) {
         this.vendor = vendor
-        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            var wishlistId = appSharedPreference.getLongValue(Constants.SHARED_FAV_ID, 2222)
+        if (appSharedPreference.getBooleanValue("login")) {
+            viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+                var wishlistId = appSharedPreference.getLongValue(Constants.SHARED_FAV_ID, 2222)
 
-            wishlistRepo.getWishlist(wishlistId).onEach {wishlistResponse ->
-                _wishlist.postValue(wishlistResponse.body()?.draftOrder?.lineItems)
-                productRepo.getVendorProducts(vendor).onEach {productlistResponse->
-                    mapFavourite(wishlistResponse.body()!!.draftOrder.lineItems, productlistResponse.body()!!.products)
-                    _vendorsProduct.postValue(productlistResponse)
+                wishlistRepo.getWishlist(wishlistId).onEach { wishlistResponse ->
+                    _wishlist.postValue(wishlistResponse.body()?.draftOrder?.lineItems)
+                    productRepo.getVendorProducts(vendor).onEach { productlistResponse ->
+                        mapFavourite(
+                            wishlistResponse.body()!!.draftOrder.lineItems,
+                            productlistResponse.body()!!.products
+                        )
+                        _vendorsProduct.postValue(productlistResponse)
+                    }.launchIn(viewModelScope)
                 }.launchIn(viewModelScope)
-            }.launchIn(viewModelScope)
 
+            }
+        }else{
+            viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+                productRepo.getVendorProducts(vendor).onEach{
+                    _vendorsProduct.postValue(it)
+                }.launchIn(viewModelScope)
+            }
         }
 
     }
