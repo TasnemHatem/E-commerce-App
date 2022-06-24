@@ -5,25 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar_checkout_activity"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:background="@color/white">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/wishlistTitleId"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:gravity="center"-->
-<!--            android:text="@string/wishlistTitle"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="@dimen/toolbar_title_text_size"-->
-<!--            android:textStyle="bold" />-->
-
-<!--    </androidx.appcompat.widget.Toolbar>-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_title"
         android:layout_width="match_parent"
@@ -72,4 +53,64 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header_title" />
+
+    <LinearLayout
+        android:id="@+id/emptyMsgId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/emptyMsgImgId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/empty_favourites"
+            app:tint="@color/colorDarkGrey"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/emptyMsgTextId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/emptyWishlistMessage"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarWishlistId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:indeterminateTint="@color/black"
+        android:visibility="gone"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/imageView">
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/no_connection"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please check network and try again"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image2"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

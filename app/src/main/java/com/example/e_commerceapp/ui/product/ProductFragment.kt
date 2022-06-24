@@ -43,7 +43,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBind
             }
         }
         binding.productBackBtn.setOnClickListener{
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_productFragment2_to_mainFragment)
+            navController.navigateUp()
 
         }
         seekBar()

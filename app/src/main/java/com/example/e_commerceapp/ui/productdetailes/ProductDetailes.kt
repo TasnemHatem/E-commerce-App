@@ -122,7 +122,13 @@ class ProductDetailes :
         binding.productDescription.text = product.bodyHtml
         bindingAddToFavourite = binding.addToFavouriteFromDetailes
         bindingDeletFromFavourite = binding.deleteToFavouriteFromDetailes
-
+        if(product.isFavourite){
+            bindingAddToFavourite.visibility = View.GONE
+            bindingDeletFromFavourite.visibility=View.VISIBLE
+        }else{
+            bindingAddToFavourite.visibility = View.VISIBLE
+            bindingDeletFromFavourite.visibility=View.GONE
+        }
     }
 
     private fun initReviewsRecycler(){
@@ -176,9 +182,7 @@ class ProductDetailes :
 
     private fun backToHome() {
         binding.backFromProductDetailesTOMain.setOnClickListener {
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_productDetailes_to_mainFragment)
-
+            navController.navigateUp()
         }
     }
 
