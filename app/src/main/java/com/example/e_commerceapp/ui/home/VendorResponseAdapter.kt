@@ -20,10 +20,13 @@ class VendorResponseAdapter (var brands:  VendorsResponse, private val clickBran
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var current = brands.smartCollections[position]
        holder.txtBrandName.text = current.title
+        if(current.title == "SUPRA")
+            holder.image.scaleType = ImageView.ScaleType.CENTER_CROP
        holder.image.load(current.image.src)
         holder.image.setOnClickListener{
             clickBrandBtn.clickBrandBtn(current.title)
         }
+
 
     }
 
