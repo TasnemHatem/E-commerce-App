@@ -3,6 +3,7 @@ package com.example.e_commerceapp.ui.me.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
@@ -10,13 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
+import com.example.e_commerceapp.base.network.DataState
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentMeBinding
 import com.example.e_commerceapp.local.AppSharedPreference
+import com.example.e_commerceapp.ui.cart.viewmodel.CartViewModel
 import com.example.e_commerceapp.ui.order.model.Order
 import com.example.e_commerceapp.ui.order.view.OrderAdapter
 import com.example.e_commerceapp.ui.order.viewmodel.OrderVM
 import com.example.e_commerceapp.ui.wishlist.model.LineItem
+import com.example.e_commerceapp.ui.wishlist.model.toListItem
 import com.example.e_commerceapp.ui.wishlist.view.OnWishlistClickListenert
 import com.example.e_commerceapp.ui.wishlist.view.WishListAdapter
 import com.example.e_commerceapp.ui.wishlist.viewmodel.WishlistVM
@@ -31,6 +35,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>(FragmentMeBinding::inflate), 
     private lateinit var ordersResponse: List<Order>
     lateinit var orderSubAdapter: OrderSubAdapter
     val ordersViewmodel: OrderVM by viewModels()
+    val cartViewModel: CartViewModel by viewModels()
 
     //wishlist
     private lateinit var wishlistResponse: List<LineItem>
@@ -70,7 +75,12 @@ class MeFragment : BaseFragment<FragmentMeBinding>(FragmentMeBinding::inflate), 
 
         var layoutManager: RecyclerView.LayoutManager =  LinearLayoutManager(view?.context, RecyclerView.VERTICAL, false)
         binding.orderRecycleViewId.layoutManager = layoutManager
-
+        cartViewModel.addItemResponse.observeInFragment(viewLifecycleOwner){
+            when(it){
+                is DataState.Success -> Toast.makeText(context, context?.resources?.getString(R.string.added_successfully_to_cart), Toast.LENGTH_SHORT).show()
+                is DataState.Error -> Toast.makeText(context, context?.resources?.getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show()
+            }
+        }
         ordersViewmodel.error.observeInFragment(viewLifecycleOwner){
 
         }
@@ -120,8 +130,8 @@ class MeFragment : BaseFragment<FragmentMeBinding>(FragmentMeBinding::inflate), 
         wishlistViewmodel.deleteWish(deletedItem)
     }
 
-    override fun clickAddToCartListener() {
-        TODO("Not yet implemented")
+    override fun clickAddToCartListener(item: LineItem) {
+        cartViewModel.addItem(item.toListItem())
     }
 
 }

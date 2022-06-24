@@ -3,7 +3,7 @@ package com.example.e_commerceapp.ui.wishlist.view
 import com.example.e_commerceapp.ui.wishlist.model.DraftOrderResponse
 import com.example.e_commerceapp.ui.wishlist.model.LineItem
 
-interface OnWishlistClickListenert {
+interface OnWishlistClickListenert   {
     fun clickDeleteListener(deletedItem: LineItem)
-    fun clickAddToCartListener()
+    fun clickAddToCartListener(deletedItem: LineItem)
 }

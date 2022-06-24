@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commerceapp.local.AppSharedPreference
+import com.example.e_commerceapp.ui.cart.repo.CartRepo
 import com.example.e_commerceapp.ui.wishlist.model.DraftOrder
 import com.example.e_commerceapp.ui.wishlist.model.DraftOrderResponse
 import com.example.e_commerceapp.ui.wishlist.model.LineItem
@@ -23,7 +24,7 @@ import javax.inject.Inject
 import kotlin.math.log
 
 @HiltViewModel
-class WishlistVM @Inject constructor(val wishlistRepo: WishlistRepo) : ViewModel(){
+class WishlistVM @Inject constructor(val wishlistRepo: WishlistRepo,val cartRepo: CartRepo) : ViewModel(){
 
     @Inject
     lateinit var appSharedPreference: AppSharedPreference
