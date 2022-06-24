@@ -36,6 +36,7 @@ class OrderRepo(
                 val body = res.body()
                 if (body != null) {
                     Either.Success(body)
+
                 } else {
                     Either.Error(SignUpErrors.NullValue, res.message())
                 }
