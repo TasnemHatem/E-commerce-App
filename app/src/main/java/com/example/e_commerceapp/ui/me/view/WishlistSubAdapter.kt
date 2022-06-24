@@ -41,10 +41,8 @@ class WishlistSubAdapter(var context: Context, var data: List<LineItem>, var lis
 
     override fun getItemCount(): Int {
         if(data != null){
-            if(data.size == 1)
-                return 0
-            if(data.size <= 4)
-                return data.size
+            if(data.size <= 5)
+                return data.size-1
             else
                 return 4
         }
