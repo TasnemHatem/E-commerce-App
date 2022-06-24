@@ -1,6 +1,7 @@
 package com.example.e_commerceapp.ui.currency.view
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,8 +35,10 @@ class CurrencyAdapter(var context: Context, var data: List<Currency>, var curren
         holder.binding.currencyCodeId.text = data[position].currnecyName
         if(currencyCode == data[position].currnecyName){
             holder.binding.currecnyCheckId.setImageResource(R.drawable.ic_check)
+            holder.binding.currencyCodeId.setTextColor(Color.BLACK)
         }else{
             holder.binding.currecnyCheckId.setImageResource(0)
+            holder.binding.currencyCodeId.setTextColor(Color.GRAY)
         }
         holder.binding.layoutId.setOnClickListener {
             operation(data[position].currnecyName, data[position].currencyValue)
