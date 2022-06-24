@@ -40,7 +40,7 @@ class WishListAdapter(var context: Context, var data: List<LineItem>, var listen
             delete(position+1)
         }
         holder.binding.addCartIconId.setOnClickListener {
-            addToCart()
+            listener.clickAddToCartListener(data[position+1])
         }
     }
 
@@ -70,7 +70,4 @@ class WishListAdapter(var context: Context, var data: List<LineItem>, var listen
         alert.show()
     }
 
-    fun addToCart(){
-
-    }
 }

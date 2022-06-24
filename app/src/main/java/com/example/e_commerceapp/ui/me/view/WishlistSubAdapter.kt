@@ -35,7 +35,7 @@ class WishlistSubAdapter(var context: Context, var data: List<LineItem>, var lis
             delete(position+1)
         }
         holder.binding.addCartIconId.setOnClickListener {
-            addToCart()
+            listener.clickAddToCartListener(data[position+1])
         }
     }
 
