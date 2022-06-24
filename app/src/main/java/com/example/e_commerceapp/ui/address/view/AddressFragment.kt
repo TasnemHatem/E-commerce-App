@@ -15,6 +15,7 @@ import com.example.e_commerceapp.databinding.FragmentAddressBinding
 import com.example.e_commerceapp.ui.address.model.Address
 import com.example.e_commerceapp.ui.address.viewmodel.AddressVM
 import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
+import com.example.e_commerceapp.utils.ConnectionLiveData
 import com.example.e_commerceapp.utils.POST_ORDER_BODY
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +30,7 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>(FragmentAddressBind
     val viewmodel: AddressVM by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        listenerToNetwork()
         super.onViewCreated(view, savedInstanceState)
         postOrderBody = arguments?.getParcelable<PostOrderBody>(POST_ORDER_BODY)
         binding.addAdressBtnId.setOnClickListener {
@@ -43,6 +45,10 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>(FragmentAddressBind
         binding.addressRecycleViewId.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
 
+        binding.btnBack.setOnClickListener{
+            navController.navigateUp()
+        }
+
     }
 
     override fun afterOnCreateView() {
@@ -53,12 +59,20 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>(FragmentAddressBind
         }
 
         viewmodel.addresslist.observeInFragment(viewLifecycleOwner) {
-            Log.i("TAG", "afterOnCreateView: Ya address data ${it}")
+            if(it.isNullOrEmpty()){
+                binding.progressBarAddressId.visibility = View.GONE
+                binding.emptyMsgId.visibility = View.VISIBLE
+            }else{
+                binding.progressBarAddressId.visibility = View.GONE
+                binding.emptyMsgId.visibility = View.INVISIBLE
+            }
             addresslist = it
             addressAdapter.data = addresslist
             addressAdapter.notifyDataSetChanged()
         }
-        viewmodel.requestAddresses()
+
+        //binding.progressBarAddressId.visibility = View.VISIBLE
+        //viewmodel.requestAddresses()
     }
 
     override fun clickDelete(userId: Long, addressId: Long) {
@@ -79,5 +93,20 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>(FragmentAddressBind
         } else {
             viewmodel.changeDefaultAddress(userId, addressId.id!!)
         }
+    }
+
+    private fun listenerToNetwork() {
+        ConnectionLiveData(requireContext()).observe(this, {
+            if (it) {
+                binding.addressRecycleViewId.visibility = View.VISIBLE
+                binding.imageView.visibility = View.GONE
+                binding.progressBarAddressId.visibility = View.VISIBLE
+                viewmodel.requestAddresses()
+            } else {
+                binding.addressRecycleViewId.visibility = View.GONE
+                binding.progressBarAddressId.visibility = View.GONE
+                binding.imageView.visibility = View.VISIBLE
+            }
+        })
     }
 }
