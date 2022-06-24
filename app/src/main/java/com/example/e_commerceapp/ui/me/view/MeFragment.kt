@@ -117,7 +117,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>(FragmentMeBinding::inflate), 
     }
 
     override fun clickDeleteListener(deletedItem: LineItem) {
-        TODO("Not yet implemented")
+        wishlistViewmodel.deleteWish(deletedItem)
     }
 
     override fun clickAddToCartListener() {
