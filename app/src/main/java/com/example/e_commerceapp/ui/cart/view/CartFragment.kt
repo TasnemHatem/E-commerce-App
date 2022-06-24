@@ -104,7 +104,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                     displayMsg(data)
                 }
                 DataState.Loading -> {
-
                     binding.apply {
                         progressBarCoupon.visibility = View.VISIBLE
                         btnApplyCoupon.visibility = View.GONE
@@ -153,9 +152,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
             btnBack.setOnClickListener {
                 navController.navigateUp()
             }
-            btnCheckout.setOnClickListener {
-
-            }
             btnApplyCoupon.setOnClickListener {
                 val coupon = textInputEditText.text.toString()
                 when {
@@ -167,17 +163,20 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                     }
                 }
             }
-            binding.btnCheckout.setOnClickListener {
-                navController.safeNavigation(R.id.cartFragment,
-                    R.id.action_cartFragment_to_addressFragment,
-                    Bundle().apply {
-                        putParcelable(POST_ORDER_BODY, postOrderBody.apply {
-                            this.order?.discountCodes = listOf(coupon?.apply {
-                                amount = "10.0"
+            btnCheckout.setOnClickListener {
+                if (::mAdapter.isInitialized)
+                    navController.safeNavigation(R.id.cartFragment,
+                        R.id.action_cartFragment_to_addressFragment,
+                        Bundle().apply {
+                            putParcelable(POST_ORDER_BODY, postOrderBody.apply {
+                                this.order?.discountCodes = listOf(coupon?.apply {
+                                    amount = "10.0"
+                                })
+                                order?.lineItems = mAdapter.list
                             })
-                            order?.lineItems = mAdapter.list
                         })
-                    })
+                else
+                    Toast.makeText(context, context?.resources?.getString(R.string.buy_some_items_first), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -189,8 +188,8 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                     viewFlipperState.visibility = View.VISIBLE
                     viewFlipperState.displayedChild =
                         viewFlipperState.indexOfChild(noDataLayout.root)
-                    btnCheckout.isEnabled = false
-                    btnCheckout.isClickable = false
+//                    btnCheckout.isEnabled = false
+//                    btnCheckout.isClickable = false
                     textViewTotalPrice.text = ""
                 }
 
@@ -203,8 +202,8 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                         layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                         hasFixedSize()
                     }
-                    btnCheckout.isEnabled = true
-                    btnCheckout.isClickable = true
+//                    btnCheckout.isEnabled = true
+//                    btnCheckout.isClickable = true
                     updatePrice()
                 }
             }

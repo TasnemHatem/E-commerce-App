@@ -121,6 +121,7 @@ dependencies {
 
     implementation 'androidx.compose.runtime:runtime-livedata:1.0.0-beta01'
 
+    implementation "com.airbnb.android:lottie:5.2.0"
 
 }
 kapt {

@@ -56,9 +56,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         binding.settingsBtnId.setOnClickListener{
             navController.navigate(R.id.action_mainFragment_to_settingsFragment)
         }
-        binding.SearchBar.isIconifiedByDefault = true
+//        binding.SearchBar.isIconifiedByDefault = true
 
-        binding.SearchBar.setOnSearchClickListener{
+        binding.btnSearch.setOnClickListener{
             navController.navigate(R.id.action_mainFragment_to_searchFragment2)
         }
 
@@ -75,18 +75,18 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         localNavController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
                 R.id.homeFragment ->{
-                    binding.SearchBar.visibility=View.VISIBLE
+                    binding.btnSearch.visibility=View.VISIBLE
                     binding.settingsBtnId.visibility=View.GONE
 
                 }
                 R.id.categoryFragment ->{
-                    binding.SearchBar.visibility=View.VISIBLE
+                    binding.btnSearch.visibility=View.VISIBLE
                     binding.settingsBtnId.visibility=View.GONE
 
                 }
                 R.id.meFragment ->{
                     binding.settingsBtnId.visibility=View.VISIBLE
-                    binding.SearchBar.visibility=View.GONE
+                    binding.btnSearch.visibility=View.GONE
                 }
 
 
@@ -95,7 +95,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     }
 
     private fun listenerToNetwork() {
-        ConnectionLiveData(requireContext()).observe(this, {
+        ConnectionLiveData(requireContext()).observe(this) {
             if (it) {
                 binding.constrainCheckNetwork.visibility = View.VISIBLE
                 binding.imageView.visibility = View.GONE
@@ -103,7 +103,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
                 binding.constrainCheckNetwork.visibility = View.GONE
                 binding.imageView.visibility = View.VISIBLE
             }
-        })
+        }
     }
 
 }
