@@ -31,6 +31,12 @@ class SettingsFragment: BaseFragment<FragmentSettingsBinding>(FragmentSettingsBi
             appSharedPreference.setValue("login", false)
             navController.navigate(R.id.action_settingsFragment_to_mainFragment)
         }
+
+        binding.btnBack.setOnClickListener{
+            navController.navigateUp()
+        }
+
+        binding.currencyCodeId.text = appSharedPreference.getStringValue("shared_currency_code")
     }
 
 
