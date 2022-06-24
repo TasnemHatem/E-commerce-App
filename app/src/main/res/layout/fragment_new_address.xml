@@ -59,8 +59,8 @@
             android:background="@color/white"
             android:hint="@string/firstName"
             android:inputType="text"
-            android:textColor="@color/gray"
-            android:textSize="15sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -76,8 +76,8 @@
             android:background="@color/white"
             android:hint="@string/lastName"
             android:inputType="text"
-            android:textColor="@color/gray"
-            android:textSize="15sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -93,8 +93,8 @@
             android:background="@color/white"
             android:hint="@string/phoneNumber"
             android:inputType="text"
-            android:textColor="@color/gray"
-            android:textSize="15sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -110,8 +110,8 @@
             android:background="@color/white"
             android:hint="@string/country"
             android:inputType="text"
-            android:textColor="@color/gray"
-            android:textSize="15sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -127,8 +127,8 @@
             android:background="@color/white"
             android:hint="@string/city"
             android:inputType="text"
-            android:textColor="@color/gray"
-            android:textSize="15sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -144,8 +144,8 @@
             android:background="@color/white"
             android:hint="@string/addressLine1"
             android:inputType="text"
-            android:textColor="@color/gray"
-            android:textSize="15sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -161,8 +161,8 @@
             android:background="@color/white"
             android:hint="@string/addressLine2"
             android:inputType="text"
-            android:textColor="@color/gray"
-            android:textSize="15sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Switch
@@ -170,6 +170,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/makeDefault"
+        android:textSize="20sp"
         android:layout_margin="10dp"
         android:thumbTint="@color/black"
         android:trackTint="@color/black" />
@@ -178,10 +179,18 @@
         android:id="@+id/saveAddressBtnId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="16dp"
+        app:cornerRadius="15dp"
         android:backgroundTint="@color/black"
+        android:gravity="center"
+        android:paddingTop="@dimen/btn_padding"
+        android:paddingBottom="@dimen/btn_padding"
         android:text="@string/save"
-        android:textSize="16sp"
-        android:padding="5dp"/>
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/btn_textSize"/>
 
 
 

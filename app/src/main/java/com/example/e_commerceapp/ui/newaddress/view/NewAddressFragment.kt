@@ -38,6 +38,7 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding>(FragmentNewAd
         viewmodel.addAddressSuccess.observeInFragment(viewLifecycleOwner){
             Toast.makeText(requireContext(), "Address successfully added", Toast.LENGTH_SHORT).show()
             clearTexts()
+            navController.navigateUp()
         }
         viewmodel.addAddressError.observeInFragment(viewLifecycleOwner){
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
