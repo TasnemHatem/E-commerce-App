@@ -103,4 +103,6 @@
     <string name="viewAll">View All</string>
     <string name="buy_some_items_first">Buy some items first!</string>
     <string name="search">Search</string>
+    <string name="currencyTitle">Change Currency</string>
+    <string name="emptyWishlistMessage">No favourites yet :-(</string>
 </resources>

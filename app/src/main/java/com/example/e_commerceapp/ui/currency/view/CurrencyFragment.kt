@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlin.reflect.full.memberProperties
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.e_commerceapp.local.AppSharedPreference
+import com.example.e_commerceapp.utils.ConnectionLiveData
 import com.example.e_commerceapp.utils.Constants
 import javax.inject.Inject
 
@@ -35,7 +36,7 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        listenerToNetwork()
         currencyAdapter = CurrencyAdapter(requireContext(), currencyData, appSharedPreference.getStringValue(
             Constants.SHARED_CURRENCY_CODE, "USD"), ::changeCurrency)
         binding.currencyRecycleviewId.adapter = currencyAdapter
@@ -52,20 +53,23 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
 
         viewmodel.currencyResponse.observeInFragment(viewLifecycleOwner){
             this.currencyResponse = it.conversionRates
-
-            Log.i("EMYTAG", "onViewCreated: Ya Reflect")
-
+            var count = 0
             for (prop in ConversionRates::class.memberProperties) {
                 currencyData.add(Currency(prop.name.capitalize(), prop.get(currencyResponse!!) as Double))
-                //println("${prop.name} = ${prop.get(currencyResponse!!)}")
+                count++
             }
+            Log.i("TAG", "onViewCreated: currency count = $count")
+            binding.progressBarCurrencyId.visibility = View.GONE
             currencyAdapter.data = currencyData
             currencyAdapter.notifyDataSetChanged()
 
-            Log.i("EMYTAG", "onViewCreated: Bye bye")
-            //Log.i("EMYTAG", "onViewCreated: Ya Currency $it")
         }
+        binding.progressBarCurrencyId.visibility = View.VISIBLE
         viewmodel.requestCurrency()
+
+        binding.btnBack.setOnClickListener {
+            navController.navigateUp()
+        }
     }
 
     fun changeCurrency(currencyCode: String, currencyValue: Double){
@@ -75,5 +79,19 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
         currencyAdapter.notifyDataSetChanged()
     }
 
+    private fun listenerToNetwork() {
+        ConnectionLiveData(requireContext()).observe(this, {
+            if (it) {
+                binding.currencyRecycleviewId.visibility = View.VISIBLE
+                binding.progressBarCurrencyId.visibility = View.VISIBLE
+                binding.imageView.visibility = View.GONE
+                viewmodel.requestCurrency()
+            } else {
+                binding.currencyRecycleviewId.visibility = View.GONE
+                binding.progressBarCurrencyId.visibility = View.GONE
+                binding.imageView.visibility = View.VISIBLE
+            }
+        })
+    }
 
 }
