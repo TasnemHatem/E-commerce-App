@@ -5,6 +5,7 @@ import com.example.e_commerceapp.ui.wishlist.model.DraftOrder
 import com.example.e_commerceapp.ui.wishlist.model.DraftOrderResponse
 import com.example.e_commerceapp.ui.wishlist.network.WishlistService
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 
@@ -20,7 +21,7 @@ class WishlistRepo(var wishlistService: WishlistService) : WishlistRepoI {
 
     override suspend fun getWishlist(id: Long) = flow {
         emit(wishlistService.getWishlist(id))
-    }
+    }.catch {  }
 
     override suspend fun deleteFavouriteProduct(wishlistId: Long, modifiedWishlist: DraftOrderResponse) {
         wishlistService.deleteFavouriteProduct(wishlistId, modifiedWishlist)

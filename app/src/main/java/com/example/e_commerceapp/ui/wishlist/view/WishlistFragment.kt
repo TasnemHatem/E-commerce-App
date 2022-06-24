@@ -14,6 +14,7 @@ import com.example.e_commerceapp.ui.wishlist.model.Customer
 import com.example.e_commerceapp.ui.wishlist.model.DraftOrder
 import com.example.e_commerceapp.ui.wishlist.model.LineItem
 import com.example.e_commerceapp.ui.wishlist.viewmodel.WishlistVM
+import com.example.e_commerceapp.utils.ConnectionLiveData
 import com.example.e_commerceapp.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -31,6 +32,8 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        listenerToNetwork()
 
         wishlistResponse = listOf<LineItem>()
         wishlistAdapter = WishListAdapter(requireContext(), wishlistResponse, this)
@@ -50,7 +53,13 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
             //TODO Add logic depending on Exception Type
         }
         viewmodel.wishlist.observeInFragment(viewLifecycleOwner){
-            Log.i("EMYTAG", "afterOnCreateView: Ya Data + ${it}")
+            if(it.isNullOrEmpty() || it.size == 1){
+                binding.progressBarWishlistId.visibility = View.GONE
+                binding.emptyMsgId.visibility = View.VISIBLE
+            }else{
+                binding.progressBarWishlistId.visibility = View.GONE
+                binding.emptyMsgId.visibility = View.INVISIBLE
+            }
             wishlistResponse = it
             wishlistAdapter.data = wishlistResponse
             wishlistAdapter.notifyDataSetChanged()
@@ -66,5 +75,21 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
 
     override fun clickAddToCartListener() {
         TODO("Not yet implemented")
+    }
+
+    private fun listenerToNetwork() {
+        ConnectionLiveData(requireContext()).observe(this, {
+            if (it) {
+                binding.wishlistRecycleViewId.visibility = View.VISIBLE
+                binding.imageView.visibility = View.GONE
+                binding.progressBarWishlistId.visibility = View.VISIBLE
+                viewmodel.requestWishlist()
+            } else {
+                binding.wishlistRecycleViewId.visibility = View.GONE
+                binding.progressBarWishlistId.visibility = View.GONE
+                binding.emptyMsgId.visibility = View.INVISIBLE
+                binding.imageView.visibility = View.VISIBLE
+            }
+        })
     }
 }

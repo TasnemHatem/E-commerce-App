@@ -102,4 +102,5 @@
     <string name="emptyOrdersMessage">There are no orders yet :-(</string>
     <string name="viewAll">View All</string>
     <string name="currencyTitle">Change Currency</string>
+    <string name="emptyWishlistMessage">No favourites yet :-(</string>
 </resources>
