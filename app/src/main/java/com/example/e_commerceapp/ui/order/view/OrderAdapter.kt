@@ -30,9 +30,9 @@ class OrderAdapter(var context: Context, var data: List<Order>) : RecyclerView.A
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         data[position].number
         holder.binding.orderId.text = "Order Num: " + data[position].orderNumber
-        holder.binding.itemNumId.text = "Num of items: " + data[position].number + "items"
+        holder.binding.itemNumId.text = "Num of items: " + data[position].lineItems.size + " items"
         holder.binding.orderTotalId.text = "Total Price: " + data[position].currentTotalPrice +"$"
-        holder.binding.orderDateId.text = "Created at: " + data[position].createdAt
+        holder.binding.orderDateId.text = "Created at: " + formatDate(data[position].createdAt)
     }
 
     override fun getItemCount(): Int {
@@ -41,5 +41,11 @@ class OrderAdapter(var context: Context, var data: List<Order>) : RecyclerView.A
         else return 0
     }
 
+    fun formatDate(dtStart: String) : String{
+        val format = SimpleDateFormat("yyyy-MM-dd")
+        val date: Date = format.parse(dtStart)
+        val stringFormat = SimpleDateFormat("dd/MM/yyy")
+        return stringFormat.format(date)
+    }
 
 }

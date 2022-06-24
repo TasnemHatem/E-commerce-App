@@ -32,8 +32,6 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.i("EMYTAG", "onViewCreated: user id = ${appSharedPreference.getLongValue(Constants.SHARED_ID, 2222)}")
-        Log.i("EMYTAG", "onViewCreated: wishlist id = ${appSharedPreference.getLongValue(Constants.SHARED_FAV_ID, 2)}")
         wishlistResponse = listOf<LineItem>()
         wishlistAdapter = WishListAdapter(requireContext(), wishlistResponse, this)
         binding.wishlistRecycleViewId.adapter = wishlistAdapter

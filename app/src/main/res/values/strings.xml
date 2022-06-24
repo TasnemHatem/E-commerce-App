@@ -99,4 +99,6 @@
     <string name="operation_failed">Operation Failed</string>
     <string name="operation_succeeded">Operation Succeeded</string>
     <string name="you_have_to_login_first">You have to login first</string>
+    <string name="emptyOrdersMessage">There are no orders yet :-(</string>
+    <string name="viewAll">View All</string>
 </resources>
