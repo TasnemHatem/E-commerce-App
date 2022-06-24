@@ -101,4 +101,6 @@
     <string name="you_have_to_login_first">You have to login first</string>
     <string name="emptyOrdersMessage">There are no orders yet :-(</string>
     <string name="viewAll">View All</string>
+    <string name="buy_some_items_first">Buy some items first!</string>
+    <string name="search">Search</string>
 </resources>
