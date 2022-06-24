@@ -17,7 +17,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
     override fun afterOnViewCreated() {
         super.afterOnViewCreated()
         lifecycleScope.launch(Dispatchers.Default) {
-            delay(2000L)
+            delay(3500L)
             withContext(Dispatchers.Main){
                 navController.safeNavigation(R.id.splashFragment,R.id.action_splashFragment_to_mainFragment)
             }
