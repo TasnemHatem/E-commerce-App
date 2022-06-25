@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
+import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentLoginBinding
 import com.example.e_commerceapp.local.AppSharedPreference
@@ -39,12 +40,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     override fun afterOnCreateView() {
         super.afterOnCreateView()
+
+
+    }
+
+    override fun afterOnViewCreated() {
+        super.afterOnViewCreated()
         binding.tvRegistry.setOnClickListener {
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_loginFragment_to_registerFragment)
+            navController.navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         binding.backLogin.setOnClickListener {
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_loginFragment_to_mainFragment)
+            navController.navigate( R.id.action_loginFragment_to_mainFragment)
 
         }
 
@@ -52,41 +59,41 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             if (validate()) {
                 startProgress()
                 vm.getData(userEmail!!,userPassword!!)
-                vm.loginState.observe(viewLifecycleOwner) {
-                    when (it) {
-                        is Either.Error -> when (it.errorCode) {
-                            LoginErrors.NoInternetConnection -> {
-                                val snackBar = Snackbar.make(binding.root, "NoInternetConnection" + it.message, Snackbar.LENGTH_LONG)
-                                snackBar.view.setBackgroundColor(Color.RED)
-                                snackBar.show()
-                                endProgress()
-                            }
-                            LoginErrors.ServerError -> {
-                                val snackBar = Snackbar.make(binding.root, "ServerError" + it.message, Snackbar.LENGTH_LONG)
-                                snackBar.view.setBackgroundColor(Color.RED)
-                                snackBar.show()
-                                endProgress()
+            }
+        }
 
-                            }
-                            LoginErrors.IncorrectEmailOrPassword->{
-                                val snackBar = Snackbar.make(binding.root, R.string.incorrect_email_or_password, Snackbar.LENGTH_LONG)
-                                snackBar.view.setBackgroundColor(Color.RED)
-                                snackBar.show()
-                                endProgress()
-                            }
-                        }
-                        is Either.Success -> {
-                            val snackBar = Snackbar.make(binding.root, R.string.login_successfully, Snackbar.LENGTH_LONG)
-                            snackBar.view.setBackgroundColor(Color.GREEN)
-                            snackBar.show()
-                            endProgress()
-                            runBlocking {
-                                delay(200)
-                                Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate( R.id.action_loginFragment_to_mainFragment)
-                            }
-
-                        }
+        vm.loginState.observeInFragment(viewLifecycleOwner) {
+            when (it) {
+                is Either.Error -> when (it.errorCode) {
+                    LoginErrors.NoInternetConnection -> {
+                        val snackBar = Snackbar.make(binding.root, "NoInternetConnection" + it.message, Snackbar.LENGTH_LONG)
+                        snackBar.view.setBackgroundColor(Color.RED)
+                        snackBar.show()
+                        endProgress()
                     }
+                    LoginErrors.ServerError -> {
+                        val snackBar = Snackbar.make(binding.root, "ServerError" + it.message, Snackbar.LENGTH_LONG)
+                        snackBar.view.setBackgroundColor(Color.RED)
+                        snackBar.show()
+                        endProgress()
+
+                    }
+                    LoginErrors.IncorrectEmailOrPassword->{
+                        val snackBar = Snackbar.make(binding.root, R.string.incorrect_email_or_password, Snackbar.LENGTH_LONG)
+                        snackBar.view.setBackgroundColor(Color.RED)
+                        snackBar.show()
+                        endProgress()
+                    }
+                }
+                is Either.Success -> {
+                    val snackBar = Snackbar.make(binding.root, R.string.login_successfully, Snackbar.LENGTH_LONG)
+                    snackBar.view.setBackgroundColor(Color.GREEN)
+                    snackBar.show()
+                    endProgress()
+
+                    navController.navigate( R.id.action_loginFragment_to_mainFragment)
+
+
                 }
             }
         }
