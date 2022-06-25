@@ -1,5 +1,6 @@
 package com.example.e_commerceapp.ui.cart.view
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,6 +16,7 @@ import com.example.e_commerceapp.base.network.NetworkExceptions
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.base.utils.safeNavigation
 import com.example.e_commerceapp.databinding.FragmentCartBinding
+import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.cart.model.CreateCartBody
 import com.example.e_commerceapp.ui.cart.model.DiscountCode
 import com.example.e_commerceapp.ui.cart.model.DraftOrder
@@ -25,6 +27,7 @@ import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
 import com.example.e_commerceapp.utils.POST_ORDER_BODY
 import com.example.e_commerceapp.utils.toTwoDecimalDigits
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 private const val TAG = "CartFragment"
@@ -32,7 +35,8 @@ private const val TAG = "CartFragment"
 @AndroidEntryPoint
 class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::inflate),
     OnCartItemClickListeners {
-
+    @Inject
+    lateinit var appSharedPreferences: AppSharedPreference
     private var coupon: DiscountCode? = null
     private val mViewModel: CartViewModel by viewModels()
     private val postOrderBody: PostOrderBody = PostOrderBody(Order())
@@ -62,7 +66,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                                 mAdapter.list.clear()
                             showData(it.toMutableList())
                         }
-
                 }
                 is DataState.Error -> {
                     binding.rvCartListItems.visibility = View.GONE

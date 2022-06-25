@@ -3,6 +3,7 @@ package com.example.e_commerceapp.ui.payment
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +17,7 @@ import com.example.e_commerceapp.ui.checkout.model.CASH
 import com.example.e_commerceapp.ui.checkout.model.PAYPAL
 import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
 import com.example.e_commerceapp.utils.Constants.PAYPAL_KEY
+import com.example.e_commerceapp.utils.Constants.SHARED_CURRENCY_CODE
 import com.example.e_commerceapp.utils.POST_ORDER_BODY
 import com.paypal.android.sdk.payments.*
 import com.paypal.checkout.approve.OnApprove
@@ -27,12 +29,17 @@ import com.paypal.checkout.order.Amount
 import com.paypal.checkout.order.AppContext
 import com.paypal.checkout.order.Order
 import com.paypal.checkout.order.PurchaseUnit
+import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
 import java.math.BigDecimal
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBinding::inflate) {
     private var postOrderBody: PostOrderBody? = null
 
+    @Inject
+    lateinit var appSharedPreferences: SharedPreferences
     override fun afterOnCreateView() {
         super.afterOnCreateView()
         postOrderBody = arguments?.getParcelable<PostOrderBody>(POST_ORDER_BODY)
@@ -55,7 +62,6 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
         }
 
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,8 +71,12 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
 
     /******************paypal***********************************/
     private fun payPalPaymentMethod() {
+        val price = ((postOrderBody?.order?.lineItems?.map { it?.price?.toDouble() ?: 0.0 }
+            ?.reduce { x, y -> x + y }
+            ?: 0.0) - (if (postOrderBody?.order?.discountCodes?.isNullOrEmpty() == true) 0.0 else 10.0)).toBigDecimal()
+        val currencyCode = appSharedPreferences.getString(SHARED_CURRENCY_CODE, "USD")
         var payment =
-            PayPalPayment(BigDecimal(1), "USD", "Shopify", PayPalPayment.PAYMENT_INTENT_SALE)
+            PayPalPayment(price, currencyCode, "Shopify", PayPalPayment.PAYMENT_INTENT_SALE)
         val intent = Intent(activity, PaymentActivity::class.java)
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration)
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment)
@@ -78,13 +88,14 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
             val resultCode = data.resultCode
 
             if (resultCode == Activity.RESULT_OK) {
-                val auth = data?.data?.getParcelableExtra<PayPalAuthorization>(PayPalProfileSharingActivity.EXTRA_RESULT_AUTHORIZATION)
+                val auth =
+                    data?.data?.getParcelableExtra<PayPalAuthorization>(PayPalProfileSharingActivity.EXTRA_RESULT_AUTHORIZATION)
                 val confirm =
 
                     data?.data?.getParcelableExtra<PaymentConfirmation>(PaymentActivity.EXTRA_RESULT_CONFIRMATION)
                 if (confirm != null) {
                     try {
-                        Log.e(TAG, ": auth ${auth}" )
+                        Log.e(TAG, ": auth ${auth}")
                         Log.i(TAG, confirm.toJSONObject().toString(4))
                         Log.i(TAG, confirm.payment.toJSONObject().toString(4))
                         navController.safeNavigation(R.id.paymentFragment,
