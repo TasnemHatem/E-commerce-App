@@ -8,13 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.FragmentMeWhishlistRowBinding
 import com.example.e_commerceapp.databinding.FragmentOrderRowBinding
+import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.order.model.Order
 import com.example.e_commerceapp.ui.wishlist.model.LineItem
 import com.example.e_commerceapp.ui.wishlist.view.OnWishlistClickListenert
+import com.example.e_commerceapp.utils.formatCurrency
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class OrderAdapter(var context: Context, var data: List<Order>) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
+class OrderAdapter(var context: Context, var data: List<Order>, var appSharedPreference: AppSharedPreference) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val binding = FragmentOrderRowBinding.bind(itemView)
@@ -31,7 +36,8 @@ class OrderAdapter(var context: Context, var data: List<Order>) : RecyclerView.A
         data[position].number
         holder.binding.orderId.text = "Order Num: " + data[position].orderNumber
         holder.binding.itemNumId.text = "Num of items: " + data[position].lineItems.size + " items"
-        holder.binding.orderTotalId.text = "Total Price: " + data[position].currentTotalPrice +"$"
+        //holder.binding.orderTotalId.text = "Total Price: " + data[position].currentTotalPrice +"$"
+        holder.binding.orderTotalId.text = "Total Price: " + formatCurrency(data[position].currentTotalPrice, appSharedPreference)
         holder.binding.orderDateId.text = "Created at: " + formatDate(data[position].createdAt)
     }
 
@@ -47,5 +53,7 @@ class OrderAdapter(var context: Context, var data: List<Order>) : RecyclerView.A
         val stringFormat = SimpleDateFormat("dd/MM/yyy")
         return stringFormat.format(date)
     }
+
+
 
 }

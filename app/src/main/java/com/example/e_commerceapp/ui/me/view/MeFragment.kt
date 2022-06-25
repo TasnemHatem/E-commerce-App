@@ -70,7 +70,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>(FragmentMeBinding::inflate), 
 
     fun setupOrders(){
         ordersResponse = listOf<Order>()
-        orderSubAdapter = OrderSubAdapter(requireContext(), ordersResponse)
+        orderSubAdapter = OrderSubAdapter(requireContext(), ordersResponse, appSharedPreference)
         binding.orderRecycleViewId.adapter = orderSubAdapter
 
         var layoutManager: RecyclerView.LayoutManager =  LinearLayoutManager(view?.context, RecyclerView.VERTICAL, false)
@@ -102,7 +102,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>(FragmentMeBinding::inflate), 
 
     fun setupWishlist(listener: OnWishlistClickListenert){
         wishlistResponse = listOf<LineItem>()
-        wishlistSubAdapter = WishlistSubAdapter(requireContext(), wishlistResponse, listener)
+        wishlistSubAdapter = WishlistSubAdapter(requireContext(), wishlistResponse, listener, appSharedPreference)
         binding.wishlistRecycleViewId.adapter = wishlistSubAdapter
 
         var layoutManager: RecyclerView.LayoutManager = GridLayoutManager(view?.context, 2, )

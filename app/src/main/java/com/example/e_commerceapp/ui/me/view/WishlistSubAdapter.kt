@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.FragmentMeWhishlistRowBinding
+import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.wishlist.model.LineItem
 import com.example.e_commerceapp.ui.wishlist.view.OnWishlistClickListenert
+import com.example.e_commerceapp.utils.formatCurrency
 
-class WishlistSubAdapter(var context: Context, var data: List<LineItem>, var listener: OnWishlistClickListenert) : RecyclerView.Adapter<WishlistSubAdapter.ViewHolder>() {
+class WishlistSubAdapter(var context: Context, var data: List<LineItem>, var listener: OnWishlistClickListenert, var appSharedPreference: AppSharedPreference) : RecyclerView.Adapter<WishlistSubAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val binding = FragmentMeWhishlistRowBinding.bind(itemView)
@@ -29,7 +31,8 @@ class WishlistSubAdapter(var context: Context, var data: List<LineItem>, var lis
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.wishlistPriceId.text = data[position+1].properties[2].value
+        //holder.binding.wishlistPriceId.text = data[position+1].properties[2].value
+        holder.binding.wishlistPriceId.text = "Total Price: " + formatCurrency(data[position+1].properties[2].value, appSharedPreference)
         holder.binding.wishlistImgId.load(data[position+1].properties[1].value)
         holder.binding.deleteIconId.setOnClickListener {
             delete(position+1)

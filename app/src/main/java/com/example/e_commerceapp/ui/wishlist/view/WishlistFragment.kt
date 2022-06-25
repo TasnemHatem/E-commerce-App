@@ -42,7 +42,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
         listenerToNetwork()
 
         wishlistResponse = listOf<LineItem>()
-        wishlistAdapter = WishListAdapter(requireContext(), wishlistResponse, this)
+        wishlistAdapter = WishListAdapter(requireContext(), wishlistResponse, this, appSharedPreference)
         binding.wishlistRecycleViewId.adapter = wishlistAdapter
 
         var layoutManager: RecyclerView.LayoutManager = GridLayoutManager(view.context, 2, )
