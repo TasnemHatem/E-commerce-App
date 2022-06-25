@@ -73,7 +73,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
     private fun payPalPaymentMethod() {
         val price = ((postOrderBody?.order?.lineItems?.map { it?.price?.toDouble() ?: 0.0 }
             ?.reduce { x, y -> x + y }
-            ?: 0.0) - (if (postOrderBody?.order?.discountCodes?.isNullOrEmpty() == true) 0.0 else 10.0)).toBigDecimal()
+            ?: 0.0) - (if (postOrderBody?.order?.discountCodes == null ||postOrderBody?.order?.discountCodes?.isEmpty() != false) 0.0 else 10.0 )).toBigDecimal()
         val currencyCode = appSharedPreferences.getString(SHARED_CURRENCY_CODE, "USD")
         var payment =
             PayPalPayment(price, currencyCode, "Shopify", PayPalPayment.PAYMENT_INTENT_SALE)

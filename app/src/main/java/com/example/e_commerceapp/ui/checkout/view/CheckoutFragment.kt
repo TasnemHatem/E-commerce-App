@@ -3,9 +3,9 @@ package com.example.e_commerceapp.ui.checkout.view
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.R
@@ -13,16 +13,17 @@ import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.base.utils.safeNavigation
 import com.example.e_commerceapp.databinding.FragmentCheckoutBinding
+import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.cart.model.LineItemsItem
 import com.example.e_commerceapp.ui.checkout.model.Order
 import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
 import com.example.e_commerceapp.ui.checkout.viewmodel.CheckoutViewModel
 import com.example.e_commerceapp.utils.Either
 import com.example.e_commerceapp.utils.POST_ORDER_BODY
+import com.example.e_commerceapp.utils.formatCurrency
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 private const val TAG = "CheckoutFragment"
 
@@ -31,7 +32,10 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(FragmentCheckoutB
 
     private lateinit var mAdapter: CheckoutAdapter
     private var orderBody: Order? = null
-    val mViewModel: CheckoutViewModel by viewModels()
+    private val mViewModel: CheckoutViewModel by viewModels()
+
+    @Inject
+    lateinit var appSharedPreference: AppSharedPreference
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -90,7 +94,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(FragmentCheckoutB
     private fun setView() {
         var subTotal = 0.0
         binding.rvCartListItems.apply {
-            mAdapter = CheckoutAdapter(orderBody?.lineItems as List<LineItemsItem>)
+            mAdapter = CheckoutAdapter(orderBody?.lineItems as List<LineItemsItem>,appSharedPreference)
             adapter = mAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             hasFixedSize()
@@ -102,17 +106,20 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(FragmentCheckoutB
             tvCheckoutAdditionalNote.text = orderBody?.shippingAddress?.city ?: "cairo"
             tvCheckoutOtherDetails.text = orderBody?.shippingAddress?.address1 ?: "maadi"
             tvCheckoutMobileNumber.text = orderBody?.shippingAddress?.phone ?: "4637485"
-            tvCheckoutShippingCharge.text = "50.00"
+//            tvCheckoutShippingCharge.text = formatCurrency("5.0", appSharedPreference)
             for (e in orderBody?.lineItems!!) {
                 if (e != null) {
                     subTotal += (e.price?.toDouble() ?: 0.0) * (e.quantity?.toDouble() ?: 0.0)
                 }
             }
-            tvCheckoutSubTotal.text = (subTotal -  (if (orderBody?.discountCodes?.isNullOrEmpty() == true) 0.0 else 10.0)).toString()
-            tvCheckoutTotalAmount.text = (subTotal + 50.00).toString()
+            Log.e(TAG, "setView: ${orderBody?.discountCodes}")
+            tvCheckoutSubTotal.text =
+                formatCurrency((subTotal - (if (orderBody?.discountCodes == null || orderBody?.discountCodes?.isEmpty() != false) 0.0 else 10.0 )).toString(),
+                    appSharedPreference)
+            tvCheckoutTotalAmount.text =
+                formatCurrency((subTotal).toString(), appSharedPreference)
             tvPaymentMode.text = orderBody?.gateway ?: "cash"
         }
-
     }
 
     private fun showLoading() {
