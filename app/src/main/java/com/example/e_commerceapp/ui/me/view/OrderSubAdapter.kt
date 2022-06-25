@@ -1,17 +1,20 @@
 package com.example.e_commerceapp.ui.me.view
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.FragmentOrderRowBinding
+import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.order.model.Order
+import com.example.e_commerceapp.utils.formatCurrency
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OrderSubAdapter(var context: Context, var data: List<Order>) : RecyclerView.Adapter<OrderSubAdapter.ViewHolder>() {
+class OrderSubAdapter(var context: Context, var data: List<Order>, var appSharedPreference: AppSharedPreference) : RecyclerView.Adapter<OrderSubAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = FragmentOrderRowBinding.bind(itemView)
     }
@@ -27,7 +30,8 @@ class OrderSubAdapter(var context: Context, var data: List<Order>) : RecyclerVie
         data[position].number
         holder.binding.orderId.text = "Order Num: " + data[position].orderNumber
         holder.binding.itemNumId.text = "Num of items: " + data[position].lineItems.size + " items"
-        holder.binding.orderTotalId.text = "Total Price: " + data[position].currentTotalPrice +"$"
+        //holder.binding.orderTotalId.text = "Total Price: " + data[position].currentTotalPrice +"$"
+        holder.binding.orderTotalId.text = "Total Price: " + formatCurrency(data[position].currentTotalPrice, appSharedPreference)
         holder.binding.orderDateId.text = "Created at: " + formatDate(data[position].createdAt)
     }
 

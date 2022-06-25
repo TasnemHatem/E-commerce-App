@@ -30,7 +30,7 @@ class OrderFragment : BaseFragment<FragmentOrdersBinding>(FragmentOrdersBinding:
         super.onViewCreated(view, savedInstanceState)
 
         ordersResponse = listOf<Order>()
-        orderAdapter = OrderAdapter(requireContext(), ordersResponse)
+        orderAdapter = OrderAdapter(requireContext(), ordersResponse, appSharedPreference)
         binding.ordersRecycleViewId.adapter = orderAdapter
 
         var layoutManager: RecyclerView.LayoutManager =  LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)

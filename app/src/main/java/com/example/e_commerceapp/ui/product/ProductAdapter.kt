@@ -1,5 +1,6 @@
 package com.example.e_commerceapp.ui.product
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.example.e_commerceapp.ui.category.model.ProductsResponse
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import kotlin.math.log
 
 class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: OnProductClickLisenter,
  var appSharedPreference: AppSharedPreference) : RecyclerView.Adapter<ProductAdapter.ViewHolder>(){
@@ -26,14 +28,12 @@ class ProductAdapter (var product: ProductsResponse,var onProductClickLisenter: 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var current = product.products[position]
-     //   var valu= appSharedPreference.getStringValue("shared_currency_value").toDouble()
 
         var value= appSharedPreference.getStringValue("shared_currency_value").toDouble()
-        val df = DecimalFormat("#.##")
-        df.roundingMode = RoundingMode.CEILING
-        val valu =  df.format(value)
         val price = current.variants.get(0).price.toDouble()
-        holder.textNameProduct.text = "${appSharedPreference.getStringValue("shared_currency_code")} ${df.format(price).toDouble()*valu.toDouble()  }"
+        val temp = value* price
+        val temp2 = "%.2f".format(temp)
+        holder.textNameProduct.text = "${appSharedPreference.getStringValue("shared_currency_code")} ${temp2 }"
         holder.image.load(current.image.src)
 
         if(product.products[position].isFavourite){

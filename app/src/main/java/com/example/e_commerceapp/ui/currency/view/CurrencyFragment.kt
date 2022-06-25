@@ -51,6 +51,7 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
         )
         binding.currencyRecycleviewId.addItemDecoration(dividerItemDecoration)
 
+
         viewmodel.currencyResponse.observeInFragment(viewLifecycleOwner){
             this.currencyResponse = it.conversionRates
             var count = 0
@@ -95,3 +96,4 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
     }
 
 }
+

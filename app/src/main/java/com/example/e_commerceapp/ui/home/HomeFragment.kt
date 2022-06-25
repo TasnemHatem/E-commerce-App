@@ -13,11 +13,14 @@ import com.example.e_commerceapp.R
 import com.example.e_commerceapp.base.LiveDataUtils.observeInFragment
 import com.example.e_commerceapp.base.ui.BaseFragment
 import com.example.e_commerceapp.databinding.FragmentHomeBinding
+import com.example.e_commerceapp.local.AppSharedPreference
 import com.example.e_commerceapp.ui.home.model.VendorsResponse
 import com.example.e_commerceapp.ui.home.viewmodel.VendorsViewModel
+import com.example.e_commerceapp.utils.Constants
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 private const val TAG = "HomeFragment"
@@ -27,12 +30,19 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
     private lateinit var   vendorResponseAdapter: VendorResponseAdapter
     val mViewModel:VendorsViewModel by viewModels()
 
+    @Inject
+    lateinit var appSharedPreference: AppSharedPreference
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
          initBrandRecyclerView(view)
         initSlider()
         // initBanerRecyclerView(view)
 
+        if (!appSharedPreference.getBooleanValue("login")) {
+            appSharedPreference.setValue(Constants.SHARED_CURRENCY_CODE, "USD")
+            appSharedPreference.setValue(Constants.SHARED_CURRENCY_VALUE, 1.0)
+        }
     }
     override fun afterOnCreateView() {
         super.afterOnCreateView()
@@ -76,8 +86,8 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
     }
 
 //    private fun initBanerRecyclerView(view:View){
-//
-//
+///
+///
 //        val _layoutManager = LinearLayoutManager(context)
 //        _layoutManager.orientation = RecyclerView.HORIZONTAL
 //        var banerAdapter = BanerAdapter(listOf(R.drawable.banner1, R.drawable.banner2, R.drawable.banner3))

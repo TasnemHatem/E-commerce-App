@@ -120,13 +120,13 @@ class ProductDetailes :
         binding.imageSliderProductDetailes.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION)
         binding.imageSliderProductDetailes.startAutoCycle()
         binding.productDetailesName.text = product.title
-        var value= appSharedPreference.getStringValue("shared_currency_value").toDouble()
-        val df = DecimalFormat("#.##")
-        df.roundingMode = RoundingMode.CEILING
-        val valu =  df.format(value)
-        val price = product.variants.get(0).price.toDouble()
 
-        binding.productDetailesPrice.text = "${appSharedPreference.getStringValue("shared_currency_code")} ${df.format(price).toDouble()*valu.toDouble()  }"
+        var value= appSharedPreference.getStringValue("shared_currency_value").toDouble()
+        val price = product.variants.get(0).price.toDouble()
+        val temp = value* price
+        val temp2 = "%.2f".format(temp)
+
+        binding.productDetailesPrice.text = "${appSharedPreference.getStringValue("shared_currency_code")} ${temp2 }"
         binding.productDescription.text = product.bodyHtml
         bindingAddToFavourite = binding.addToFavouriteFromDetailes
         bindingDeletFromFavourite = binding.deleteToFavouriteFromDetailes
