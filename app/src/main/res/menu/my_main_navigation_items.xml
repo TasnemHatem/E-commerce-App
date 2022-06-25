@@ -6,7 +6,7 @@
     <item android:id="@+id/categoryFragment"
         android:title="@string/category"
         android:enabled="true"
-        android:icon="@drawable/ic_cart" />
+        android:icon="@drawable/category" />
     <item android:id="@+id/meFragment"
         android:title="@string/profile"
         android:enabled="true"
