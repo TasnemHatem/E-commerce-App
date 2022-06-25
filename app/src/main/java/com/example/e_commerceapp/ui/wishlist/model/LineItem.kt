@@ -19,16 +19,16 @@ data class LineItem(
     @SerializedName("title")
     val title: String,
     @field:SerializedName("variant_id")
-    @Expose val variantId: Long? = null
-    )
+    @Expose val variantId: Long? = null,
+)
 
 fun LineItem.toListItem(): LineItemsItem {
     return LineItemsItem(
         quantity = 1,
-        title = title,
+        title = properties.first { it.name == "title" }.value,
         variantId = variantId,
-        price = price,
-        properties = listOf(Property("0",properties[1].value)),
+        price = properties.first { it.name == "productPrice" }.value,
+        properties = listOf(Property("0", properties[1].value)),
     )
 }
 

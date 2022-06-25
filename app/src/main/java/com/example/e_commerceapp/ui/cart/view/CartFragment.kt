@@ -98,10 +98,15 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                 is DataState.Success -> {
                     Log.e(TAG, "afterOnCreateView: " + data)
                     coupon = data.data.discountCode
-                    updatePrice()
-                    Toast.makeText(context,
-                        resources.getString(R.string.coupon_applied_successfully),
-                        Toast.LENGTH_SHORT).show()
+                    if (::mAdapter.isInitialized) {
+                        updatePrice()
+                        Toast.makeText(context,
+                            resources.getString(R.string.coupon_applied_successfully),
+                            Toast.LENGTH_SHORT).show()
+                    } else
+                        Toast.makeText(context,
+                            resources.getString(R.string.add_items_first),
+                            Toast.LENGTH_SHORT).show()
                 }
                 is DataState.Error -> {
                     displayMsg(data)
@@ -218,9 +223,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
     }
 
     private fun updatePrice() {
-        val currencyCode =
-            appSharedPreferences.getStringValue(Constants.SHARED_CURRENCY_CODE, "USD")
-
         var totalPrice = 0.0
         mAdapter.list.forEach {
             totalPrice += (it.price ?: "0.0").toDouble() * (it.quantity ?: 0)
@@ -231,8 +233,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
             totalPrice = 0.0
         val stringValue = formatCurrency(totalPrice.toString(), appSharedPreferences)
         binding.textViewTotalPrice.text = stringValue
-//            resources.getString(R.string.price_money,
-//                totalPrice.toTwoDecimalDigits().toString())
     }
 
     private fun checkError(it: DataState.Error) {

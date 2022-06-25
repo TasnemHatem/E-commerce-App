@@ -28,7 +28,7 @@ import javax.inject.Inject
 class ProductViewModel @Inject constructor(
     val productRepo: ProductRepo,
     val wishlistRepo: WishlistRepo,
-    val appSharedPreference: AppSharedPreference
+    val appSharedPreference: AppSharedPreference,
 ) : ViewModel() {
 
     private val _wishlist: MutableLiveData<List<LineItem>> = MutableLiveData()
@@ -61,9 +61,9 @@ class ProductViewModel @Inject constructor(
                 }.launchIn(viewModelScope)
 
             }
-        }else{
+        } else {
             viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-                productRepo.getVendorProducts(vendor).onEach{
+                productRepo.getVendorProducts(vendor).onEach {
                     _vendorsProduct.postValue(it)
                 }.launchIn(viewModelScope)
             }
@@ -72,26 +72,30 @@ class ProductViewModel @Inject constructor(
     }
 
     fun mapFavourite(wishlist: List<LineItem>, products: List<Product>) {
-        for(j in 1 until wishlist.size){
-            for(i in 0 until products.size){
-                if(products[i].id == (wishlist[j].properties[0].value.toLong()))
+        for (j in 1 until wishlist.size) {
+            for (i in 0 until products.size) {
+                if (products[i].id == (wishlist[j].properties[0].value.toLong()))
                     products[i].isFavourite = true
             }
         }
     }
 
-    fun addFavourite(product: Product){
+    fun addFavourite(product: Product) {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             var wishlistId = appSharedPreference.getLongValue(Constants.SHARED_FAV_ID, 2222)
-            var favData : List<Property> = listOf(Property("productId", product.id.toString()), Property("productImgURL", product.image.src),Property("productPrice", product.variants.get(0).price))
+            var favData: List<Property> = listOf(Property("productId", product.id.toString()),
+                Property("productImgURL", product.image.src),
+                Property("productPrice", product.variants.get(0).price),
+                Property("title", product.title))
             var favProduct = LineItem(0, "199.00", favData, 1, "wishlist")
-            var putWishlist : List<LineItem>? = _wishlist.value!!.plus(favProduct)
-            wishlistRepo.addFavouriteProduct(wishlistId, DraftOrderResponse(DraftOrder(null,null, putWishlist!!)))
+            var putWishlist: List<LineItem>? = _wishlist.value!!.plus(favProduct)
+            wishlistRepo.addFavouriteProduct(wishlistId,
+                DraftOrderResponse(DraftOrder(null, null, putWishlist!!)))
             requestVendorsProduct(vendor!!)
         }
     }
 
-    fun deleteFavourite(product: Product){
+    fun deleteFavourite(product: Product) {
         //Log.i("TAG", "deleteFavourite: profuct id ${product.id}")
         //var s = _wishlist.value?.size
         //_wishlist.value?.map { println(it.properties[0].value) }
@@ -101,9 +105,11 @@ class ProductViewModel @Inject constructor(
 //            var putWishlist : List<LineItem>? = _wishlist.value?.filter { it.title == "wishlist" }
 //            Log.i("EMYTAG", "deleteFavourite: after1 ${putWishlist?.size}")
             //var putWishlist : List<LineItem>? = _wishlist.value?.filter { it.properties[0].value != product.id.toString() }
-            var putWishlist = _wishlist.value?.filter {it.properties.isNullOrEmpty() || it.properties[0].value != product.id.toString() }
+            var putWishlist =
+                _wishlist.value?.filter { it.properties.isNullOrEmpty() || it.properties[0].value != product.id.toString() }
             //Log.i("EMYTAG", "deleteFavourite: after ${putWishlist?.size}")
-            wishlistRepo.deleteFavouriteProduct(wishlistId, DraftOrderResponse(DraftOrder(null,null, putWishlist!!)))
+            wishlistRepo.deleteFavouriteProduct(wishlistId,
+                DraftOrderResponse(DraftOrder(null, null, putWishlist!!)))
             requestVendorsProduct(vendor!!)
         }
     }
