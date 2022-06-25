@@ -1,6 +1,5 @@
 package com.example.e_commerceapp.ui.cart.view
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -24,8 +23,9 @@ import com.example.e_commerceapp.ui.cart.model.LineItemsItem
 import com.example.e_commerceapp.ui.cart.viewmodel.CartViewModel
 import com.example.e_commerceapp.ui.checkout.model.Order
 import com.example.e_commerceapp.ui.checkout.model.PostOrderBody
+import com.example.e_commerceapp.utils.Constants
 import com.example.e_commerceapp.utils.POST_ORDER_BODY
-import com.example.e_commerceapp.utils.toTwoDecimalDigits
+import com.example.e_commerceapp.utils.formatCurrency
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -172,14 +172,18 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
                         R.id.action_cartFragment_to_addressFragment,
                         Bundle().apply {
                             putParcelable(POST_ORDER_BODY, postOrderBody.apply {
-                                this.order?.discountCodes = listOf(coupon?.apply {
+                                coupon?.apply {
                                     amount = "10.0"
-                                })
+                                    order?.discountCodes = mutableListOf(this)
+                                }
                                 order?.lineItems = mAdapter.list
                             })
-                        })
+                        }
+                    )
                 else
-                    Toast.makeText(context, context?.resources?.getString(R.string.buy_some_items_first), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,
+                        context?.resources?.getString(R.string.buy_some_items_first),
+                        Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -200,7 +204,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
             else -> {
                 binding.apply {
                     rvCartListItems.apply {
-                        mAdapter = CartAdapter(it, this@CartFragment)
+                        mAdapter = CartAdapter(it, this@CartFragment, appSharedPreferences)
                         adapter = mAdapter
                         layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                         hasFixedSize()
@@ -214,6 +218,9 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
     }
 
     private fun updatePrice() {
+        val currencyCode =
+            appSharedPreferences.getStringValue(Constants.SHARED_CURRENCY_CODE, "USD")
+
         var totalPrice = 0.0
         mAdapter.list.forEach {
             totalPrice += (it.price ?: "0.0").toDouble() * (it.quantity ?: 0)
@@ -222,10 +229,10 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
             totalPrice -= 10
         if (totalPrice < 0.0)
             totalPrice = 0.0
-
-        binding.textViewTotalPrice.text =
-            resources.getString(R.string.price_money,
-                totalPrice.toTwoDecimalDigits().toString())
+        val stringValue = formatCurrency(totalPrice.toString(), appSharedPreferences)
+        binding.textViewTotalPrice.text = stringValue
+//            resources.getString(R.string.price_money,
+//                totalPrice.toTwoDecimalDigits().toString())
     }
 
     private fun checkError(it: DataState.Error) {
@@ -268,5 +275,3 @@ class CartFragment : BaseFragment<FragmentCartBinding>(FragmentCartBinding::infl
     override fun onClickItem(item: LineItemsItem) {
     }
 }
-
-class Empty

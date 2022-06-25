@@ -29,7 +29,7 @@ data class Order(
     var lineItems: List<LineItemsItem?>? = null,
 
     @field:SerializedName("discount_codes")
-    var discountCodes: List<DiscountCode?>? = null,
+    var discountCodes: MutableList<DiscountCode?>? = null,
     @SerializedName("customer")
     var customer: Customer? = null
 ) : Parcelable
