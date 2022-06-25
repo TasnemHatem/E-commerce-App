@@ -32,8 +32,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
 
         binding.btnFavorite.setOnClickListener{
-            if(!appSharedPreference.getBooleanValue("login",false))
+            if(appSharedPreference.getBooleanValue("login",false))
                 navController.navigate(R.id.action_mainFragment_to_wishlistFragment)
+            else
+                navController.navigate(R.id.action_mainFragment_to_loginFragment)
+
         }
 
         binding.btnCart.setOnClickListener{
