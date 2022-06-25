@@ -33,17 +33,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     val vm: LoginViewModel by viewModels()
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-    override fun afterOnCreateView() {
-        super.afterOnCreateView()
-
-
-    }
-
     override fun afterOnViewCreated() {
         super.afterOnViewCreated()
         binding.tvRegistry.setOnClickListener {
