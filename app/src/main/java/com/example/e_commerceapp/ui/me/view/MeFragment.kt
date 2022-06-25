@@ -52,6 +52,9 @@ class MeFragment : BaseFragment<FragmentMeBinding>(FragmentMeBinding::inflate), 
         if (!appSharedPreference.getBooleanValue("login")) {
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
                 .navigate(R.id.action_mainFragment_to_loginFragment)
+        }else{
+            setupOrders()
+            setupWishlist(this)
         }
 
         binding.viewallOrdersBtnId.setOnClickListener {
@@ -64,8 +67,6 @@ class MeFragment : BaseFragment<FragmentMeBinding>(FragmentMeBinding::inflate), 
                 .navigate(R.id.action_mainFragment_to_wishlistFragment)
         }
 
-        setupOrders()
-        setupWishlist(this)
     }
 
     fun setupOrders(){

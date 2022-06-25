@@ -27,21 +27,16 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         super.afterOnViewCreated()
         listenerToNetwork()
 
-//        connectionLiveData = ConnectionLiveData(requireContext())
-////        connectionLiveData.observe(this,{isNetworkAvailable->
-////            binding.constrainCheckNetwork.visibility = View.GONE
-////
-////        })
-//
-//                setContent {
-//
-//        }
         setUpBottomNavigation()
         setOnDestinationChangedListener()
 
 
         binding.btnFavorite.setOnClickListener{
-            navController.navigate(R.id.action_mainFragment_to_wishlistFragment)
+            if(appSharedPreference.getBooleanValue("login",false))
+                navController.navigate(R.id.action_mainFragment_to_wishlistFragment)
+            else
+                navController.navigate(R.id.action_mainFragment_to_loginFragment)
+
         }
 
         binding.btnCart.setOnClickListener{
@@ -56,7 +51,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         binding.settingsBtnId.setOnClickListener{
             navController.navigate(R.id.action_mainFragment_to_settingsFragment)
         }
-//        binding.SearchBar.isIconifiedByDefault = true
 
         binding.btnSearch.setOnClickListener{
             navController.navigate(R.id.action_mainFragment_to_searchFragment2)
@@ -77,19 +71,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
                 R.id.homeFragment ->{
                     binding.btnSearch.visibility=View.VISIBLE
                     binding.settingsBtnId.visibility=View.GONE
-
                 }
                 R.id.categoryFragment ->{
                     binding.btnSearch.visibility=View.VISIBLE
                     binding.settingsBtnId.visibility=View.GONE
-
                 }
                 R.id.meFragment ->{
                     binding.settingsBtnId.visibility=View.VISIBLE
                     binding.btnSearch.visibility=View.GONE
                 }
-
-
             }
         }
     }
