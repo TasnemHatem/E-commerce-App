@@ -1,6 +1,7 @@
 package com.example.e_commerceapp.ui.newaddress.view
 
 import android.os.Bundle
+import android.telephony.PhoneNumberUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.example.e_commerceapp.ui.address.model.Address
 import com.example.e_commerceapp.ui.newaddress.model.PostAddress
 import com.example.e_commerceapp.ui.newaddress.viewmodel.NewAddressVM
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -22,6 +24,8 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding>(FragmentNewAd
     lateinit var appSharedPreference: AppSharedPreference
 
     val viewmodel: NewAddressVM by viewModels()
+
+    //var reqex: String = "^01[0-2]\\s\\d{1,8}\$"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,9 +79,16 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding>(FragmentNewAd
             binding.lastNameId.error = "Required"
             return false
         }
+        var phone = binding.phoneId.text.toString()
         if (binding.phoneId.text.toString().isEmpty()) {
             binding.phoneId.requestFocus()
             binding.phoneId.error = "Required"
+            return false
+        }
+
+        if(!(phone.length == 11) || !((phone.take(3) == "010") || (phone.take(3) == "011") || (phone.take(3) == "012"))){
+            binding.phoneId.requestFocus()
+            binding.phoneId.error = "Invalid"
             return false
         }
         if (binding.countryId.text.toString().isEmpty()) {

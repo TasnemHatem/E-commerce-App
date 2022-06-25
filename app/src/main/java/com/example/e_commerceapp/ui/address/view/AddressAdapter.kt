@@ -1,6 +1,9 @@
 package com.example.e_commerceapp.ui.address.view
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +36,8 @@ class AddressAdapter(var context: Context, var data: List<Address>, val listener
         holder.binding.addressGeneralId.text = data[position].city + " " + data[position].country
         holder.binding.defaultRadioBtnId.isChecked = data[position].default
         holder.binding.deleteAddressId.setOnClickListener {
-            listener.clickDelete(data[position].userId!!, data[position].id!!)
+            //listener.clickDelete(data[position].userId!!, data[position].id!!)
+            delete(data[position].userId!!, data[position].id!!)
         }
         holder.binding.defaultRadioBtnId.setOnClickListener{
             listener.changeDefault(data[position].userId!!, data[position])
@@ -45,6 +49,25 @@ class AddressAdapter(var context: Context, var data: List<Address>, val listener
             return data.size
         else return 0
 
+    }
+
+    fun delete(userId: Long, addressId: Long){
+        var buildr = AlertDialog.Builder(context)
+        buildr.setTitle("Confirm Remove")
+        buildr.setMessage("Are you sure you want to remove this address?")
+        buildr.setPositiveButton("Yes", DialogInterface.OnClickListener{
+                dialog, id ->
+            Log.i("TAG", "onBindViewHolder: Remove it")
+            listener.clickDelete(userId, addressId)
+            dialog.cancel()
+        })
+        buildr.setNegativeButton("Cancel", DialogInterface.OnClickListener{
+                dialog, id ->
+            Log.i("TAG", "onBindViewHolder: Don't remove it")
+            dialog.cancel()
+        })
+        var alert = buildr.create()
+        alert.show()
     }
 
 
