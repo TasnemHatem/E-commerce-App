@@ -24,7 +24,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyBinding::inflate){
+class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyBinding::inflate) {
 
     @Inject
     lateinit var appSharedPreference: AppSharedPreference
@@ -37,12 +37,14 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listenerToNetwork()
-        currencyAdapter = CurrencyAdapter(requireContext(), currencyData, appSharedPreference.getStringValue(
-            Constants.SHARED_CURRENCY_CODE, "USD"), ::changeCurrency)
+        currencyAdapter =
+            CurrencyAdapter(requireContext(), currencyData, appSharedPreference.getStringValue(
+                Constants.SHARED_CURRENCY_CODE, "USD"), ::changeCurrency)
         binding.currencyRecycleviewId.adapter = currencyAdapter
 
 
-        var layoutManager: RecyclerView.LayoutManager =  LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
+        var layoutManager: RecyclerView.LayoutManager =
+            LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
         binding.currencyRecycleviewId.layoutManager = layoutManager
 
         val dividerItemDecoration = DividerItemDecoration(
@@ -52,28 +54,27 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
         binding.currencyRecycleviewId.addItemDecoration(dividerItemDecoration)
 
 
-        viewmodel.currencyResponse.observeInFragment(viewLifecycleOwner){
+        viewmodel.currencyResponse.observeInFragment(viewLifecycleOwner) {
             this.currencyResponse = it.conversionRates
             var count = 0
+            currencyData.clear()
             for (prop in ConversionRates::class.memberProperties) {
-                currencyData.add(Currency(prop.name.capitalize(), prop.get(currencyResponse!!) as Double))
+                currencyData.add(Currency(prop.name.uppercase(),
+                    prop.get(currencyResponse!!) as Double))
                 count++
             }
             Log.i("TAG", "onViewCreated: currency count = $count")
             binding.progressBarCurrencyId.visibility = View.GONE
             currencyAdapter.data = currencyData
             currencyAdapter.notifyDataSetChanged()
-
         }
         binding.progressBarCurrencyId.visibility = View.VISIBLE
-        viewmodel.requestCurrency()
-
         binding.btnBack.setOnClickListener {
             navController.navigateUp()
         }
     }
 
-    fun changeCurrency(currencyCode: String, currencyValue: Double){
+    fun changeCurrency(currencyCode: String, currencyValue: Double) {
         appSharedPreference.setValue(Constants.SHARED_CURRENCY_CODE, currencyCode)
         appSharedPreference.setValue(Constants.SHARED_CURRENCY_VALUE, currencyValue)
         currencyAdapter.currencyCode = currencyCode
@@ -81,7 +82,7 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
     }
 
     private fun listenerToNetwork() {
-        ConnectionLiveData(requireContext()).observe(this, {
+        ConnectionLiveData(requireContext()).observe(viewLifecycleOwner) {
             if (it) {
                 binding.currencyRecycleviewId.visibility = View.VISIBLE
                 binding.progressBarCurrencyId.visibility = View.VISIBLE
@@ -92,7 +93,7 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(FragmentCurrencyB
                 binding.progressBarCurrencyId.visibility = View.GONE
                 binding.imageView.visibility = View.VISIBLE
             }
-        })
+        }
     }
 
 }
