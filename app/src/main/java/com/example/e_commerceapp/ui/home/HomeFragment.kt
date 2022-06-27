@@ -40,8 +40,8 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
         // initBanerRecyclerView(view)
 
         if (!appSharedPreference.getBooleanValue("login")) {
-            appSharedPreference.setValue(Constants.SHARED_CURRENCY_CODE, "USD")
-            appSharedPreference.setValue(Constants.SHARED_CURRENCY_VALUE, 1.0)
+            appSharedPreference.setValue(Constants.SHARED_CURRENCY_CODE, "EGP")
+            appSharedPreference.setValue(Constants.SHARED_CURRENCY_VALUE, 18.78)
         }
     }
     override fun afterOnCreateView() {

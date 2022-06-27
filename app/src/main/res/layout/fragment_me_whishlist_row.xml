@@ -53,7 +53,8 @@
                 android:paddingRight="10dp"
                 android:text="99.99 EGP"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="16dp"
+                android:textStyle="bold"/>
 
             <ImageView
                 android:id="@+id/addCartIconId"

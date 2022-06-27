@@ -32,7 +32,7 @@ class WishlistSubAdapter(var context: Context, var data: List<LineItem>, var lis
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //holder.binding.wishlistPriceId.text = data[position+1].properties[2].value
-        holder.binding.wishlistPriceId.text = "Total Price: " + formatCurrency(data[position+1].properties[2].value, appSharedPreference)
+        holder.binding.wishlistPriceId.text = formatCurrency(data[position+1].properties[2].value, appSharedPreference)
         holder.binding.wishlistImgId.load(data[position+1].properties[1].value)
         holder.binding.deleteIconId.setOnClickListener {
             delete(position+1)

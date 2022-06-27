@@ -52,8 +52,8 @@ class AuthRepoImpl(
         appSharedPreference.setValue(SHARED_FAV_ID, (customer.favouriteId?.toLong())?:2)
         appSharedPreference.setValue(SHARED_NAME, customer.firstName + " " + customer.lastName)
         appSharedPreference.setValue("login", true)
-        appSharedPreference.setValue(SHARED_CURRENCY_CODE, "USD")
-        appSharedPreference.setValue(SHARED_CURRENCY_VALUE, 1.0)
+        appSharedPreference.setValue(SHARED_CURRENCY_CODE, "EGP")
+        appSharedPreference.setValue(SHARED_CURRENCY_VALUE, 18.78)
     }
 
     override suspend fun login(
