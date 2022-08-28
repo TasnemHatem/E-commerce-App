@@ -1,0 +1,30 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+ 
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2.3.2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3.4.1
+        
+        with:
+          java-version: 1.8
+          
+      - name: Build with Gradel
+        run: ./gradlew build
+        
+      - name: Upload apk
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: app
+          path: app/build/outputs/apk/debug/app-debug.apk
